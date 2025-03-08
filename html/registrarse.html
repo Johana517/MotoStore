@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ms-2 ">
+          <li class="nav-item">
+            <a class="nav-link" href="categoria.html">Categorias <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="descuentos.html">Descuentos</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
+          </li>
+          <form class="form-inline">
+            <div class="input-group">
+              <input type="search" class="form-control" placeholder="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarse.html">Registrarse</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+<div class="container mt-5">
+    <div class="card p-4">
+        <h2 class="text-center">Registro</h2>
+        <form id="registroForm">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellido" required>
+            </div>
+            <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="fechaNacimiento" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+                <select class="form-select" id="tipoDocumento" required>
+                    <option value="">Seleccione...</option>
+                    <option value="DNI">CC</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="documento" class="form-label">Documento</label>
+                <input type="text" class="form-control" id="documento" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion">
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="contrasena" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">👁</button>
+                </div>
+                <small class="text-danger" id="errorPassword"></small>
+            </div>
+            <div class="mb-3">
+                <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
+                <input type="password" class="form-control" id="confirmarContrasena" required>
+                <small class="text-danger" id="errorConfirmPassword"></small>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Continuar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#togglePassword").click(function () {
+            let input = $("#contrasena");
+            let type = input.attr("type") === "password" ? "text" : "password";
+            input.attr("type", type);
+        });
+
+        $("#registroForm").submit(function (event) {
+            event.preventDefault();
+            
+            let password = $("#contrasena").val();
+            let confirmPassword = $("#confirmarContrasena").val();
+            let passwordError = $("#errorPassword");
+            let confirmPasswordError = $("#errorConfirmPassword");
+
+            passwordError.text("");
+            confirmPasswordError.text("");
+
+            // Validación de contraseña
+            let regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!regex.test(password)) {
+                passwordError.text("La contraseña debe tener al menos 8 caracteres, incluir una mayúscula y un número.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.text("Las contraseñas no coinciden.");
+                return;
+            }
+
+            alert("Formulario enviado correctamente.");
+        });
+    });
+</script>
+<footer>
+  <div class="container-fluid bg-dark p-5 mt-5 text-center">
+    <div class="row">
+      <div class="col">
+        <a href="">
+          <i class="fa-brands fa-youtube fa-3x"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <i class="fa-brands fa-facebook fa-3x"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <i class="fa-brands fa-x-twitter fa-3x"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <i class="fa-brands fa-instagram fa-3x"></i>
+        </a>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <a href="#" class="text-decoration-none text-success fs-1">Aviso Legal</a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-decoration-none text-success fs-1">Contactanos</a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-decoration-none text-success fs-1">Ayuda</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+
+</body>
+</html>

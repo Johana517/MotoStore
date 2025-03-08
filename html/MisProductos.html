@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Productos</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+    <style>
+        .breadcrumb {
+            background: none;
+            padding: 0;
+        }
+        .product-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .product-card img {
+            width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="sesion-vendedor.html">
+            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item mx-2"> 
+                <a class="nav-link" href="membresia.html">Membresia</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="MisProductos.html">Mis productos</a>
+              </li>
+              <form class="form-inline">
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+              </form>
+              <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Vender 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="vender-moto.html">Moto</a>
+                  <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+                </div>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
+              </li>
+              <li class="nav-item dropdown mx-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user fa-2x"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
+                  <a class="dropdown-item" id="logout" href="">Cerrar sesion</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+    <main class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="sesion-vendedor.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mis productos</li>
+            </ol>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Buscar productos">
+                <button class="btn btn-outline-secondary"><i class="fas fa-filter"></i></button>
+            </div>
+            <button class="btn btn-primary">+ Publicar nuevo producto</button>
+        </div>
+
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Producto 1</a></h5>
+                <p>Detalles</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/scooter.png" alt="Moto">
+            <div>
+                <p class="text-success">Activo</p>
+                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-on"></i></button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Producto 2</a></h5>
+                <p>Detalles</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/yamaha.jpg" alt="Moto">
+            <div>
+                <p class="text-warning">Pausado</p>
+                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-off"></i></button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Producto 3</a></h5>
+                <p>Detalles</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/bujia.jpg" alt="Moto">
+            <div>
+                <p class="text-warning">Pausado</p>
+                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-off"></i></button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+
+        <nav>
+            <ul class="pagination justify-content-center mt-3">
+                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer class="container-fluid bg-dark p-5 mt-5 text-center text-primary">
+        <div class="row">
+            <div class="col">
+                <a href=""><i class="fa-brands fa-youtube fa-3x text-primary"></i></a>
+            </div>
+            <div class="col">
+                <a href=""><i class="fa-brands fa-facebook fa-3x text-primary"></i></a>
+            </div>
+            <div class="col">
+                <a href=""><i class="fa-brands fa-x-twitter fa-3x text-primary"></i></a>
+            </div>
+            <div class="col">
+                <a href=""><i class="fa-brands fa-instagram fa-3x text-primary"></i></a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <a href="#" class="text-decoration-none text-success fs-1">Aviso Legal</a>
+            </div>
+            <div class="col">
+                <a href="#" class="text-decoration-none text-success fs-1">Contáctanos</a>
+            </div>
+            <div class="col">
+                <a href="#" class="text-decoration-none text-success fs-1">Ayuda</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

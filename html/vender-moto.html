@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuenta Vendedor vender-moto</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+  <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+  <style>
+    /* Ocultar las flechas en Bootstrap */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+    input[type="number"] {
+    appearance: textfield; /* Funciona en Firefox y otros navegadores modernos */
+}
+
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+      <a class="navbar-brand" href="sesion-vendedor.html">
+        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item mx-2"> 
+            <a class="nav-link" href="membresia.html">Membresia</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="MisProductos.html">Mis productos</a>
+          </li>
+          <form class="form-inline">
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+          </form>
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vender 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="vender-moto.html">Moto</a>
+              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+            </div>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
+          </li>
+          <li class="nav-item dropdown mx-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user fa-2x"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
+              <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container bg-light mt-5 py-2 px-5">
+      <h2 class="text-center mt-5">Describe tu Moto</h2>
+      <form>
+        <div class="form-row my-3">
+          <div class="form-group col-md-4">
+            <label for="inputState">Marca</label>
+            <select id="inputState" class="form-control" required>
+              <option value="0" selected disabled>Seleccionar Marca</option>
+              <option value="1">Yamaha</option>
+              <option value="2">Honda</option>
+              <option value="3">Suzuki</option>
+              <option value="4">Kawasaki</option>
+              <option value="5">Auteco</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">Cilindraje</label>
+            <select id="inputState" class="form-control" required>
+              <option value="0" selected disabled>Seleccionar Cilindraje</option>
+              <option value="1">100</option>
+              <option value="2">110</option>
+              <option value="3">125</option>
+              <option value="4">150</option>
+              <option value="5">200</option>
+              <option value="5">250</option>
+              <option value="5">300</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">Tipo de Moto</label>
+            <select id="inputState" class="form-control">
+              <option value="0" selected disabled>Seleccionar Tipo de moto</option>
+              <option value="1">Scooter</option>
+              <option value="2">Enduro</option>
+              <option value="3">Deportiva</option>
+              <option value="4">Electrica</option>
+              <option value="5">Chopper</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row my-3">
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Precio</label>
+              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la moto" required>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Kilometraje</label>
+              <input type="number" class="form-control" id="flechas" placeholder="Colocar el kilometraje de la moto" required>
+          </div>
+        </div>
+        <h2 class="text-center my-5">Documentacion de la Moto</h2>
+        <div class="form-row my-3">
+          <div class="mb-3 form-group col-md-6 col-lg-3">
+            <label for="formFile" class="form-label">SOAT</label>
+            <input class="form-control" type="file" id="formFile">
+          </div>
+          <div class="mb-3 form-group col-md-6 col-lg-3">
+            <label for="formFileMultiple" class="form-label">TECNOMECANICA</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          <div class="mb-3 form-group col-md-6 col-lg-3">
+            <label for="formFileMultiple" class="form-label">TARJETA DE PROPIEDAD</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          <div class="mb-3 form-group col-md-6 col-lg-3">
+            <label for="formFileMultiple" class="form-label">FOTO DE LA MOTO</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>                   
+        </div>
+        <div class="container d-flex justify-content-end">
+          <button type="button" class="btn btn-danger" id="btnCancelar" style="margin-right: 15px;">Cancelar</button>
+          <button type="button" class="btn btn-success">Publicar</button>
+        </div>  
+      </form>
+    </div>
+  </main>
+  <footer>
+    <div class="container-fluid bg-dark p-5 mt-5 text-center">
+      <div class="row">
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-youtube fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-facebook fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-x-twitter fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-instagram fa-3x"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Aviso Legal</a>
+        </div>
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Contactanos</a>
+        </div>
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Ayuda</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+  <script src="../js/sweetalert2@9.js"></script>
+  <script src="../js/cancelar.js"></script>
+  <script src="../js/logout.js"></script>
+
+</body>
+</html>

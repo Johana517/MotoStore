@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuenta Vendedor</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+  <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="sesion-vendedor.html">
+        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item mx-2"> 
+            <a class="nav-link" href="membresia.html">Membresia</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="MisProductos.html">Mis productos</a>
+          </li>
+          <form class="form-inline">
+            <div class="input-group">
+              <input type="search" class="form-control" placeholder="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+          </form>
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vender 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="vender-moto.html">Moto</a>
+              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+            </div>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
+          </li>
+          <li class="nav-item dropdown mx-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user fa-2x"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
+              <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <div class="container-fluid bg-light my-5 py-5 text-center fs-1">
+        <h2 class="text-center">Mis productos</h2>
+        <div class="row">
+          <div class="col-lg-4 ms-5 col-md-6 mt-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/bujia.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Bujia</h5>
+                <p class="card-text">Bujia para Frio.</p>
+                <p class="card-text">$45.000 COP</p>
+                <p class="card-text">Estas bujias sirven para cualquier tipo de moto.</p>
+                <a href="#" class="btn btn-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-3 ">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/honda.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Moto Honda</h5>
+                <p class="card-text">Moto honda CB 125f Deportivo</p>
+                <p class="card-text">$3.500.000 COP</p>
+                <p class="card-text">Moto de segunda</p>
+                <a href="#" class="btn btn-primary">Edita</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/scooter.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Scooter 150</h5>
+                <p class="card-text">Scooter 150 Deportivo.</p>
+                <p class="card-text">$7.500.000 COP.</p>
+                <p class="card-text">Moto de segunda.</p>
+                <a href="#" class="btn btn-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/guayas.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Guayas</h5>
+                <p class="card-text">$24.000 COP</p>
+                <p class="card-text">Guayas Totalmente nuevas</p>
+                <a href="#" class="btn btn-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/yamaha.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Moto Yamaha</h5>
+                <p class="card-text">6.700.000 COP</p>
+                <p class="card-text">Moto yamaha 125 de segunda</p>
+                <a href="#" class="btn btn-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="../img/repuestos.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Juego de repuestos</h5>
+                <p class="card-text">$120.000 COP</p>
+                <p class="card-text">Juegos de repuestos totalmente nuevos</p>
+                <a href="#" class="btn btn-primary">Editar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container-fluid bg-dark p-5 mt-5 text-center">
+      <div class="row">
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-youtube fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-facebook fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-x-twitter fa-3x"></i>
+          </a>
+        </div>
+        <div class="col">
+          <a href="">
+            <i class="fa-brands fa-instagram fa-3x"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Aviso Legal</a>
+        </div>
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Contactanos</a>
+        </div>
+        <div class="col">
+          <a href="#" class="text-decoration-none text-success fs-1">Ayuda</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+  <script src="../js/sweetalert2@9.js"></script>
+  <script src="../js/logout.js"></script>
+</body>
+</html>
