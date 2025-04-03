@@ -7,10 +7,11 @@ s<!DOCTYPE html>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg">
           <a class="navbar-brand" href="sesion-vendedor.html">
             <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
           </a>
@@ -60,32 +61,33 @@ s<!DOCTYPE html>
         </nav>
       </header>
 
-<div class="container text-center my-5">
-    <h2>¿Como podemos ayudarte?</h2>
-    <input class="form-control me-1" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-light" type="submit">Buscar</button>
-    <div class="card shadow p-4">
-        <div class="row">
-            <div class="col-md-6">
-                <i class="bi bi-person-circle display-1"></i>
-                <h3>CONTACTANOS</h3>
-                <p>Correos Electrónicos:</p>
-                <p><a href="mailto:examplemail@gmail.com">EXAMPLEMAIL@GMAIL.COM</a></p>
-                <p><a href="mailto:examplemail@gmail.com">EXAMPLEMAIL@GMAIL.COM</a></p>
-            </div>
-            <div class="col-md-6">
-                <i class="bi bi-telephone-fill display-1"></i>
-                <p>LLAMANOS:</p>
-                <p><a href="tel:+5798779874646">+57 98778979874646</a></p>
-                <p>WHATSAPP:</p>
-                <p><a href="https://wa.me/5798779874646">+57 98778979874646</a></p>
+      <div class="container text-center my-5">
+        <h2>¿Como podemos ayudarte?</h2>
+        <!-- Modificación aquí: Contenedor flex para input + botón -->
+        <div class="d-flex justify-content-center gap-2 mb-4">
+          <input class="form-control" style="max-width: 400px;" type="search" placeholder="Buscar" size="150" aria-label="Search">
+          <button class="btn btn-light" type="submit">Buscar</button>
+        </div>
+        <div class="card shadow p-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="bi bi-person-circle display-1"></i>
+                    <h3>CONTACTANOS</h3>
+                    <p>Correos Electrónicos:</p>
+                    <p><a href="mailto:examplemail@gmail.com">MotoStoreSupport@gmail.com</a></p>
+                    <p><a href="mailto:examplemail@gmail.com">MotoStoreSupport2@gmail.com</a></p>
+                </div>
+                <div class="col-md-6">
+                    <i class="bi bi-telephone-fill display-1"></i>
+                    <p>WHATSAPP:</p>
+                    <p><a href="https://wa.me/5798779874646">+57 3123248007</a></p>
+                </div>
             </div>
         </div>
+        <p class="mt-4">SOPORTE, DUDAS E INQUIETUDES ESCRIBENOS A NUESTRO CORREO O WHATSAPP </p>
     </div>
-    <p class="mt-4">SOPORTE, DUDAS E INQUIETUDES ESCRIBENOS A NUESTRO CORREO O LLAMANOS</p>
-</div>
 
-<footer class="bg-dark text-white py-4">
+<footer class="py-4">
   <div class="container">
     <!-- Primera fila: Enlaces y redes sociales -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -93,13 +95,13 @@ s<!DOCTYPE html>
       <div class="mb-3 mb-md-0">
         <ul class="list-inline mb-0">
           <li class="list-inline-item me-3">
-            <a href="#" class="text-success text-decoration-none fs-5">Aviso Legal</a>
+            <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
           </li>
           <li class="list-inline-item me-3">
-            <a href="#" class="text-success text-decoration-none fs-5">Contáctanos</a>
+            <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Contáctanos</a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-success text-decoration-none fs-5">Ayuda</a>
+            <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
           </li>
         </ul>
       </div>

@@ -1,132 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
-    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-          <a class="navbar-brand" href="sesion-administrador.html">
-            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="sesion-administrador.html">
+          <img
+            src="../img/logo_moto_store-1-5.png"
+            style="width: 200px; height: 150px"
+            alt="logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="gestion-categoria-baquen.html"
+                >Conf.categorias</a
+              >
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="gestion-notificaciones.html"
+                >Conf.notificaciones</a
+              >
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="Informe-admi.html">Informes</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="administracion-cuentas.html"
+                >Conf.cuentas</a
+              >
+            </li>
+            <li class="nav-item dropdown mx-4">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user fa-2x"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="perfil-administrador.html"
+                  >Ver perfil</a
+                >
+                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-4 mb-5">
+      <h2 class="text-center">Gestionar Categorías</h2>
+      <div class="card">
+        <div class="card-body">
+          <div id="categorias">
+            <!-- Categorías dinámicas aquí -->
+          </div>
+          <button class="btn btn-primary mt-3" id="addCategoria">
+            Añadir Categoría
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item mx-4">
-                <a class="nav-link btn" href="gestion-categoria-baquen.html">Conf.categorias</a>
-              </li>
-              <li class="nav-item mx-4"> 
-                <a class="nav-link" href="gestion-notificaciones.html">Conf.notificaciones</a>
-              </li>
-              <li class="nav-item mx-4">
-                <a class="nav-link" href="Informe-admi.html">Informes</a>
-              </li>
-              <li class="nav-item mx-4">
-                <a class="nav-link" href="administracion-cuentas.html">Conf.cuentas</a>
-              </li>
-              <li class="nav-item dropdown mx-4">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user fa-2x"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="perfil-administrador.html">Ver perfil</a>
-                  <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <div class="container mt-4">
-        <h2 class="text-center">Gestionar Categorías</h2>
-        <div class="card">
-            <div class="card-body">
-                <div id="categorias">
-                    <!-- Categorías dinámicas aquí -->
-                </div>
-                <button class="btn btn-primary mt-3" id="addCategoria">Añadir Categoría</button>
-                <button class="btn btn-success mt-3" id="aplicarCambios">Aplicar Cambios</button>
-            </div>
-        </div>
-    </div>
-    <footer class="bg-dark text-white py-4">
-      <div class="container">
-        <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <!-- Enlaces legales - Izquierda -->
-          <div class="mb-3 mb-md-0">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item me-3">
-                <a href="#" class="text-success text-decoration-none fs-5">Aviso Legal</a>
-              </li>
-              <li class="list-inline-item me-3">
-                <a href="#" class="text-success text-decoration-none fs-5">Contáctanos</a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#" class="text-success text-decoration-none fs-5">Ayuda</a>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
-          <div class="mb-3 mb-md-0">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item me-3">
-                <a href="#" class="text-white">
-                  <i class="fab fa-youtube fa-3x"></i>
-                </a>
-              </li>
-              <li class="list-inline-item me-3">
-                <a href="#" class="text-white">
-                  <i class="fab fa-facebook fa-3x"></i>
-                </a>
-              </li>
-              <li class="list-inline-item me-3">
-                <a href="#" class="text-white">
-                  <i class="fab fa-x-twitter fa-3x"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#" class="text-white">
-                  <i class="fab fa-instagram fa-3x"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+          <button class="btn btn-success mt-3" id="aplicarCambios">
+            Aplicar Cambios
+          </button>
         </div>
       </div>
-    </footer>
+    </div>
     <script>
-        document.getElementById("addCategoria").addEventListener("click", function () {
-            let categoriaDiv = document.createElement("div");
-            categoriaDiv.classList.add("d-flex", "align-items-center", "mb-2");
-            categoriaDiv.innerHTML = `
+      document
+        .getElementById("addCategoria")
+        .addEventListener("click", function () {
+          let categoriaDiv = document.createElement("div");
+          categoriaDiv.classList.add("d-flex", "align-items-center", "mb-2");
+          categoriaDiv.innerHTML = `
                 <input type="text" class="form-control me-2" placeholder="Nombre Categoría">
                 <input type="text" class="form-control me-2" placeholder="Descripción">
                 <button class="btn btn-warning me-2 editar">Editar</button>
                 <button class="btn btn-danger desactivar">Desactivar / Activar</button>
             `;
-            document.getElementById("categorias").appendChild(categoriaDiv);
+          document.getElementById("categorias").appendChild(categoriaDiv);
         });
     </script>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-  <script src="../js/sweetalert2@9.js"></script>
-  <script src="../js/logout.js"></script>
-</body>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/logout.js"></script>
+  </body>
 </html>

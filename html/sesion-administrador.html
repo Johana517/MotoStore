@@ -1,221 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuenta Administrador</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cuenta Administrador</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
-  <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-      <a class="navbar-brand" href="sesion-administrador.html">
-        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item mx-4">
-            <a class="nav-link btn" href="gestion-categoria-baquen.html">Conf.categorias</a>
-          </li>
-          <li class="nav-item mx-4"> 
-            <a class="nav-link" href="#">Conf.notificaciones</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a class="nav-link" href="Informe-admi.html">Informes</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a class="nav-link" href="administracion-cuentas.html">Conf.cuentas</a>
-          </li>
-          <li class="nav-item dropdown mx-4">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user fa-2x"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="perfil-administrador.html">Ver perfil</a>
-              <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <h2 class="text-center mt-5">Registros de Plataforma</h2>
-    <div class="container mt-5 border bg-light" style="width: 800px; height: 600px;">
-      <h3 class="text-center">Grafica de Productos</h3>
-      <canvas id="productosChart"></canvas>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg text-center">
+        <a class="navbar-brand" href="sesion-administrador.html">
+          <img
+            src="../img/logo_moto_store-1-5.png"
+            style="width: 200px; height: 150px"
+            alt="logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="gestion-categoria-baquen.html"
+                >Conf.categorias</a
+              >
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="#">Conf.notificaciones</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="Informe-admi.html">Informes</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="administracion-cuentas.html"
+                >Conf.cuentas</a
+              >
+            </li>
+            <li class="nav-item dropdown mx-4">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user fa-2x"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="perfil-administrador.html"
+                  >Ver perfil</a
+                >
+                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h2 class="text-center mt-5 mb-5">Registros de Plataforma</h2>
+      <div
+        class="container mt-5 border bg-light"
+        style="width: 800px; height: 600px"
+      >
+        <h3 class="text-center">Grafica de Productos</h3>
+        <canvas id="productosChart"></canvas>
         <script>
-        const ctx = document.getElementById('productosChart').getContext('2d');
+          const ctx = document
+            .getElementById("productosChart")
+            .getContext("2d");
 
-        const productosChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-            datasets: [
-               {
-                  label: 'Productos Publicados',
-                  data: [8, 16, 24, 32, 40, 48],
-                  backgroundColor: ['blue', 'green', 'orange', 'red', 'darkblue'],
-                  borderWidth: 1
-                },
-              ]
-            },
-        options: {
-          responsive: true,
-          scales: {
-              y: {
-                beginAtZero: true,
-                min: 0,
-                max: 60,
-                ticks: {
-                  stepSize: 10
-                }
-              }
-            }
-          }
-        });
-      </script>
-    </div>
-    <div class="container mt-5 border bg-light" style="width: 800px; height: 600px;">
-      <h3 class="text-center">Grafica de vendedores registrados</h3>
-      <canvas id="vendedoresChart">
-        <script>
-          const ctx2 = document.getElementById('vendedoresChart').getContext('2d');
-
-          const vendedoresChart = new Chart(ctx2, {
-            type: 'bar',
+          const productosChart = new Chart(ctx, {
+            type: "bar",
             data: {
-              labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+              labels: ["Febrero", "Marzo", "Abril", "Mayo", "Junio"],
               datasets: [
-                  {
-                      label: 'Vendedores Registrados',
-                      data: [3, 7, 12, 18, 26], // Datos corregidos
-                      backgroundColor: ['gray', 'green', 'orange', 'red', 'darkblue'],
-                      borderWidth: 1
-                  },
-                ]
-              },
+                {
+                  label: "Productos Publicados",
+                  data: [8, 16, 24, 32, 40, 48],
+                  backgroundColor: [
+                    "blue",
+                    "green",
+                    "orange",
+                    "red",
+                    "darkblue",
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
             options: {
               responsive: true,
               scales: {
                 y: {
                   beginAtZero: true,
+                  min: 0,
+                  max: 60,
+                  ticks: {
+                    stepSize: 10,
+                  },
+                },
+              },
+            },
+          });
+        </script>
+      </div>
+      <div
+        class="container mt-5 border bg-light"
+        style="width: 800px; height: 600px"
+      >
+        <h3 class="text-center">Grafica de vendedores registrados</h3>
+        <canvas id="vendedoresChart">
+          <script>
+            const ctx2 = document
+              .getElementById("vendedoresChart")
+              .getContext("2d");
+
+            const vendedoresChart = new Chart(ctx2, {
+              type: "bar",
+              data: {
+                labels: ["Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+                datasets: [
+                  {
+                    label: "Vendedores Registrados",
+                    data: [3, 7, 12, 18, 26], // Datos corregidos
+                    backgroundColor: [
+                      "gray",
+                      "green",
+                      "orange",
+                      "red",
+                      "darkblue",
+                    ],
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
                     min: 0,
                     max: 30,
                     ticks: {
-                      stepSize: 5
-                    }
-                  }
-                }
-              }
+                      stepSize: 5,
+                    },
+                  },
+                },
+              },
             });
-        </script>
-      </canvas>
-    </div>
-    <div class="container mt-5 border bg-light" style="width: 800px; height: 600px;">
-      <h3 class="text-center">Grafica de Ingresos</h3>
-      <canvas id="ingresosChart">
-        <script>
-            const ctxIngresos = document.getElementById('ingresosChart').getContext('2d');
+          </script>
+        </canvas>
+      </div>
+      <div
+        class="container mt-5 mb-5 border bg-light"
+        style="width: 800px; height: 600px"
+      >
+        <h3 class="text-center">Grafica de Ingresos</h3>
+        <canvas id="ingresosChart">
+          <script>
+            const ctxIngresos = document
+              .getElementById("ingresosChart")
+              .getContext("2d");
 
             const ingresosChart = new Chart(ctxIngresos, {
-              type: 'bar',
+              type: "bar",
               data: {
-              labels: ['Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-              datasets: [
-                {
-                  label: 'Ingresos en COPs',
-                  data: [8000, 18000, 25000, 36000, 48000],
-                  backgroundColor: ['blue', 'green', 'orange', 'red', 'darkblue'],
-                  borderWidth: 1
-                },  
-              ]
-            },
-            options: {
-            responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
-                min: 0,
-                max: 50000,
-                ticks: { stepSize: 5000
-
-                 }
-                }
-              }
-            }
-          });
-        </script>
-      </canvas>
-    </div>
-  </main>
-  <footer class="bg-dark text-white py-4">
-    <div class="container">
-      <!-- Primera fila: Enlaces y redes sociales -->
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <!-- Enlaces legales - Izquierda -->
-        <div class="mb-3 mb-md-0">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-success text-decoration-none fs-5">Aviso Legal</a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-success text-decoration-none fs-5">Contáctanos</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="text-success text-decoration-none fs-5">Ayuda</a>
-            </li>
-          </ul>
-        </div>
-        
-        <!-- Redes sociales - Derecha (iconos más grandes) -->
-        <div class="mb-3 mb-md-0">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-youtube fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-facebook fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-x-twitter fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="text-white">
-                <i class="fab fa-instagram fa-3x"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+                labels: ["Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+                datasets: [
+                  {
+                    label: "Ingresos en COPs",
+                    data: [8000, 18000, 25000, 36000, 48000],
+                    backgroundColor: [
+                      "blue",
+                      "green",
+                      "orange",
+                      "red",
+                      "darkblue",
+                    ],
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 50000,
+                    ticks: { stepSize: 5000 },
+                  },
+                },
+              },
+            });
+          </script>
+        </canvas>
       </div>
-        
-        <!-- Copyright centrado -->
-        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-          <p class="mb-0 text-white">https://Motostore.com</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-  <script src="../js/sweetalert2@9.js"></script>
-  <script src="../js/logout.js"></script>
-</body>
+    </main>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/logout.js"></script>
+  </body>
 </html>

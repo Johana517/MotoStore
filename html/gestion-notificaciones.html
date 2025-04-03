@@ -1,189 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notificaciones</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
     <style>
-        .breadcrumb {
-            background: none;
-            padding: 0;
-        }
-        .product-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #f8f9fa;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-        .product-card img {
-            width: 80px;
-            height: auto;
-        }
+      .breadcrumb {
+        background: none;
+        padding: 0;
+      }
+      .product-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+      }
+      .product-card img {
+        width: 80px;
+        height: auto;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-          <a class="navbar-brand" href="sesion-administrador.html">
-            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item mx-4">
-                <a class="nav-link btn" href="gestion-categoria-baquen.html">Conf.categorias</a>
-              </li>
-              <li class="nav-item mx-4"> 
-                <a class="nav-link" href="gestion-notificaciones.html">Conf.notificaciones</a>
-              </li>
-              <li class="nav-item mx-4">
-                <a class="nav-link" href="Informe-admi.html">Informes</a>
-              </li>
-              <li class="nav-item mx-4">
-                <a class="nav-link" href="administracion-cuentas.html">Conf.cuentas</a>
-              </li>
-              <li class="nav-item dropdown mx-4">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user fa-2x"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="perfil-administrador.html">Ver perfil</a>
-                  <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+      <nav class="navbar navbar-expand-lg text-center">
+        <a class="navbar-brand" href="sesion-administrador.html">
+          <img
+            src="../img/logo_moto_store-1-5.png"
+            style="width: 200px; height: 150px"
+            alt="logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="gestion-categoria-baquen.html"
+                >Conf.categorias</a
+              >
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="gestion-notificaciones.html"
+                >Conf.notificaciones</a
+              >
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="Informe-admi.html">Informes</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" href="administracion-cuentas.html"
+                >Conf.cuentas</a
+              >
+            </li>
+            <li class="nav-item dropdown mx-4">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user fa-2x"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="perfil-administrador.html"
+                  >Ver perfil</a
+                >
+                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
     <main class="container mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="sesion-administrador.html">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Notificaciones</li>
-            </ol>
-        </nav>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="sesion-administrador.html">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Notificaciones
+          </li>
+        </ol>
+      </nav>
 
-       
-
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Notificacio 1</a></h5>
-                <p>Detalles</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia sit enim reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit qui voluptatum tempore officia?</p>
-
-                
-            </div>
-           
-            <div>
-                <p class="text-success">Activo</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-on"></i></button>
-                
-            </div>
+      <div class="product-card">
+        <div>
+          <h5><a href="#">Notificacio 1</a></h5>
+          <p>Detalles</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
+            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
+            qui voluptatum tempore officia?
+          </p>
         </div>
 
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Notificacio 1</a></h5>
-                <p>Detalles</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia sit enim reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit qui voluptatum tempore officia?</p>
-
-                
-            </div>
-           
-            <div>
-                <p class="text-success">Activo</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-on"></i></button>
-                
-            </div>
+        <div>
+          <p class="text-success">Activo</p>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-toggle-on"></i>
+          </button>
         </div>
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Notificacio 1</a></h5>
-                <p>Detalles</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia sit enim reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit qui voluptatum tempore officia?</p>
+      </div>
 
-                
-            </div>
-           
-            <div>
-                <p class="text-success">Activo</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-on"></i></button>
-                
-            </div>
+      <div class="product-card">
+        <div>
+          <h5><a href="#">Notificacio 1</a></h5>
+          <p>Detalles</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
+            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
+            qui voluptatum tempore officia?
+          </p>
         </div>
 
-        <nav>
-            <ul class="pagination justify-content-center mt-3">
-                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </nav>
+        <div>
+          <p class="text-success">Activo</p>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-toggle-on"></i>
+          </button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div>
+          <h5><a href="#">Notificacio 1</a></h5>
+          <p>Detalles</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
+            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
+            qui voluptatum tempore officia?
+          </p>
+        </div>
+
+        <div>
+          <p class="text-success">Activo</p>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-toggle-on"></i>
+          </button>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="pagination justify-content-center mt-3">
+          <li class="page-item disabled">
+            <a class="page-link" href="#">«</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </nav>
     </main>
-
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-          <!-- Primera fila: Enlaces y redes sociales -->
-          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <!-- Enlaces legales - Izquierda -->
-            <div class="mb-3 mb-md-0">
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item me-3">
-                  <a href="#" class="text-success text-decoration-none fs-5">Aviso Legal</a>
-                </li>
-                <li class="list-inline-item me-3">
-                  <a href="#" class="text-success text-decoration-none fs-5">Contáctanos</a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#" class="text-success text-decoration-none fs-5">Ayuda</a>
-                </li>
-              </ul>
-            </div>
-            
-            <!-- Redes sociales - Derecha (iconos más grandes) -->
-            <div class="mb-3 mb-md-0">
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item me-3">
-                  <a href="#" class="text-white">
-                    <i class="fab fa-youtube fa-3x"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item me-3">
-                  <a href="#" class="text-white">
-                    <i class="fab fa-facebook fa-3x"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item me-3">
-                  <a href="#" class="text-white">
-                    <i class="fab fa-x-twitter fa-3x"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#" class="text-white">
-                    <i class="fab fa-instagram fa-3x"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-            
-            <!-- Copyright centrado -->
-            <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-              <p class="mb-0 text-white">https://Motostore.com</p>
-            </div>
-          </div>
-        </div>
-      </footer>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -191,5 +185,5 @@
     <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
     <script src="../js/sweetalert2@9.js"></script>
     <script src="../js/logout.js"></script>
-</body>
+  </body>
 </html>
