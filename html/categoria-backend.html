@@ -197,19 +197,25 @@
   <!-- HEADER / NAVBAR -->
   <header>
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="sesion-vendedor.html">
         <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto ms-2 ">
-          <li class="nav-item">
-            <a class="nav-link" href="categoria.html">Categorias <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
+          <li class="nav-item mx-2"> 
+            <a class="nav-link" href="membresia.html">Membresia</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="categoria-backend.html">Categorias</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="MisProductos.html">Mis productos</a>
           </li>
           <form class="form-inline">
             <div class="input-group">
@@ -217,19 +223,31 @@
               <button class="btn btn-outline-success" type="submit">Search</button>
             </div>
           </form>
-          <li class="nav-item">
-            <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vender 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="vender-moto.html">Moto</a>
+              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registrarse.html">Registrarse</a>
+          <li class="nav-item dropdown mx-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user fa-2x"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
+              <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
+            </div>
           </li>
         </ul>
       </div>
     </nav>
-  </header>   
+  </header>
   
   <div class="main-container">
     <div class="sidebar">
@@ -259,8 +277,6 @@
                 <option value="Deportiva">Deportiva</option>
                 <option value="Scooter">Scooter</option>
                 <option value="Enduro">Enduro</option>
-                <option value="Chopper">Chopper</option>
-                <option value="Naked">Naked</option>
             </select>
 
             <label>Cilindraje:</label>
@@ -300,7 +316,7 @@
         <!-- Filtros para repuestos -->
         <div id="opcionesRepuesto" style="display: none;">
           <label>Marca:</label>
-            <select id="categoria" class="form-select">
+            <select id="marcaRepuesto" class="form-select">
                 <option value="">Seleccionar</option>
                 <option value="Yamaha">Yamaha</option>
                 <option value="Honda">Honda</option>
@@ -388,7 +404,7 @@
         <div class="product-grid row"></div>
     </div>
     <div>
-
+      
     </div>           
           
           </script>
@@ -452,16 +468,98 @@
 
 <script>
   // Asegúrate de que esta función esté definida correctamente
+  function mostrarOpciones() {
+  try {
+      var tipo = document.getElementById("tipo").value;
+      var opcionesMoto = document.getElementById("opcionesMoto");
+      var opcionesRepuesto = document.getElementById("opcionesRepuesto");
+      
+      if (!opcionesMoto || !opcionesRepuesto) {
+          console.error("Elementos del formulario no encontrados");
+          return;
+      }
+      
+      opcionesMoto.style.display = tipo === "moto" ? "block" : "none";
+      opcionesRepuesto.style.display = tipo === "repuesto" ? "block" : "none";
+  } catch (error) {
+      console.error("Error en mostrarOpciones:", error);
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const btnBuscar = document.getElementById("btnBuscar");
+  const tipo = document.getElementById("tipo");
+  const productGrid = document.querySelector(".product-grid");
+  const tituloResultados = document.getElementById("tituloResultados");
+
+  btnBuscar.addEventListener("click", function () {
+    const tipoSeleccionado = tipo.value;
+    let productosFiltrados = [];
+
+    // Lógica de filtrado según el tipo seleccionado
+    if (tipoSeleccionado === "moto") {
+      const marca = document.getElementById("marcaMoto").value;
+      const tipoMoto = document.getElementById("tipoMoto").value;
+      const cilindraje = document.getElementById("tipoCilindraje").value;
+      const anio = document.getElementById("tipoAños").value;
+
+      productosFiltrados = productos.filter(producto => 
+        producto.tipo === "moto" &&
+        (marca === "" || producto.marca === marca) &&
+        (tipoMoto === "" || producto.tipoMoto === tipoMoto) &&
+        (cilindraje === "" || producto.cilindraje === cilindraje) &&
+        (anio === "" || producto.anio === anio)
+      );
+
+    } else if (tipoSeleccionado === "repuesto") {
+      const marca = document.getElementById("marcaRepuesto").value;
+      const categoria = document.getElementById("categoria").value;
+      const subcategoria = document.getElementById("subcategoria").value;
+
+      productosFiltrados = productos.filter(producto =>
+        producto.tipo === "repuesto" &&
+        (marca === "" || producto.marca === marca) &&
+        (categoria === "" || producto.categoria === categoria) &&
+        (subcategoria === "" || producto.subcategoria === subcategoria)
+      );
+    }
+
+    mostrarProductos(productosFiltrados);
+  });
+
+  function mostrarProductos(lista) {
+    productGrid.innerHTML = ""; // Limpiar resultados anteriores
+    if (lista.length === 0) {
+      tituloResultados.textContent = "No se encontraron resultados";
+      return;
+    }
+
+    tituloResultados.textContent = `Se encontraron ${lista.length} resultados`;
+
+    lista.forEach(producto => {
+      const card = document.createElement("div");
+      card.className = "col-md-4 product-card";
+      card.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <div class="card-body">
+          <h5 class="card-title">${producto.nombre}</h5>
+          <p class="card-text">${producto.descripcion}</p>
+        </div>
+        <div class="card-footer">
+          <strong>$${producto.precio}</strong>
+        </div>
+      `;
+      productGrid.appendChild(card);
+    });
+  }
+});
 // Base de datos de productos
 
 
 // Ejemplo de productos (esto debería venir de tu base de datos)
 
 </script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

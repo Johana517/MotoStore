@@ -1,6 +1,6 @@
 /* Fondo general */
 body {
-  background-color: lightgray; /* Negro profundo */
+  background-color: #d3d3d3; /* Negro profundo */
   font-family: "Arial", sans-serif;
 }
 h1 {
@@ -14,7 +14,7 @@ header {
 
 /* Links */
 a {
-  color: #0077ff; /* Azul eléctrico */
+  color: #f3b95f; /* Azul eléctrico */
   text-decoration: none;
   font-weight: bold;
 }
@@ -25,4 +25,12 @@ a:hover {
 
 footer {
   background-color: black;
+}
+.navbar-toggler {
+  background-color: white;
+  color: black;
+}
+
+i {
+  color: black;
 }
