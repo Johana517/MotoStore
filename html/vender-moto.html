@@ -11,15 +11,32 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     /* Ocultar las flechas en Bootstrap */
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-    input[type="number"] {
-    appearance: textfield; /* Funciona en Firefox y otros navegadores modernos */
-}
+    .sidebar {
+        width: 1200px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        }
+        .sidebar h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        }
+        .sidebar label {
+        font-weight: bold;
+        margin-top: 5px;
+        }
+        .sidebar .form-select, 
+        .sidebar .form-control {
+        width: 100%; 
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        }
+        .sidebar .btn {
+        width: 100%; 
+        padding: 10px;
+        font-size: 1rem;
+        }
 
 
 
@@ -78,7 +95,7 @@
     </nav>
   </header>
   <main>
-    <div class="container bg-light mt-5 py-2 px-5 mb-5">
+    <div class="sidebar container bg-light mt-5 py-2 px-5 mb-5">
       <h2 class="text-center mt-5">Describe tu Moto</h2>
       <form>
         <div class="form-row my-3">
@@ -107,23 +124,23 @@
             </select>
           </div>
           <div class="form-group col-md-4">
-            <label for="inputState">Tipo de Moto</label>
+            <label for="inputState">Modelo de Moto</label>
             <select id="inputState" class="form-control">
-              <option value="0" selected disabled>Seleccionar Tipo de moto</option>
+              <option value="0" selected disabled>Seleccionar Modelo de moto</option>
               <option value="1">Scooter</option>
               <option value="2">Enduro</option>
               <option value="3">Deportiva</option>
-              <option value="4">Electrica</option>
+              <option value="4">Naked</option>
               <option value="5">Chopper</option>
             </select>
           </div>
         </div>
         <div class="form-row my-3">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
               <label for="inputEmail4">Precio</label>
-              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la moto" required>
+              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la Moto" required>
           </div>
-          <div class="form-gruop col-md-4">
+          <div class="form-gruop col-md-6">
             <label for="inputState">Año (Desde que año tiene su moto)</label>
             <select id="inputState" class="form-control" required>
               <option value="0" selected disabled>Seleccionar Año</option>
@@ -145,26 +162,15 @@
               <option value="2025">2025</option>
             </select>
           </div>
-          <div class="form-group col-md-4">
-              <label for="inputEmail4">Kilometraje</label>
-              <input type="number" class="form-control" id="flechas" placeholder="Colocar el kilometraje de la moto" required>
+        </div>
+        <div class="form-row my-3">
+          <div class="col-lg-12">
+            <h4>Descripcion</h4>
+            <textarea name="" id="descripcion" rows="5" cols="50" placeholder="Si quieres detallar mas cosas de tu moto lo puedes hacer aqui"></textarea>
           </div>
         </div>
-        <h2 class="text-center my-5">Documentacion de la Moto</h2>
         <div class="form-row my-3">
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFile" class="form-label">SOAT</label>
-            <input class="form-control" type="file" id="formFile">
-          </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFileMultiple" class="form-label">TECNOMECANICA</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
-          </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFileMultiple" class="form-label">TARJETA DE PROPIEDAD</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
-          </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
+          <div class="mb-3 form-group col-lg-12 col-md-12">
             <label for="formFileMultiple" class="form-label">FOTO DE LA MOTO</label>
             <input class="form-control" type="file" id="formFileMultiple" multiple>
           </div>                   

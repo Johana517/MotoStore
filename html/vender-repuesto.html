@@ -9,6 +9,34 @@
   <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
   <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .sidebar {
+        width: 1200px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        }
+        .sidebar h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        }
+        .sidebar label {
+        font-weight: bold;
+        margin-top: 5px;
+        }
+        .sidebar .form-select, 
+        .sidebar .form-control {
+        width: 100%; 
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        }
+        .sidebar .btn {
+        width: 100%; 
+        padding: 10px;
+        font-size: 1rem;
+        }
+  </style>
 </head>
 
 <body>
@@ -63,19 +91,23 @@
     </nav>
   </header>
   <main>
-    <div class="container bg-light mt-5 py-2 px-5 mb-5">
+    <div class="sidebar container bg-light mt-5 py-2 px-5 mb-5">
       <h2 class="text-center mt-5">Describe tu repuesto</h2>
       <form>
         <div class="form-row my-3">
           <div class="form-group col-md-4">
+            <label for="inputEmail4">Cantidad</label>
+            <input type="text" class="form-control" id="flechas" placeholder="Colocar cantidad del repuesto" required>
+          </div>
+          <div class="form-group col-md-4">
             <label for="inputState">Marca</label>
             <select id="inputState" class="form-control" required>
               <option value="0" selected disabled>Seleccionar Marca</option>
-              <option value="1">Yamaha</option>
-              <option value="2">Honda</option>
-              <option value="3">Suzuki</option>
-              <option value="4">Kawasaki</option>
-              <option value="5">Auteco</option>
+              <option value="1">Bosch</option>
+              <option value="2">Moog</option>
+              <option value="3">Febi Bilstein</option>
+              <option value="4">SKF</option>
+              <option value="5">Gates</option>
             </select>
           </div>
           <div class="form-group col-md-4">
@@ -85,20 +117,79 @@
               <option value="1">Original</option>
               <option value="2">Genérico</option>
             </select>
-          </div>
+
         </div>
         <div class="form-row my-3">
-          <div class="form-group col-md-6">
-              <label for="inputEmail4">Referencia</label>
-              <input type="text" class="form-control" id="flechas" placeholder="Colocar referencia del repuesto" required>
-          </div>
-          <div class="form-group col-md-6">
-              <label for="inputEmail4">Cantidad</label>
-              <input type="text" class="form-control" id="flechas" placeholder="Colocar cantidad del repuesto" required>
-          </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="inputEmail4">Precio</label>
             <input type="text" class="form-control" id="flechas" placeholder="Colocar precio del repuesto" required>
+          </div>
+          <div class="form-grup col-md-4">
+            <label for="categoria">Categoría: </label>
+            <select id="categoria" class="form-select" onchange="cargarSubcategorias()">
+              <option value="">Seleccionar categoría</option>
+              <option value="motor">Partes del Motor</option>
+              <option value="transmision">Transmisión</option>
+              <option value="frenos">Sistema de Frenos</option>
+              <option value="suspension">Ruedas y Suspensión</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="subcategoria">Subcategoría:</label>
+            <select id="subcategoria" class="form-select">
+              <option>Seleccionar subcategoría</option>
+            </select>
+          
+            <script>
+              const subcategorias = {
+                motor: [
+                  "Cilindros",
+                  "Pistones",
+                  "Árbol de levas",
+                  "Válvulas",
+                  "Juntas"
+                ],
+                transmision: [
+                  "Cadena",
+                  "Piñón",
+                  "Corona",
+                  "Embrague",
+                  "Caja de cambios"
+                ],
+                frenos: [
+                  "Pastillas de freno",
+                  "Discos de freno",
+                  "Zapatas",
+                  "Bombas de freno",
+                  "Líneas de freno"
+                ],
+                suspension: [
+                  "Llantas",
+                  "Neumáticos",
+                  "Amortiguadores",
+                  "Bujes y rodamientos",
+                  "Ejes"
+                ]
+              };
+            
+              function cargarSubcategorias() {
+                const categoria = document.getElementById("categoria").value;
+                const subcategoriaSelect = document.getElementById("subcategoria");
+            
+                // Limpiar opciones anteriores
+                subcategoriaSelect.innerHTML = '<option value="" > Selecciona una subcategoría </option>';
+            
+                // Si existe la categoría, llenar subcategorías
+                if (categoria && subcategorias[categoria]) {
+                  subcategorias[categoria].forEach(function(subcat) {
+                    const option = document.createElement("option");
+                    option.value = subcat.toLowerCase().replace(/\s/g, "_");
+                    option.textContent = subcat;
+                    subcategoriaSelect.appendChild(option);
+                  });
+                }
+              }
+            </script>
           </div>
           <div class="mb-3 form-group col-md-12 col-lg-12">
             <label for="formFileMultiple" class="form-label">FOTO DEl REPUESTO</label>
