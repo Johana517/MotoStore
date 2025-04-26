@@ -77,41 +77,176 @@
         </div>
       </nav>
     </header>
+    <main>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+        }
+        .contenedor {
+          width: 90%;
+          margin: 20px auto;
+        }
+        .boton-crear {
+          padding: 8px 15px;
+          background-color: #3498db;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-bottom: 20px;
+        }
+        .tabla-responsive {
+          width: 100%;
+          overflow-x: auto;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 600px; /* Esto fuerza que no se encoja demasiado */
+        }
+        th, td {
+          padding: 10px;
+          border: 1px solid #ccc;
+          text-align: center;
+        }
+        th {
+          background-color: #f4f4f4;
+        }
+        .activo {
+          color: green;
+        }
+        .desactivado {
+          color: red;
+        }
+        .boton-accion {
+          padding: 5px 10px;
+          margin: 2px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .boton-activar {
+          background-color: #2ecc71;
+          color: white;
+        }
+        .boton-desactivar {
+          background-color: #e74c3c;
+          color: white;
+        }
+        .boton-accion:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+        .boton-crear {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #007bff; /* Azul brillante */
+          color: white; /* Texto blanco */
+          text-decoration: none; /* Quitar subrayado del enlace */
+          border: 2px solid black; /* Borde negro */
+          border-radius: 8px; /* Esquinas redondeadas */
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
+          transition: background-color 0.3s, color 0.3s;
+        }
 
-    <!-- 🟢 Barra de navegación -->
+        /* Efecto al pasar el mouse */
+        .boton-crear:hover {
+          background-color: #0056b3; /* Azul más oscuro */
+          color: white;
+        }
 
-    <!-- 🟢 Contenido Principal -->
-    <div class="container mt-5 mb-5">
-      <div class="card p-4">
-        <h2 class="text-center">Administrador de Cuentas</h2>
-
-        <!-- 🟢 Sección de Activación de Cuentas -->
-        <div class="mb-3">
-          <h5>Información Básica</h5>
-          <label class="form-label">Activar cuentas</label>
-          <div class="d-flex align-items-center">
-            <strong class="me-3"></strong>
-            <button class="btn btn-success btn-sm me-2">Activar</button>
-            <button class="btn btn-danger btn-sm">Desactivar</button>
-          </div>
-        </div>
-
-        <!-- 🟢 Descripción de Suspensión -->
-        <div class="mb-3">
-          <h5><i class="fas fa-circle me-2"></i>Descripción de Suspensión</h5>
-          <textarea
-            class="form-control"
-            rows="3"
-            placeholder="Escriba los detalles aquí..."
-          ></textarea>
-        </div>
-
-        <!-- 🟢 Botón Guardar -->
-        <button class="btn btn-primary">
-          <i class="fas fa-save"></i> Guardar
-        </button>
+      </style>
+    </head>
+    <body>
+    
+    <div class="contenedor">
+    
+      <a href="registrarse.html" class="boton-crear">Crear Usuario</a>
+    
+      <h2 style="text-align: center;">Gestión de Usuarios</h2>
+    
+      <div class="tabla-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo Electrónico</th>
+              <th>Edad</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Juan Pérez</td>
+              <td>juan@example.com</td>
+              <td>30</td>
+              <td class="estado activo">Activo</td>
+              <td>
+                <button class="boton-accion boton-desactivar">Desactivar</button>
+                <button class="boton-accion boton-activar" disabled>Activar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Ana López</td>
+              <td>ana@example.com</td>
+              <td>25</td>
+              <td class="estado activo">Activo</td>
+              <td>
+                <button class="boton-accion boton-desactivar">Desactivar</button>
+                <button class="boton-accion boton-activar" disabled>Activar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Carlos Sánchez</td>
+              <td>carlos@example.com</td>
+              <td>28</td>
+              <td class="estado desactivado">Desactivado</td>
+              <td>
+                <button class="boton-accion boton-desactivar" disabled>Desactivar</button>
+                <button class="boton-accion boton-activar">Activar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    
     </div>
+    
+    <script>
+      const desactivarBtns = document.querySelectorAll('.boton-desactivar');
+      const activarBtns = document.querySelectorAll('.boton-activar');
+    
+      desactivarBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const fila = btn.closest('tr');
+          const estado = fila.querySelector('.estado');
+          estado.textContent = 'Desactivado';
+          estado.classList.remove('activo');
+          estado.classList.add('desactivado');
+    
+          btn.disabled = true;
+          fila.querySelector('.boton-activar').disabled = false;
+        });
+      });
+    
+      activarBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const fila = btn.closest('tr');
+          const estado = fila.querySelector('.estado');
+          estado.textContent = 'Activo';
+          estado.classList.remove('desactivado');
+          estado.classList.add('activo');
+    
+          btn.disabled = true;
+          fila.querySelector('.boton-desactivar').disabled = false;
+        });
+      });
+    </script>
+    
+    </main>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
