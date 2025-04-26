@@ -75,7 +75,8 @@
     }
     .btn-close:hover {
       background-color: #f8f9fa;
-    } 
+    }
+    
 
 
 
@@ -85,40 +86,66 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg ">
-      <a class="navbar-brand" href="index.html">
-        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-thin fa-line-height"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-        <ul class="navbar-nav mr-auto ms-2 ">
-          <li class="nav-item">
-            <a class="nav-link" href="categoria.html">Categorias</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
-          </li>
-          <form class="form-inline">
-            <div class="input-group">
-              <input type="search" class="form-control" placeholder="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-4 col-md-4">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+              <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+            </a>
+          </div>
+          <div class="col-4 col-md-4">
+            <!-- Barra de búsqueda (siempre visible) -->
+            <div class="search-mobile d-lg-none ms-2">
+              <form class="d-flex">
+                <input type="search" class="form-control" placeholder="Search" size="100">
+                <button class="btn btn-success ms-2" type="submit">Search</button>
+              </form>
             </div>
-          </form>
-          <li class="nav-item">
-            <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registrarse.html">Registrarse</a>
-          </li>
-        </ul>
+          </div>
+          <div class="col">
+            <!-- Botón hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Menú colapsable -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto ms-2">
+            <li class="nav-item">
+              <a class="nav-link" href="categoria.html">Categorias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
+            </li>
+            
+            <!-- Barra de búsqueda (solo en desktop) -->
+            <li class="nav-item search-desktop d-none d-lg-block">
+              <form class="form-inline">
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="Search" size="30">
+                  <button class="btn btn-success" type="submit">Search</button>
+                </div>
+              </form>
+            </li>
+            
+  
+            <li class="nav-item">
+              <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="iniciar-sesion.html">Iniciar sesion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="registrarse.html">Registrarse</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
-  </header>
+  </header>  
   <main>
     <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -524,9 +551,6 @@
       </div>
     </div>
   </footer>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script src="/js/buscar.js"></script>
   <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>

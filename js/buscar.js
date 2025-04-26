@@ -606,7 +606,7 @@ function mostrarProductos(productosFiltrados) {
     }).format(producto.precio);
 
     const card = document.createElement("div");
-    card.className = "col-md-4 mb-4";
+    card.className = "col-lg-4 col-md-6 mb-4";
     card.innerHTML = `
       <div class="product-card">
           <div class="product-image-container">

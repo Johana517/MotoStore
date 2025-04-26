@@ -1,6 +1,6 @@
 /* Fondo general */
 body {
-  background-color: #d3d3d3; /* Negro profundo */
+  background-color: lightgray; /* Negro profundo */
   font-family: "Arial", sans-serif;
 }
 h1 {
@@ -8,13 +8,13 @@ h1 {
 }
 /* Header */
 header {
-  background-color: #000957; /* Gris metálico */
+  background-color: #235dbc; /* Gris metálico */
   padding: 10px;
 }
 
 /* Links */
 a {
-  color: #f3b95f; /* Azul eléctrico */
+  color: #ffd700; /* Azul eléctrico */
   text-decoration: none;
   font-weight: bold;
 }
@@ -26,11 +26,11 @@ a:hover {
 footer {
   background-color: black;
 }
-.navbar-toggler {
-  background-color: white;
-  color: black;
-}
 
 i {
-  color: black;
+  color: #ffd700;
+}
+
+header a {
+  font-size: 16px;
 }

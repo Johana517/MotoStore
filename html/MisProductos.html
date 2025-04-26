@@ -26,6 +26,72 @@
             width: 80px;
             height: auto;
         }
+        .publish-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 3rem;
+        }
+        .dropdown-toggle::after {
+            margin-left: 0.5em;
+        }
+        
+        /* Nuevos estilos para el switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin: 0 10px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #007bff; /* Azul cuando está activado */
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .estado-texto {
+            font-weight: 500;
+            min-width: 70px;
+            display: inline-block;
+        }
+        .text-active {
+            color: #007bff;
+        }
+        .btn-options {
+            font-size: 1.2rem;
+            padding: 0.15rem 0.5rem;
+            line-height: 1;
+            border: none;
+            background: transparent;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -88,14 +154,20 @@
             </ol>
         </nav>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Buscar productos">
-                <button class="btn btn-outline-secondary"><i class="fas fa-filter"></i></button>
+        <!-- Botón Publicar nuevo producto en esquina derecha con mb-5 -->
+        <div class="publish-btn-container">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Publicar nuevo producto
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="vender-moto.html">Moto</a>
+              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
             </div>
-            <button class="btn btn-primary">+ Publicar nuevo producto</button>
+          </div>
         </div>
 
+        <!-- Producto 1 con nuevos controles -->
         <div class="product-card">
             <div>
                 <h5><a href="#">Producto 1</a></h5>
@@ -103,13 +175,30 @@
                 <p>$50.00</p>
             </div>
             <img src="../img/scooter.png" alt="Moto">
-            <div>
-                <p class="text-success">Activo</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-on"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-active">Activado</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- Producto 2 con nuevos controles -->
         <div class="product-card">
             <div>
                 <h5><a href="#">Producto 2</a></h5>
@@ -117,13 +206,30 @@
                 <p>$50.00</p>
             </div>
             <img src="../img/yamaha.jpg" alt="Moto">
-            <div>
-                <p class="text-warning">Pausado</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-off"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-warning">Pausado</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- Producto 3 con nuevos controles -->
         <div class="product-card">
             <div>
                 <h5><a href="#">Producto 3</a></h5>
@@ -131,10 +237,26 @@
                 <p>$50.00</p>
             </div>
             <img src="../img/bujia.jpg" alt="Moto">
-            <div>
-                <p class="text-warning">Pausado</p>
-                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-toggle-off"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-warning">Pausado</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -205,13 +327,24 @@
     <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
     <script src="../js/sweetalert2@9.js"></script>
     <script src="../js/logout.js"></script>
+    
+    <!-- Script para el switch -->
+    <script>
+        document.querySelectorAll('.switch input').forEach(toggle => {
+            const texto = toggle.closest('.product-card').querySelector('.estado-texto');
+            
+            toggle.addEventListener('change', function() {
+                if(this.checked) {
+                    texto.textContent = "Activado";
+                    texto.classList.remove('text-warning');
+                    texto.classList.add('text-active');
+                } else {
+                    texto.textContent = "Pausado";
+                    texto.classList.remove('text-active');
+                    texto.classList.add('text-warning');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
