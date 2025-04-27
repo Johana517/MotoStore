@@ -8,13 +8,13 @@ h1 {
 }
 /* Header */
 header {
-  background-color: #000957; /* Gris metálico */
+  background-color: #235dbc; /* Gris metálico */
   padding: 10px;
 }
 
 /* Links */
 a {
-  color: #0077ff; /* Azul eléctrico */
+  color: #ffd700; /* Azul eléctrico */
   text-decoration: none;
   font-weight: bold;
 }
@@ -25,4 +25,12 @@ a:hover {
 
 footer {
   background-color: black;
+}
+
+i {
+  color: #ffd700;
+}
+
+header a {
+  font-size: 16px;
 }

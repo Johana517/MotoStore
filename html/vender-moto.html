@@ -11,15 +11,32 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     /* Ocultar las flechas en Bootstrap */
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-    input[type="number"] {
-    appearance: textfield; /* Funciona en Firefox y otros navegadores modernos */
-}
+    .sidebar {
+        width: 1200px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        }
+        .sidebar h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        }
+        .sidebar label {
+        font-weight: bold;
+        margin-top: 5px;
+        }
+        .sidebar .form-select, 
+        .sidebar .form-control {
+        width: 100%; 
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        }
+        .sidebar .btn {
+        width: 100%; 
+        padding: 10px;
+        font-size: 1rem;
+        }
 
 
 
@@ -32,53 +49,10 @@
       <a class="navbar-brand" href="sesion-vendedor.html">
         <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item mx-2"> 
-            <a class="nav-link" href="membresia.html">Membresia</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="MisProductos.html">Mis productos</a>
-          </li>
-          <form class="form-inline">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </div>
-          </form>
-          <li class="nav-item dropdown mx-2">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Vender 
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="vender-moto.html">Moto</a>
-              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
-            </div>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
-          </li>
-          <li class="nav-item dropdown mx-3">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user fa-2x"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
-              <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-            </div>
-          </li>
-        </ul>
-      </div>
     </nav>
   </header>
   <main>
-    <div class="container bg-light mt-5 py-2 px-5 mb-5">
+    <div class="sidebar container bg-light mt-5 py-2 px-5 mb-5">
       <h2 class="text-center mt-5">Describe tu Moto</h2>
       <form>
         <div class="form-row my-3">
@@ -107,13 +81,13 @@
             </select>
           </div>
           <div class="form-group col-md-4">
-            <label for="inputState">Tipo de Moto</label>
+            <label for="inputState">Modelo de Moto</label>
             <select id="inputState" class="form-control">
-              <option value="0" selected disabled>Seleccionar Tipo de moto</option>
+              <option value="0" selected disabled>Seleccionar Modelo de moto</option>
               <option value="1">Scooter</option>
               <option value="2">Enduro</option>
               <option value="3">Deportiva</option>
-              <option value="4">Electrica</option>
+              <option value="4">Naked</option>
               <option value="5">Chopper</option>
             </select>
           </div>
@@ -121,28 +95,39 @@
         <div class="form-row my-3">
           <div class="form-group col-md-6">
               <label for="inputEmail4">Precio</label>
-              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la moto" required>
+              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la Moto" required>
           </div>
-          <div class="form-group col-md-6">
-              <label for="inputEmail4">Kilometraje</label>
-              <input type="number" class="form-control" id="flechas" placeholder="Colocar el kilometraje de la moto" required>
+          <div class="form-gruop col-md-6">
+            <label for="inputState">Año (Desde que año tiene su moto)</label>
+            <select id="inputState" class="form-control" required>
+              <option value="0" selected disabled>Seleccionar Año</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+            </select>
           </div>
         </div>
-        <h2 class="text-center my-5">Documentacion de la Moto</h2>
         <div class="form-row my-3">
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFile" class="form-label">SOAT</label>
-            <input class="form-control" type="file" id="formFile">
+          <div class="col-lg-12">
+            <h4>Descripcion</h4>
+            <textarea name="" id="descripcion" rows="5" cols="50" placeholder="Si quieres detallar mas cosas de tu moto lo puedes hacer aqui"></textarea>
           </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFileMultiple" class="form-label">TECNOMECANICA</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
-          </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
-            <label for="formFileMultiple" class="form-label">TARJETA DE PROPIEDAD</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
-          </div>
-          <div class="mb-3 form-group col-md-6 col-lg-3">
+        </div>
+        <div class="form-row my-3">
+          <div class="mb-3 form-group col-lg-12 col-md-12">
             <label for="formFileMultiple" class="form-label">FOTO DE LA MOTO</label>
             <input class="form-control" type="file" id="formFileMultiple" multiple>
           </div>                   
@@ -163,9 +148,6 @@
           <ul class="list-inline mb-0">
             <li class="list-inline-item me-3">
               <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Contáctanos</a>
             </li>
             <li class="list-inline-item">
               <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
