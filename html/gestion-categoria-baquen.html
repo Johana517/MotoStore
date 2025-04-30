@@ -1,117 +1,829 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <title>Administrador de Categorías - Motos y Repuestos</title>
+    <!-- Bootstrap 5 -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="../fontawesome-free-6.7.2-web/css/all.min.css"
     />
-    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
-    <link rel="stylesheet" href="../css/style.css" />
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .card {
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border: none;
+      }
+      .badge-active {
+        background-color: #28a745;
+        color: white;
+      }
+      .badge-inactive {
+        background-color: #dc3545;
+        color: white;
+      }
+      .table-hover tbody tr:hover {
+        background-color: rgba(233, 247, 239, 0.7);
+      }
+      .btn-group .btn {
+        min-width: 100px;
+      }
+      .subcategory-row {
+        background-color: #f8f9fa;
+      }
+      .toggle-subcategories {
+        cursor: pointer;
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+      }
+      .collapsed .fa-chevron-down {
+        transform: rotate(-90deg);
+      }
+      .hidden {
+        display: none;
+      }
+      .category-name {
+        display: flex;
+        align-items: center;
+      }
+      /* Estilos para niveles anidados */
+      .level-1 td:first-child {
+        padding-left: 40px !important;
+      }
+      .level-2 td:first-child {
+        padding-left: 80px !important;
+      }
+      .level-3 td:first-child {
+        padding-left: 120px !important;
+      }
+      .level-4 td:first-child {
+        padding-left: 160px !important;
+      }
+      .level-5 td:first-child {
+        padding-left: 200px !important;
+      }
+      .level-icon {
+        font-size: 0.6rem;
+        opacity: 0.5;
+        margin-right: 10px;
+      }
+      .navbar-brand {
+        font-weight: 600;
+      }
+      .badge {
+        font-size: 0.85rem;
+        padding: 0.35em 0.65em;
+      }
+      .no-categories {
+        text-align: center;
+        padding: 20px;
+        color: #6c757d;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="sesion-administrador.html">
-          <img
-            src="../img/logo_moto_store-1-5.png"
-            style="width: 200px; height: 150px"
-            alt="logo"
-          />
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-motorcycle me-2"></i>MotoParts Admin
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-categoria-baquen.html"
-                >Conf.categorias</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-notificaciones.html"
-                >Conf.notificaciones</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="Informe-admi.html">Informes</a>
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="administracion-cuentas.html"
-                >Conf.cuentas</a
-              >
-            </li>
-            <li class="nav-item dropdown mx-4">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user fa-2x"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="perfil-administrador.html"
-                  >Ver perfil</a
-                >
-                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <div class="container mt-4 mb-5">
-      <h2 class="text-center">Gestionar Categorías</h2>
-      <div class="card">
-        <div class="card-body">
-          <div id="categorias">
-            <!-- Categorías dinámicas aquí -->
+      </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+      <div class="card p-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0">
+            <i class="fas fa-list-alt me-2"></i>Configuración de Categorías
+          </h2>
+          <div>
+            <button class="btn btn-primary me-2" onclick="crearCategoria()">
+              <i class="fas fa-plus me-1"></i> Crear Categoría
+            </button>
+            <button class="btn btn-secondary" onclick="crearSubcategoria()">
+              <i class="fas fa-plus me-1"></i> Crear Subcategoría
+            </button>
           </div>
-          <button class="btn btn-primary mt-3" id="addCategoria">
-            Añadir Categoría
-          </button>
-          <button class="btn btn-success mt-3" id="aplicarCambios">
-            Aplicar Cambios
-          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Nombre</th>
+                <th class="text-center">Estado</th>
+                <th class="text-end">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="categoriaTable">
+              <!-- Las categorías se cargarán dinámicamente aquí -->
+            </tbody>
+          </table>
+          <div id="noCategoriesMessage" class="no-categories">
+            <i class="fas fa-folder-open fa-3x mb-3"></i>
+            <h4>No hay categorías creadas</h4>
+            <p>Comienza creando tu primera categoría</p>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Modal para crear/editar categorías -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Crear Categoría</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="categoryForm">
+              <div class="mb-3">
+                <label for="categoryName" class="form-label"
+                  >Nombre de la categoría</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="categoryName"
+                  required
+                />
+              </div>
+              <div class="mb-3" id="parentCategoryGroup">
+                <label for="parentCategory" class="form-label"
+                  >Categoría padre</label
+                >
+                <select class="form-select" id="parentCategory">
+                  <option value="0">Ninguna (categoría principal)</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="categoryStatus" class="form-label">Estado</label>
+                <select class="form-select" id="categoryStatus">
+                  <option value="active">Activo</option>
+                  <option value="inactive">Inactivo</option>
+                </select>
+              </div>
+              <input type="hidden" id="categoryId" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              <i class="fas fa-times me-1"></i> Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="saveCategory()"
+            >
+              <i class="fas fa-save me-1"></i> Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalTitle">Confirmar acción</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="confirmModalBody">
+            ¿Estás seguro de que deseas eliminar esta categoría?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmActionBtn">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para funcionalidades -->
     <script>
-      document
-        .getElementById("addCategoria")
-        .addEventListener("click", function () {
-          let categoriaDiv = document.createElement("div");
-          categoriaDiv.classList.add("d-flex", "align-items-center", "mb-2");
-          categoriaDiv.innerHTML = `
-                <input type="text" class="form-control me-2" placeholder="Nombre Categoría">
-                <input type="text" class="form-control me-2" placeholder="Descripción">
-                <button class="btn btn-warning me-2 editar">Editar</button>
-                <button class="btn btn-danger desactivar">Desactivar / Activar</button>
-            `;
-          document.getElementById("categorias").appendChild(categoriaDiv);
+      // Variables globales
+      let categories = JSON.parse(localStorage.getItem("categories")) || [
+        // Datos de ejemplo iniciales
+        { id: 1, parentId: 0, name: "Motos", status: "active", level: 0 },
+        { id: 11, parentId: 1, name: "Yamaha", status: "active", level: 1 },
+        {
+          id: 111,
+          parentId: 11,
+          name: "Deportivas",
+          status: "active",
+          level: 2,
+        },
+        { id: 112, parentId: 11, name: "Urbanas", status: "active", level: 2 },
+        { id: 12, parentId: 1, name: "Honda", status: "active", level: 1 },
+        { id: 2, parentId: 0, name: "Repuestos", status: "active", level: 0 },
+        { id: 21, parentId: 2, name: "Motores", status: "active", level: 1 },
+        { id: 211, parentId: 21, name: "Pistones", status: "active", level: 2 },
+        {
+          id: 212,
+          parentId: 21,
+          name: "Cilindros",
+          status: "inactive",
+          level: 2,
+        },
+        {
+          id: 22,
+          parentId: 2,
+          name: "Transmisión",
+          status: "active",
+          level: 1,
+        },
+        { id: 221, parentId: 22, name: "Cadenas", status: "active", level: 2 },
+        { id: 222, parentId: 22, name: "Piñones", status: "active", level: 2 },
+      ];
+
+      let editingCategoryId = null;
+      let actionToConfirm = null;
+      let categoryToDelete = null;
+
+      const categoryModal = new bootstrap.Modal(
+        document.getElementById("categoryModal")
+      );
+      const confirmModal = new bootstrap.Modal(
+        document.getElementById("confirmModal")
+      );
+      const confirmActionBtn = document.getElementById("confirmActionBtn");
+
+      // Función para guardar en localStorage
+      function saveToLocalStorage() {
+        localStorage.setItem("categories", JSON.stringify(categories));
+      }
+
+      // Función para actualizar la propiedad hasChildren
+      function updateHasChildrenProperty() {
+        categories.forEach((category) => {
+          category.hasChildren = categories.some(
+            (cat) => cat.parentId === category.id
+          );
         });
+      }
+
+      // Función para mostrar/ocultar mensaje de "no hay categorías"
+      function toggleNoCategoriesMessage() {
+        const message = document.getElementById("noCategoriesMessage");
+        message.style.display = categories.length === 0 ? "block" : "none";
+      }
+
+      // Función para alternar la visualización de subcategorías
+      function toggleSubcategories(icon) {
+        const row = icon.closest("tr");
+        const categoryId = parseInt(row.getAttribute("data-id"));
+        const subcategories = document.querySelectorAll(
+          `tr[data-parent="${categoryId}"]`
+        );
+
+        row.classList.toggle("collapsed");
+        subcategories.forEach((subcat) => {
+          subcat.classList.toggle("hidden");
+        });
+      }
+
+      // Función para abrir modal de creación de categoría
+      function crearCategoria() {
+        document.getElementById("modalTitle").textContent = "Crear Categoría";
+        document.getElementById("categoryForm").reset();
+        document
+          .getElementById("parentCategoryGroup")
+          .classList.remove("hidden");
+        document.getElementById("categoryId").value = "";
+
+        const parentSelect = document.getElementById("parentCategory");
+        parentSelect.innerHTML =
+          '<option value="0">Ninguna (categoría principal)</option>';
+
+        categories.forEach((cat) => {
+          if (cat.level < 4) {
+            const option = document.createElement("option");
+            option.value = cat.id;
+            option.textContent = "-- ".repeat(cat.level) + cat.name;
+            parentSelect.appendChild(option);
+          }
+        });
+
+        document.getElementById("categoryStatus").value = "active";
+        categoryModal.show();
+      }
+
+      // Función para abrir modal de creación de subcategoría
+      function crearSubcategoria() {
+        if (categories.length === 0) {
+          alert("Primero debe crear al menos una categoría principal");
+          return;
+        }
+
+        document.getElementById("modalTitle").textContent =
+          "Crear Subcategoría";
+        document.getElementById("categoryForm").reset();
+        document
+          .getElementById("parentCategoryGroup")
+          .classList.remove("hidden");
+        document.getElementById("categoryId").value = "";
+
+        const parentSelect = document.getElementById("parentCategory");
+        parentSelect.innerHTML =
+          '<option value="">Seleccione una categoría padre</option>';
+
+        categories.forEach((cat) => {
+          if (cat.level < 4) {
+            const option = document.createElement("option");
+            option.value = cat.id;
+            option.textContent = "-- ".repeat(cat.level) + cat.name;
+            parentSelect.appendChild(option);
+          }
+        });
+
+        document.getElementById("categoryStatus").value = "active";
+        categoryModal.show();
+      }
+
+      // Función para abrir modal de edición
+      function editarCategoria(button) {
+        const row = button.closest("tr");
+        const categoryId = parseInt(row.getAttribute("data-id"));
+        const category = categories.find((cat) => cat.id === categoryId);
+
+        if (category) {
+          editingCategoryId = categoryId;
+          document.getElementById("modalTitle").textContent =
+            "Editar Categoría";
+          document.getElementById("categoryName").value = category.name;
+          document.getElementById("categoryStatus").value = category.status;
+          document.getElementById("categoryId").value = categoryId;
+
+          const parentSelect = document.getElementById("parentCategory");
+          parentSelect.innerHTML = "";
+
+          if (category.level === 0) {
+            const noneOption = document.createElement("option");
+            noneOption.value = "0";
+            noneOption.textContent = "Ninguna (categoría principal)";
+            noneOption.selected = true;
+            parentSelect.appendChild(noneOption);
+          } else {
+            const noneOption = document.createElement("option");
+            noneOption.value = "0";
+            noneOption.textContent =
+              "Ninguna (convertir en categoría principal)";
+            parentSelect.appendChild(noneOption);
+          }
+
+          categories.forEach((cat) => {
+            if (
+              cat.id !== categoryId &&
+              !isDescendant(categoryId, cat.id) &&
+              cat.level < 4
+            ) {
+              const option = document.createElement("option");
+              option.value = cat.id;
+              option.textContent = "-- ".repeat(cat.level) + cat.name;
+              option.selected = cat.id === category.parentId;
+              parentSelect.appendChild(option);
+            }
+          });
+
+          categoryModal.show();
+        }
+      }
+
+      // Función para verificar si una categoría es descendiente de otra
+      function isDescendant(parentId, categoryId) {
+        let current = categories.find((cat) => cat.id === categoryId);
+        while (current && current.parentId !== 0) {
+          if (current.parentId === parentId) return true;
+          current = categories.find((cat) => cat.id === current.parentId);
+        }
+        return false;
+      }
+
+      // Función para confirmar eliminación
+      function confirmDeleteCategory(categoryId) {
+        categoryToDelete = categoryId;
+        const category = categories.find((cat) => cat.id === categoryId);
+
+        document.getElementById("confirmModalTitle").textContent =
+          "Confirmar eliminación";
+        document.getElementById(
+          "confirmModalBody"
+        ).textContent = `¿Estás seguro de que deseas eliminar la categoría "${category.name}" y todas sus subcategorías?`;
+
+        confirmActionBtn.textContent = "Eliminar";
+        confirmActionBtn.className = "btn btn-danger";
+        actionToConfirm = "delete";
+
+        confirmModal.show();
+      }
+
+      // Función para eliminar categoría y sus hijos
+      function deleteCategoryAndChildren(categoryId) {
+        // Encontrar todos los IDs a eliminar (categoría + hijos)
+        const idsToDelete = [];
+        const findChildrenIds = (parentId) => {
+          categories.forEach((cat) => {
+            if (cat.parentId === parentId) {
+              idsToDelete.push(cat.id);
+              findChildrenIds(cat.id);
+            }
+          });
+        };
+
+        idsToDelete.push(categoryId);
+        findChildrenIds(categoryId);
+
+        // Filtrar el array de categorías
+        categories = categories.filter((cat) => !idsToDelete.includes(cat.id));
+
+        // Actualizar hasChildren de la categoría padre si es necesario
+        const category = categories.find((cat) => cat.id === categoryId);
+        if (category) {
+          const parentId = category.parentId;
+          if (parentId !== 0) {
+            const parentHasChildren = categories.some(
+              (cat) => cat.parentId === parentId
+            );
+            const parentIndex = categories.findIndex(
+              (cat) => cat.id === parentId
+            );
+            if (parentIndex !== -1) {
+              categories[parentIndex].hasChildren = parentHasChildren;
+            }
+          }
+        }
+
+        // Eliminar filas de la tabla
+        idsToDelete.forEach((id) => {
+          const row = document.querySelector(`tr[data-id="${id}"]`);
+          if (row) row.remove();
+        });
+
+        saveToLocalStorage();
+        toggleNoCategoriesMessage();
+      }
+
+      // Función para guardar categoría
+      function saveCategory() {
+        const name = document.getElementById("categoryName").value.trim();
+        const status = document.getElementById("categoryStatus").value;
+        const parentId =
+          parseInt(document.getElementById("parentCategory").value) || 0;
+        const categoryId = document.getElementById("categoryId").value;
+
+        if (!name) {
+          alert("Por favor ingrese un nombre para la categoría");
+          return;
+        }
+
+        if (
+          parentId === 0 &&
+          editingCategoryId &&
+          categories.find((cat) => cat.id === editingCategoryId).parentId !== 0
+        ) {
+          // Confirmar conversión a categoría principal
+          document.getElementById("confirmModalTitle").textContent =
+            "Confirmar cambio";
+          document.getElementById("confirmModalBody").textContent =
+            "¿Estás seguro de que deseas convertir esta categoría en principal? Se perderán sus relaciones con categorías superiores.";
+
+          confirmActionBtn.textContent = "Confirmar";
+          confirmActionBtn.className = "btn btn-primary";
+          actionToConfirm = "convertToMain";
+
+          confirmModal.show();
+          return;
+        }
+
+        processSaveCategory(name, status, parentId, categoryId);
+      }
+
+      // Función para procesar el guardado de categoría
+      function processSaveCategory(name, status, parentId, categoryId) {
+        if (editingCategoryId) {
+          // Editar categoría existente
+          const index = categories.findIndex(
+            (cat) => cat.id === editingCategoryId
+          );
+          if (index !== -1) {
+            const oldParentId = categories[index].parentId;
+
+            categories[index].name = name;
+            categories[index].status = status;
+            categories[index].parentId = parentId;
+            categories[index].level =
+              parentId === 0
+                ? 0
+                : categories.find((cat) => cat.id === parentId).level + 1;
+
+            // Actualizar hasChildren del antiguo padre si es necesario
+            if (oldParentId !== 0) {
+              const hasChildren = categories.some(
+                (cat) => cat.parentId === oldParentId
+              );
+              const oldParentIndex = categories.findIndex(
+                (cat) => cat.id === oldParentId
+              );
+              if (oldParentIndex !== -1) {
+                categories[oldParentIndex].hasChildren = hasChildren;
+              }
+            }
+
+            // Actualizar hasChildren del nuevo padre
+            if (parentId !== 0) {
+              const newParentIndex = categories.findIndex(
+                (cat) => cat.id === parentId
+              );
+              if (newParentIndex !== -1) {
+                categories[newParentIndex].hasChildren = true;
+              }
+            }
+
+            updateHasChildrenProperty();
+            updateCategoryRow(editingCategoryId);
+          }
+        } else {
+          // Crear nueva categoría
+          const newId = Math.max(...categories.map((cat) => cat.id), 0) + 1;
+          const parentLevel =
+            parentId === 0
+              ? -1
+              : categories.find((cat) => cat.id === parentId).level;
+          const newCategory = {
+            id: newId,
+            parentId: parentId,
+            name: name,
+            status: status,
+            level: parentLevel + 1,
+            hasChildren: false,
+          };
+
+          categories.push(newCategory);
+
+          // Actualizar hasChildren del padre
+          if (parentId !== 0) {
+            const parentIndex = categories.findIndex(
+              (cat) => cat.id === parentId
+            );
+            if (parentIndex !== -1) {
+              categories[parentIndex].hasChildren = true;
+            }
+          }
+
+          addCategoryRow(newCategory);
+          toggleNoCategoriesMessage();
+        }
+
+        saveToLocalStorage();
+        categoryModal.hide();
+        editingCategoryId = null;
+      }
+
+      // Función para agregar fila de categoría a la tabla
+      function addCategoryRow(category) {
+        const parentRow = document.querySelector(
+          `tr[data-id="${category.parentId}"]`
+        );
+        const isSubcategory = category.parentId > 0;
+
+        const levelClass = `level-${category.level}`;
+
+        let levelIcons = "";
+        for (let i = 0; i < category.level; i++) {
+          levelIcons += `<i class="fas fa-circle-notch level-icon"></i>`;
+        }
+
+        const toggleIcon = category.hasChildren
+          ? `<i class="fas fa-chevron-down toggle-subcategories me-2" onclick="toggleSubcategories(this)"></i>`
+          : "";
+
+        let rowHtml = `
+                <tr class="${
+                  isSubcategory ? "subcategory-row hidden " : ""
+                }${levelClass}" 
+                    data-id="${category.id}" data-parent="${
+          category.parentId
+        }" data-level="${category.level}">
+                    <td>
+                        <div class="category-name">
+                            ${toggleIcon}
+                            ${levelIcons}
+                            ${category.name}
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ${
+                          category.status === "active"
+                            ? "badge-active"
+                            : "badge-inactive"
+                        }">
+                            ${
+                              category.status === "active"
+                                ? "Activo"
+                                : "Inactivo"
+                            }
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-danger btn-sm desactivar" onclick="desactivarCategoria(this)" ${
+                              category.status === "inactive" ? "disabled" : ""
+                            }>
+                                <i class="fas fa-ban me-1"></i> Desactivar
+                            </button>
+                            <button class="btn btn-success btn-sm activar" onclick="activarCategoria(this)" ${
+                              category.status === "active" ? "disabled" : ""
+                            }>
+                                <i class="fas fa-check me-1"></i> Activar
+                            </button>
+                            <button class="btn btn-info btn-sm" onclick="editarCategoria(this)">
+                                <i class="fas fa-edit me-1"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDeleteCategory(${
+                              category.id
+                            })">
+                                <i class="fas fa-trash me-1"></i> Eliminar
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        if (isSubcategory && parentRow) {
+          const siblings = Array.from(
+            document.querySelectorAll(`tr[data-parent="${category.parentId}"]`)
+          );
+          const lastSibling = siblings[siblings.length - 1];
+
+          if (lastSibling) {
+            lastSibling.insertAdjacentHTML("afterend", rowHtml);
+          } else {
+            parentRow.insertAdjacentHTML("afterend", rowHtml);
+          }
+        } else {
+          document
+            .getElementById("categoriaTable")
+            .insertAdjacentHTML("beforeend", rowHtml);
+        }
+      }
+
+      // Función para actualizar fila de categoría
+      function updateCategoryRow(categoryId) {
+        const category = categories.find((cat) => cat.id === categoryId);
+        if (!category) return;
+
+        const row = document.querySelector(`tr[data-id="${categoryId}"]`);
+        if (row) {
+          row.className = row.className.replace(
+            /\blevel-\d+/g,
+            `level-${category.level}`
+          );
+          row.setAttribute("data-level", category.level);
+
+          const nameElement = row.querySelector(".category-name");
+          if (nameElement) {
+            let levelIcons = "";
+            for (let i = 0; i < category.level; i++) {
+              levelIcons += `<i class="fas fa-circle-notch level-icon"></i>`;
+            }
+
+            const toggleIcon = category.hasChildren
+              ? `<i class="fas fa-chevron-down toggle-subcategories me-2" onclick="toggleSubcategories(this)"></i>`
+              : "";
+
+            nameElement.innerHTML = `${toggleIcon}${levelIcons}${category.name}`;
+          }
+
+          const statusBadge = row.querySelector("td:nth-child(2) span");
+          if (statusBadge) {
+            statusBadge.className = `badge ${
+              category.status === "active" ? "badge-active" : "badge-inactive"
+            }`;
+            statusBadge.textContent =
+              category.status === "active" ? "Activo" : "Inactivo";
+          }
+
+          const desactivarBtn = row.querySelector(".desactivar");
+          const activarBtn = row.querySelector(".activar");
+          if (desactivarBtn && activarBtn) {
+            desactivarBtn.disabled = category.status === "inactive";
+            activarBtn.disabled = category.status === "active";
+          }
+
+          const firstTd = row.querySelector("td:first-child");
+          if (firstTd) {
+            firstTd.style.paddingLeft = `${40 + category.level * 40}px`;
+          }
+        }
+      }
+
+      // Función para cambiar estado a activo
+      function activarCategoria(button) {
+        const row = button.closest("tr");
+        const categoryId = parseInt(row.getAttribute("data-id"));
+        const category = categories.find((cat) => cat.id === categoryId);
+
+        if (category) {
+          category.status = "active";
+          updateCategoryRow(categoryId);
+          saveToLocalStorage();
+        }
+      }
+
+      // Función para cambiar estado a inactivo
+      function desactivarCategoria(button) {
+        const row = button.closest("tr");
+        const categoryId = parseInt(row.getAttribute("data-id"));
+        const category = categories.find((cat) => cat.id === categoryId);
+
+        if (category) {
+          category.status = "inactive";
+          updateCategoryRow(categoryId);
+          saveToLocalStorage();
+        }
+      }
+
+      // Configurar botón de confirmación
+      confirmActionBtn.addEventListener("click", function () {
+        if (actionToConfirm === "delete") {
+          deleteCategoryAndChildren(categoryToDelete);
+        } else if (actionToConfirm === "convertToMain") {
+          const name = document.getElementById("categoryName").value.trim();
+          const status = document.getElementById("categoryStatus").value;
+          processSaveCategory(name, status, 0, editingCategoryId);
+        }
+
+        confirmModal.hide();
+        actionToConfirm = null;
+        categoryToDelete = null;
+      });
+
+      // Inicializar tabla
+      document.addEventListener("DOMContentLoaded", function () {
+        updateHasChildrenProperty();
+        toggleNoCategoriesMessage();
+
+        // Primero agregar categorías principales (nivel 0)
+        categories
+          .filter((cat) => cat.level === 0)
+          .forEach((cat) => {
+            addCategoryRow(cat);
+          });
+
+        // Luego agregar subcategorías en orden de nivel
+        for (let level = 1; level <= 4; level++) {
+          categories
+            .filter((cat) => cat.level === level)
+            .forEach((cat) => {
+              addCategoryRow(cat);
+            });
+        }
+
+        // Ocultar todas las subcategorías al inicio
+        document.querySelectorAll(".subcategory-row").forEach((row) => {
+          row.classList.add("hidden");
+        });
+      });
     </script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-    <script src="../js/sweetalert2@9.js"></script>
-    <script src="../js/logout.js"></script>
   </body>
 </html>

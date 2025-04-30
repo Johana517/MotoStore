@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Moto</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- Estilos personalizados -->
+    <style>
+      .header-section {
+        margin-bottom: 30px;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .repuesto-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        min-height: 200px;
+      }
+
+      .repuesto-image-preview {
+        max-width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+      }
+
+      .form-section {
+        padding: 30px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .price-input {
+        font-weight: bold;
+        text-align: right;
+      }
+
+      .quantity-input {
+        text-align: center;
+      }
+
+      .price-recommendation {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .header-section {
+          text-align: center;
+        }
+
+        .repuesto-title {
+          margin-bottom: 20px;
+        }
+
+        .repuesto-image-container {
+          margin-top: 20px;
+        }
+
+        .price-input,
+        .quantity-input {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-4">
+              <!-- Logo -->
+              <a class="navbar-brand" href="sesion-vendedor.html">
+                <img
+                  src="../img/logo_moto_store-1-5.png"
+                  style="width: 200px; height: 150px"
+                  alt="logo"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container py-5">
+      <!-- Encabezado con título e imagen -->
+      <div class="header-section row align-items-center bg-white">
+        <div class="col-md-6 repuesto-title">
+          <h1 class="display-4">Modificar Repuesto</h1>
+          <p class="lead text-muted">Actualiza la información del repuesto</p>
+        </div>
+        <div class="col-md-6">
+          <div class="repuesto-image-container">
+            <img
+              id="repuestoImagePreview"
+              src="https://via.placeholder.com/600x400?text=Imagen+del+repuesto"
+              alt="Imagen del repuesto"
+              class="repuesto-image-preview img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de modificación -->
+      <div class="form-section">
+        <form id="formRepuesto">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Campo Precio con formato automático -->
+              <div class="mb-3">
+                <label for="precio" class="form-label">Precio unitario</label>
+                <div class="input-group">
+                  <span class="input-group-text text-success">$</span>
+                  <input
+                    type="text"
+                    class="form-control price-input"
+                    id="precio"
+                    placeholder="Ej: 25.000"
+                    data-raw-value=""
+                  />
+                  <span class="input-group-text">
+                    <i class="bi bi-currency-dollar text-success"></i>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Campo Cantidad -->
+              <div class="mb-3">
+                <label for="cantidad" class="form-label"
+                  >Cantidad disponible</label
+                >
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-box-seam text-dark"></i>
+                  </span>
+                  <input
+                    type="number"
+                    class="form-control quantity-input"
+                    id="cantidad"
+                    placeholder="Ej: 10"
+                    min="0"
+                    step="1"
+                  />
+                  <span class="input-group-text">Unidades</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <!-- Subida de imagen -->
+              <div class="mb-3">
+                <label for="imagenRepuesto" class="form-label"
+                  >Cambiar imagen del repuesto</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="imagenRepuesto"
+                  accept="image/*"
+                />
+                <div class="form-text">
+                  Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 5MB
+                </div>
+              </div>
+
+              <!-- Recomendaciones de precio -->
+              <div class="price-recommendation">
+                <h5>Recomendaciones de precio</h5>
+                <ul class="list-unstyled mt-3">
+                  <li class="mb-2">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    Verifica precios en el mercado
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    Considera el estado del repuesto
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    Compara con precios de fabricante
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo Descripción -->
+          <div class="row mt-3">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="descripcion" class="form-label"
+                  >Descripción detallada</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcion"
+                  rows="4"
+                  placeholder="Describa las características, medidas, modelo compatible, etc."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-danger"><a href="MisProductos.html" class="text-white">
+                Cancelar
+            </a>
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container-fluid bg-dark">
+        <!-- Primera fila: Enlaces y redes sociales -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center px-5 pt-3">
+          <!-- Enlaces legales - Izquierda -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0 p">
+              <li class="list-inline-item me-3">
+                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Redes sociales - Derecha (iconos más grandes) -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          
+          <!-- Copyright centrado -->
+          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+            <p class="mb-0 text-white">https://Motostore.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para previsualizar la imagen -->
+    <script>
+      document
+        .getElementById("imagenRepuesto")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("repuestoImagePreview").src =
+                e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+    </script>
+
+    <!-- Script para el formato automático del precio -->
+    <script>
+      const precioInput = document.getElementById("precio");
+
+      precioInput.addEventListener("input", function (e) {
+        // Obtener valor sin formato
+        let rawValue = this.value.replace(/[^\d]/g, "");
+
+        // Guardar el valor raw en el atributo data
+        this.dataset.rawValue = rawValue;
+
+        // Formatear solo si hay valor
+        if (rawValue.length > 0) {
+          // Convertir a número
+          let numberValue = parseInt(rawValue, 10);
+
+          // Formatear con separadores de miles
+          let formattedValue = new Intl.NumberFormat("es-CO").format(
+            numberValue
+          );
+
+          // Actualizar el valor mostrado
+          this.value = formattedValue;
+        }
+      });
+
+      // Para enviar el formulario, usaríamos el valor raw
+      document
+        .getElementById("formRepuesto")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = {
+            precio: precioInput.dataset.rawValue || "0",
+            cantidad: document.getElementById("cantidad").value,
+            descripcion: document.getElementById("descripcion").value,
+            imagen:
+              document.getElementById("imagenRepuesto").files[0]?.name ||
+              "actual",
+          };
+
+          console.log("Datos a enviar:", formData);
+          // Aquí iría tu lógica de envío del formulario
+          alert(
+            `Repuesto actualizado:\nPrecio: $${formData.precio}\nCantidad: ${formData.cantidad}`
+          );
+        });
+    </script>
+  </body>
+</html>
