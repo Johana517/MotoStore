@@ -1,171 +1,707 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
-    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-    <link rel="stylesheet" href="../css/style.css">
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <!-- Logo -->
-        <a class="navbar-brand" href="index.html">
-          <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-        </a>
-    </nav>
-  </header>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .card {
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 1rem;
+      }
+      .navbar-brand img {
+        height: 80px;
+      }
+      .btn-eye {
+        cursor: pointer;
+      }
+      .verification-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1050;
+        justify-content: center;
+        align-items: center;
+      }
+      .verification-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+      }
+      .code-input {
+        letter-spacing: 0.5rem;
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .error-message {
+        color: #dc3545;
+        margin-top: 0.5rem;
+        display: none;
+      }
 
-<div class="container mt-5">
-    <div class="card p-4">
-        <h2 class="text-center">Registro</h2>
+      /* Estilos para las membresías */
+      .membership-card {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+      .membership-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .membership-card.selected {
+        border-color: #0d6efd;
+        background-color: #f8f9fa;
+      }
+      .membership-card .card-header {
+        font-weight: 600;
+      }
+      .membership-features li {
+        padding: 0.3rem 0;
+      }
+      .price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #0d6efd;
+      }
+      .recommended-badge {
+        position: absolute;
+        top: -10px;
+        right: 20px;
+        background-color: #ffc107;
+        color: #000;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .membership-error {
+        color: #dc3545;
+        text-align: center;
+        margin-top: 10px;
+        display: none;
+      }
+      .selected-membership {
+        background-color: #e9f5ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img
+              src="../img/logo_moto_store-1-5.png"
+              style="height: 130px"
+              alt="logo"
+            />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container mt-5">
+      <div class="card p-4">
+        <h2 class="text-center mb-4">Registro</h2>
         <form id="registroForm">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" required />
+          </div>
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" required />
+          </div>
+          <div class="mb-3">
+            <label for="fechaNacimiento" class="form-label"
+              >Fecha de Nacimiento</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="fechaNacimiento"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="tipoDocumento" class="form-label"
+              >Tipo de Documento</label
+            >
+            <select class="form-select" id="tipoDocumento" required>
+              <option value="">Seleccione...</option>
+              <option value="CC">CC</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="documento" class="form-label">Documento</label>
+            <input type="text" class="form-control" id="documento" required />
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="contrasena"
+                required
+              />
+              <span class="input-group-text btn-eye" id="togglePassword">
+                <i class="fas fa-eye"></i>
+              </span>
             </div>
-            <div class="mb-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="apellido" required>
+            <small class="text-danger" id="errorPassword"></small>
+          </div>
+          <div class="mb-3">
+            <label for="confirmarContrasena" class="form-label"
+              >Confirmar Contraseña</label
+            >
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="confirmarContrasena"
+                required
+              />
+              <span class="input-group-text btn-eye" id="toggleConfirmPassword">
+                <i class="fas fa-eye"></i>
+              </span>
             </div>
-            <div class="mb-3">
-                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="fechaNacimiento" required>
-            </div>
-            <div class="mb-3">
-                <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-                <select class="form-select" id="tipoDocumento" required>
-                    <option value="">Seleccione...</option>
-                    <option value="DNI">CC</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="documento" class="form-label">Documento</label>
-                <input type="text" class="form-control" id="documento" required>
-            </div>
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="direccion">
-            </div>
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" id="contrasena" required>
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">👁</button>
-                </div>
-                <small class="text-danger" id="errorPassword"></small>
-            </div>
-            <div class="mb-3">
-                <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="confirmarContrasena" required>
-                <small class="text-danger" id="errorConfirmPassword"></small>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Continuar</button>
+            <small class="text-danger" id="errorConfirmPassword"></small>
+          </div>
+          
+          <!-- Sección agregada: Mensaje "¿Ya tienes cuenta?" -->
+          <div class="mb-3 text-center">
+            <p class="mb-1">¿Ya tienes una cuenta? <a href="login.html" class="text-primary">Inicia sesión aquí</a></p>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100">Continuar</button>
         </form>
+      </div>
     </div>
-</div>
 
+    <!-- Modal de selección de membresía -->
+    <div
+      class="modal fade"
+      id="membershipModal"
+      tabindex="-1"
+      aria-labelledby="membershipModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="membershipModalLabel">
+              Selecciona tu membresía
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Membresía Estándar -->
+              <div class="col-md-6">
+                <div
+                  class="card membership-card h-100"
+                  data-membership="standard"
+                >
+                  <span class="recommended-badge">Recomendada</span>
+                  <div class="card-header text-center bg-primary text-white">
+                    <h4>Estándar</h4>
+                  </div>
+                  <div class="card-body text-center">
+                    <h3 class="price mb-3">$15.000</h3>
+                    <ul class="list-unstyled membership-features">
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Subir
+                        hasta 20 productos
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Destacar
+                        10 productos
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Soporte
+                        prioritario
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i
+                        >Estadísticas básicas
+                      </li>
+                    </ul>
+                    <p class="text-muted small">
+                      (Al seleccionar la membresia va a ser de prueba por 10
+                      días. Terminado el plazo los productos que estén agregados
+                      serán desactivados automáticamente)
+                    </p>
+                  </div>
+                  <div class="card-footer bg-white text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary select-membership"
+                    >
+                      Seleccionar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Membresía Premium -->
+              <div class="col-md-6">
+                <div
+                  class="card membership-card h-100"
+                  data-membership="premium"
+                >
+                  <div class="card-header text-center bg-dark text-white">
+                    <h4>Premium</h4>
+                  </div>
+                  <div class="card-body text-center">
+                    <h3 class="price mb-3">$35.000</h3>
+                    <ul class="list-unstyled membership-features">
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Subir
+                        hasta 50 productos
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Destacar
+                        25 productos
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Soporte
+                        24/7
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i
+                        >Estadísticas avanzadas
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i
+                        >Promociones exclusivas
+                      </li>
+                    </ul>
+                    <p class="text-muted small">
+                      (Al seleccionar la membresia va a ser de prueba por 10
+                      días. Terminado el plazo los productos que estén agregados
+                      serán desactivados automáticamente)
+                    </p>
+                  </div>
+                  <div class="card-footer bg-white text-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary select-membership"
+                    >
+                      Seleccionar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="membership-error" id="membershipError">
+              Por favor selecciona una membresía para continuar
+            </div>
+
+            <div class="selected-membership" id="selectedMembershipInfo">
+              <h5>
+                <i class="fas fa-check-circle text-success me-2"></i> Membresía
+                seleccionada: <span id="selectedMembershipName"></span>
+              </h5>
+              <p class="mb-0">
+                Precio: <span id="selectedMembershipPrice"></span>
+              </p>
+              <p class="mb-0">
+                Beneficios: <span id="selectedMembershipFeatures"></span>
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirmMembershipBtn"
+            >
+              Confirmar Membresía
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de verificación -->
+    <div class="verification-modal" id="verificationModal">
+      <div class="verification-content">
+        <h3>Verificación de correo</h3>
+        <p>
+          Hemos enviado un código de verificación al correo electrónico que
+          ingresaste.
+        </p>
+        <p>
+          Por favor revisa tu bandeja de entrada e ingresa el código a
+          continuación:
+        </p>
+
+        <div class="mb-3">
+          <label for="codigoVerificacion" class="form-label"
+            >Código de verificación</label
+          >
+          <input
+            type="text"
+            class="form-control code-input"
+            id="codigoVerificacion"
+            maxlength="5"
+            placeholder="_____"
+            required
+          />
+          <div class="error-message" id="codigoError">
+            Código incorrecto. Intenta nuevamente.
+          </div>
+        </div>
+
+        <button id="verifyBtn" class="btn btn-primary">Verificar</button>
+      </div>
+    </div>
+
+    <footer class="py-4">
+      <div class="container">
+        <!-- Primera fila: Enlaces y redes sociales -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <!-- Enlaces legales - Izquierda -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Redes sociales - Derecha (iconos más grandes) -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          
+          <!-- Copyright centrado -->
+          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+            <p class="mb-0 text-white">https://Motostore.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $(document).ready(function () {
-        $("#togglePassword").click(function () {
-            let input = $("#contrasena");
-            let type = input.attr("type") === "password" ? "text" : "password";
-            input.attr("type", type);
-        });
+  $(document).ready(function () {
+    // Variables para almacenar la membresía seleccionada
+    let selectedMembership = null;
+    const membershipOptions = {
+      standard: {
+        name: "Estándar",
+        price: "$15.000",
+        features:
+          "Subir hasta 20 productos, Destacar 10 productos, Soporte prioritario, Estadísticas básicas",
+      },
+      premium: {
+        name: "Premium",
+        price: "$35.000",
+        features:
+          "Subir hasta 50 productos, Destacar 25 productos, Soporte 24/7, Estadísticas avanzadas, Promociones exclusivas",
+      },
+    };
 
-        $("#registroForm").submit(function (event) {
-            event.preventDefault();
-            
-            let password = $("#contrasena").val();
-            let confirmPassword = $("#confirmarContrasena").val();
-            let passwordError = $("#errorPassword");
-            let confirmPasswordError = $("#errorConfirmPassword");
-
-            passwordError.text("");
-            confirmPasswordError.text("");
-
-            // Validación de contraseña
-            let regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            if (!regex.test(password)) {
-                passwordError.text("La contraseña debe tener al menos 8 caracteres, incluir una mayúscula y un número.");
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                confirmPasswordError.text("Las contraseñas no coinciden.");
-                return;
-            }
-
-            alert("Formulario enviado correctamente.");
-        });
+    // Validación de fecha de nacimiento
+    $("#fechaNacimiento").change(function() {
+      const fechaNacimiento = new Date($(this).val());
+      const hoy = new Date();
+      const añoActual = hoy.getFullYear();
+      const añoNacimiento = fechaNacimiento.getFullYear();
+      
+      // Calcular edad
+      let edad = añoActual - añoNacimiento;
+      const mesActual = hoy.getMonth();
+      const mesNacimiento = fechaNacimiento.getMonth();
+      
+      // Ajustar edad si aún no ha pasado el mes de cumpleaños
+      if (mesNacimiento > mesActual || 
+          (mesNacimiento === mesActual && hoy.getDate() < fechaNacimiento.getDate())) {
+          edad--;
+      }
+      
+      // Validaciones con SweetAlert2
+      if (añoNacimiento > añoActual) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Año inválido',
+              text: 'Por favor ingresa un año válido (no puede ser mayor al actual)',
+              confirmButtonColor: '#3085d6',
+          });
+          $(this).val('');
+          return;
+      }
+      
+      if (añoNacimiento < 1940) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Año inválido',
+              text: 'Por favor ingresa un año válido (no puede ser menor a 1940)',
+              confirmButtonColor: '#3085d6',
+          });
+          $(this).val('');
+          return;
+      }
+      
+      if (edad < 18) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Edad insuficiente',
+              text: 'Debes tener al menos 18 años para registrarte',
+              confirmButtonColor: '#3085d6',
+          });
+          $(this).val('');
+          return;
+      }
+      
+      if (edad > 85) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Edad excedida',
+              text: 'La edad máxima permitida es 85 años',
+              confirmButtonColor: '#3085d6',
+          });
+          $(this).val('');
+          return;
+      }
     });
-</script>
-<footer class="py-4">
-  <div class="container">
-    <!-- Primera fila: Enlaces y redes sociales -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <!-- Enlaces legales - Izquierda -->
-      <div class="mb-3 mb-md-0">
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item me-3">
-            <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
-          </li>
-          <li class="list-inline-item">
-            <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
-          </li>
-        </ul>
-      </div>
-      
-      <!-- Redes sociales - Derecha (iconos más grandes) -->
-      <div class="mb-3 mb-md-0">
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item me-3">
-            <a href="#" class="text-white">
-              <i class="fab fa-youtube fa-3x"></i>
-            </a>
-          </li>
-          <li class="list-inline-item me-3">
-            <a href="#" class="text-white">
-              <i class="fab fa-facebook fa-3x"></i>
-            </a>
-          </li>
-          <li class="list-inline-item me-3">
-            <a href="#" class="text-white">
-              <i class="fab fa-x-twitter fa-3x"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#" class="text-white">
-              <i class="fab fa-instagram fa-3x"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-      
-      <!-- Copyright centrado -->
-      <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-        <p class="mb-0 text-white">https://Motostore.com</p>
-      </div>
-    </div>
-  </div>
-</footer>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
 
-</body>
+    // Mostrar/ocultar contraseña principal
+    $("#togglePassword").click(function () {
+      const input = $("#contrasena");
+      const icon = $(this).find("i");
+
+      const isPassword = input.attr("type") === "password";
+      input.attr("type", isPassword ? "text" : "password");
+
+      icon.toggleClass("fa-eye fa-eye-slash");
+    });
+
+    // Mostrar/ocultar confirmar contraseña
+    $("#toggleConfirmPassword").click(function () {
+      const input = $("#confirmarContrasena");
+      const icon = $(this).find("i");
+
+      const isPassword = input.attr("type") === "password";
+      input.attr("type", isPassword ? "text" : "password");
+
+      icon.toggleClass("fa-eye fa-eye-slash");
+    });
+
+    // Validación de formulario
+    $("#registroForm").submit(function (event) {
+      event.preventDefault();
+
+      // Validar fecha de nacimiento primero
+      if (!$("#fechaNacimiento").val()) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Campo requerido',
+          text: 'Por favor ingresa tu fecha de nacimiento',
+          confirmButtonColor: '#3085d6',
+        });
+        return;
+      }
+
+      let password = $("#contrasena").val();
+      let confirmPassword = $("#confirmarContrasena").val();
+      let passwordError = $("#errorPassword");
+      let confirmPasswordError = $("#errorConfirmPassword");
+
+      passwordError.text("");
+      confirmPasswordError.text("");
+
+      let regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      if (!regex.test(password)) {
+        passwordError.text(
+          "La contraseña debe tener al menos 8 caracteres, incluir una mayúscula y un número."
+        );
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        confirmPasswordError.text("Las contraseñas no coinciden.");
+        return;
+      }
+
+      // Mostrar modal de membresías en lugar del de verificación
+      const membershipModal = new bootstrap.Modal(
+        document.getElementById("membershipModal")
+      );
+      membershipModal.show();
+    });
+
+    // Selección de membresía en el modal
+    $(".membership-card").click(function () {
+      // Remover la clase 'selected' de todas las tarjetas
+      $(".membership-card").removeClass("selected");
+
+      // Añadir la clase 'selected' solo a la tarjeta clickeada
+      $(this).addClass("selected");
+
+      // Actualizar el valor de la membresía seleccionada
+      selectedMembership = $(this).data("membership");
+
+      // Actualizar los botones
+      $(".select-membership")
+        .removeClass("btn-primary")
+        .addClass("btn-outline-primary")
+        .text("Seleccionar");
+      $(this)
+        .find(".select-membership")
+        .removeClass("btn-outline-primary")
+        .addClass("btn-primary")
+        .text("Seleccionado");
+
+      // Mostrar información de la membresía seleccionada
+      $("#selectedMembershipName").text(
+        membershipOptions[selectedMembership].name
+      );
+      $("#selectedMembershipPrice").text(
+        membershipOptions[selectedMembership].price
+      );
+      $("#selectedMembershipFeatures").text(
+        membershipOptions[selectedMembership].features
+      );
+      $("#selectedMembershipInfo").fadeIn();
+
+      // Ocultar mensaje de error si estaba visible
+      $("#membershipError").hide();
+    });
+
+    // Confirmar selección de membresía
+    $("#confirmMembershipBtn").click(function () {
+      if (!selectedMembership) {
+        $("#membershipError").fadeIn();
+        return;
+      }
+
+      // Cerrar el modal de membresías
+      const membershipModal = bootstrap.Modal.getInstance(
+        document.getElementById("membershipModal")
+      );
+      membershipModal.hide();
+
+      // Mostrar modal de verificación con SweetAlert2
+      Swal.fire({
+        title: 'Verificación de correo',
+        html: `
+          <p>Hemos enviado un código de verificación al correo electrónico que ingresaste.</p>
+          <p>Por favor revisa tu bandeja de entrada e ingresa el código a continuación:</p>
+          <input type="text" id="swalCode" class="form-control code-input" maxlength="5" placeholder="_____" required>
+          <div class="error-message text-danger mt-2" id="swalCodeError" style="display:none;">
+            Código incorrecto. Intenta nuevamente.
+          </div>
+        `,
+        showCancelButton: false,
+        confirmButtonText: 'Verificar',
+        confirmButtonColor: '#3085d6',
+        focusConfirm: false,
+        preConfirm: () => {
+          const code = document.getElementById('swalCode').value;
+          if (code !== '12345') {
+            document.getElementById('swalCodeError').style.display = 'block';
+            return false;
+          }
+          return code;
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirigir si el código es correcto
+          window.location.href = "sesion-vendedor.html";
+        }
+      });
+    });
+
+    // Mejorar UX del input de código en SweetAlert2
+    $(document).on('shown.bs.modal', '#membershipModal', function () {
+      $(document).on('input', '#swalCode', function() {
+        $('#swalCodeError').hide();
+      });
+    });
+  });
+</script>
+  </body>
 </html>

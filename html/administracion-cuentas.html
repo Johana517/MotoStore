@@ -4,227 +4,251 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Administrador de Cuentas</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css" />
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
-    <link rel="stylesheet" href="../css/style.css" />
 
     <style>
+      /* Estilos personalizados */
       body {
-        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding-top: 150px; /* Para el header fijo */
+        font-family: "Arial", sans-serif;
       }
-      .contenedor {
-        width: 90%;
-        margin: 20px auto;
+
+      /* Header fijo */
+      .fixed-header {
+        background-color: #235dbc;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        height: 150px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
-      .boton-crear {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
+
+      /* Sidebar fijo */
+      .fixed-sidebar {
+        background-color: #000;
+        width: 250px;
+        position: fixed;
+        top: 150px;
+        left: 0;
+        bottom: 0;
+        padding: 20px 0;
+        z-index: 1020;
+        overflow-y: auto;
+      }
+
+      /* Contenido principal */
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        min-height: calc(100vh - 150px);
+      }
+
+      /* Estilos para el menú lateral */
+      .sidebar-nav .nav-link {
         color: white;
-        text-decoration: none;
-        border: 2px solid black;
+        padding: 12px 20px;
+        margin: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.3s;
+      }
+
+      .sidebar-nav .nav-link:hover {
+        background-color: #333;
+      }
+
+      .sidebar-nav .nav-link i {
+        width: 24px;
+        text-align: center;
+        margin-right: 10px;
+      }
+
+      /* Estilos para la tabla */
+      .table-container {
+        background: white;
         border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        transition: background-color 0.3s, color 0.3s;
-        margin-bottom: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        padding: 20px;
       }
-      .boton-crear:hover {
-        background-color: #0056b3;
-        color: white;
-      }
-      .tabla-responsive {
-        width: 100%;
-        overflow-x: auto;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 600px;
-      }
-      th, td {
-        padding: 10px;
-        border: 1px solid #ccc;
-        text-align: center;
-      }
-      th {
-        background-color: #f4f4f4;
-      }
-      .activo {
-        color: green;
-      }
-      .desactivado {
-        color: red;
-      }
-      .boton-accion {
+
+      .btn-action {
         padding: 5px 10px;
         margin: 2px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 0.9rem;
       }
-      .boton-activar {
+
+      .btn-activate {
         background-color: #2ecc71;
         color: white;
       }
-      .boton-desactivar {
+
+      .btn-deactivate {
         background-color: #e74c3c;
         color: white;
       }
-      .boton-eliminar {
+
+      .btn-delete {
         background-color: #c0392b;
         color: white;
       }
-      .boton-eliminar:hover {
+
+      .btn-delete:hover {
         background-color: #e74c3c;
       }
-      .boton-accion:disabled {
-        background-color: #ccc;
+
+      .btn-action:disabled {
+        background-color: #ddd;
         cursor: not-allowed;
+      }
+
+      .status-active {
+        color: #28a745;
+        font-weight: 500;
+      }
+
+      .status-inactive {
+        color: #dc3545;
+        font-weight: 500;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .fixed-sidebar {
+          width: 100%;
+          position: relative;
+          top: 0;
+          height: auto;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        body {
+          padding-top: 70px;
+        }
+
+        .fixed-header {
+          height: auto;
+        }
+
+        .table-responsive {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
       }
     </style>
   </head>
-  <body class="bg-white">
-    <header>
+  <body>
+    <!-- Header fijo -->
+    <header class="fixed-header">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <!-- Logo -->
-          <a class="navbar-brand" href="index.html">
-            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo" />
+          <a class="navbar-brand" href="sesion-administrador.html">
+            <img
+              src="../img/logo_moto_store-1-5.png"
+              alt="Logo"
+              style="height: 130px"
+            />
           </a>
 
-          <!-- Botón hamburguesa -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <i class="fas fa-bars"></i>
-          </button>
-
-          <!-- Menú colapsable -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-               <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-categoria-baquen.html"
-                >Conf.categorias</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-notificaciones.html"
-                >Conf.notificaciones</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="Informe-admi.html">Informes</a>
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="administracion-cuentas.html"
-                >Conf.cuentas</a
-              >
-            </li>
-            <li class="nav-item dropdown mx-4">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user fa-2x"></i>
-              </a>
-            </div>
-            <div class="col">
-              <!-- Botón hamburguesa -->
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-              >
-                <i class="fas fa-bars"></i>
-              </button>
-            </div>
-          </div>
-          <!-- Menú colapsable -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto ms-2">
-              <li class="nav-item">
-                <a class="nav-link" href="categoria.html">Categorias</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
-              </li>
-
-              <!-- Barra de búsqueda (solo en desktop) -->
-              <li class="nav-item search-desktop d-none d-lg-block">
-                <form class="form-inline">
-                  <div class="input-group">
-                    <input
-                      type="search"
-                      class="form-control"
-                      placeholder="Search"
-                      size="30"
-                    />
-                    <button class="btn btn-success" type="submit">
-                      Search
-                    </button>
-                  </div>
-                </form>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="iniciar-sesion.html"
-                  >Iniciar sesion</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="registrarse.html">Registrarse</a>
-              </li>
-              <li class="nav-item dropdown mx-4">
+          <div class="profile-menu">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
+                  data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   <i class="fa fa-user fa-2x"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="perfil-administrador.html"
-                    >Ver perfil</a
-                  >
-                  <a class="dropdown-item" id="logout" href="#"
-                    >Cerrar sesion</a
-                  >
-                </div>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <a class="dropdown-item" href="perfil-administrador.html"
+                      >Ver perfil</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" id="logout" href="#"
+                      >Cerrar sesion</a
+                    >
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+    <!-- Sidebar fijo -->
+    <aside class="fixed-sidebar">
+      <ul class="nav flex-column sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="gestion-categoria-baquen.html">
+            <i class="fas fa-list"></i> Config. categorías
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-bell"></i> Config. notificaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Informe-admi.html">
+            <i class="fas fa-chart-bar"></i> Informes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="administracion-cuentas.html">
+            <i class="fas fa-users"></i> Config. cuentas
+          </a>
+        </li>
+      </ul>
+    </aside>
 
-    <main>
-      <div class="contenedor">
-        <a href="registrarse.html" class="boton-crear">Crear Usuario</a>
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <div class="container-fluid table-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0">Configuración de cuentas</h2>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#registroModal"
+          >
+            <i class="fas fa-plus-circle me-2"></i>Crear Usuario
+          </button>
+        </div>
 
-        <h2 style="text-align: center;">Configuracion de cuentas</h2>
-
-        <div class="tabla-responsive">
-          <table>
-            <thead>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="usuariosTable">
+            <thead class="table-light">
               <tr>
                 <th>Nombre</th>
                 <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+                <th>Documento</th>
                 <th>Edad</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -234,34 +258,76 @@
               <tr>
                 <td>Juan Pérez</td>
                 <td>juan@example.com</td>
+                <td>+57 310 1234567</td>
+                <td>1023456789</td>
                 <td>30</td>
-                <td class="estado activo">Activo</td>
+                <td class="status-active">Activo</td>
                 <td>
-                  <button class="boton-accion boton-desactivar">Desactivar</button>
-                  <button class="boton-accion boton-activar" disabled>Activar</button>
-                  <button class="boton-accion boton-eliminar">Eliminar</button>
+                  <button class="btn-action btn-deactivate">Desactivar</button>
+                  <button class="btn-action btn-activate" disabled>
+                    Activar
+                  </button>
+                  <button class="btn-action btn-delete">Eliminar</button>
                 </td>
               </tr>
               <tr>
                 <td>Ana López</td>
                 <td>ana@example.com</td>
+                <td>+57 320 9876543</td>
+                <td>987654321</td>
                 <td>25</td>
-                <td class="estado activo">Activo</td>
+                <td class="status-active">Activo</td>
                 <td>
-                  <button class="boton-accion boton-desactivar">Desactivar</button>
-                  <button class="boton-accion boton-activar" disabled>Activar</button>
-                  <button class="boton-accion boton-eliminar">Eliminar</button>
+                  <button class="btn-action btn-deactivate">Desactivar</button>
+                  <button class="btn-action btn-activate" disabled>
+                    Activar
+                  </button>
+                  <button class="btn-action btn-delete">Eliminar</button>
                 </td>
               </tr>
               <tr>
                 <td>Carlos Sánchez</td>
                 <td>carlos@example.com</td>
+                <td>+57 315 4567890</td>
+                <td>456789123</td>
                 <td>28</td>
-                <td class="estado desactivado">Desactivado</td>
+                <td class="status-inactive">Inactivo</td>
                 <td>
-                  <button class="boton-accion boton-desactivar" disabled>Desactivar</button>
-                  <button class="boton-accion boton-activar">Activar</button>
-                  <button class="boton-accion boton-eliminar">Eliminar</button>
+                  <button class="btn-action btn-deactivate" disabled>
+                    Desactivar
+                  </button>
+                  <button class="btn-action btn-activate">Activar</button>
+                  <button class="btn-action btn-delete">Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>María Rodríguez</td>
+                <td>maria@example.com</td>
+                <td>+57 300 1122334</td>
+                <td>1122334455</td>
+                <td>35</td>
+                <td class="status-active">Activo</td>
+                <td>
+                  <button class="btn-action btn-deactivate">Desactivar</button>
+                  <button class="btn-action btn-activate" disabled>
+                    Activar
+                  </button>
+                  <button class="btn-action btn-delete">Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pedro Gómez</td>
+                <td>pedro@example.com</td>
+                <td>+57 318 5566778</td>
+                <td>5566778899</td>
+                <td>42</td>
+                <td class="status-inactive">Inactivo</td>
+                <td>
+                  <button class="btn-action btn-deactivate" disabled>
+                    Desactivar
+                  </button>
+                  <button class="btn-action btn-activate">Activar</button>
+                  <button class="btn-action btn-delete">Eliminar</button>
                 </td>
               </tr>
             </tbody>
@@ -270,50 +336,279 @@
       </div>
     </main>
 
+    <!-- Modal de Registro -->
+    <div
+      class="modal fade"
+      id="registroModal"
+      tabindex="-1"
+      aria-labelledby="registroModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registroModalLabel">
+              Registro de Usuario
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="registroForm">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre" required />
+              </div>
+              <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label"
+                  >Fecha de Nacimiento</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fechaNacimiento"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="tipoDocumento" class="form-label"
+                  >Tipo de Documento</label
+                >
+                <select class="form-select" id="tipoDocumento" required>
+                  <option value="">Seleccione...</option>
+                  <option value="DNI">CC</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="documento" class="form-label">Documento</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="documento"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <div class="input-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="contrasena"
+                    required
+                  />
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="togglePassword"
+                  >
+                    👁
+                  </button>
+                </div>
+                <small class="text-danger" id="errorPassword"></small>
+              </div>
+              <div class="mb-3">
+                <label for="confirmarContrasena" class="form-label"
+                  >Confirmar Contraseña</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmarContrasena"
+                  required
+                />
+                <small class="text-danger" id="errorConfirmPassword"></small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary" id="guardarUsuario">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script personalizado -->
     <script>
-      const desactivarBtns = document.querySelectorAll('.boton-desactivar');
-      const activarBtns = document.querySelectorAll('.boton-activar');
-      const eliminarBtns = document.querySelectorAll('.boton-eliminar');
+      document.addEventListener("DOMContentLoaded", function () {
+        // Manejo de botones de acción
+        document.querySelectorAll(".btn-deactivate").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const row = this.closest("tr");
+            const statusCell = row.querySelector("td:nth-child(6)");
 
-      desactivarBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const fila = btn.closest('tr');
-          const estado = fila.querySelector('.estado');
-          estado.textContent = 'Desactivado';
-          estado.classList.remove('activo');
-          estado.classList.add('desactivado');
+            statusCell.textContent = "Inactivo";
+            statusCell.className = "status-inactive";
 
-          btn.disabled = true;
-          fila.querySelector('.boton-activar').disabled = false;
+            this.disabled = true;
+            row.querySelector(".btn-activate").disabled = false;
+          });
         });
-      });
 
-      activarBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const fila = btn.closest('tr');
-          const estado = fila.querySelector('.estado');
-          estado.textContent = 'Activo';
-          estado.classList.remove('desactivado');
-          estado.classList.add('activo');
+        document.querySelectorAll(".btn-activate").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const row = this.closest("tr");
+            const statusCell = row.querySelector("td:nth-child(6)");
 
-          btn.disabled = true;
-          fila.querySelector('.boton-desactivar').disabled = false;
+            statusCell.textContent = "Activo";
+            statusCell.className = "status-active";
+
+            this.disabled = true;
+            row.querySelector(".btn-deactivate").disabled = false;
+          });
         });
-      });
 
-      eliminarBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const fila = btn.closest('tr');
-          fila.remove(); // Elimina la fila de la tabla
+        document.querySelectorAll(".btn-delete").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            if (confirm("¿Está seguro de eliminar este usuario?")) {
+              this.closest("tr").remove();
+            }
+          });
         });
+
+        // Logout
+        document
+          .getElementById("logout")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            if (confirm("¿Desea cerrar sesión?")) {
+              // Aquí iría la lógica para cerrar sesión
+              window.location.href = "../index.html";
+            }
+          });
+
+        // Toggle para mostrar/ocultar contraseña
+        document
+          .getElementById("togglePassword")
+          .addEventListener("click", function () {
+            const passwordInput = document.getElementById("contrasena");
+            const type =
+              passwordInput.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+            passwordInput.setAttribute("type", type);
+          });
+
+        // Guardar nuevo usuario
+        document
+          .getElementById("guardarUsuario")
+          .addEventListener("click", function () {
+            const nombre = document.getElementById("nombre").value;
+            const fechaNacimiento =
+              document.getElementById("fechaNacimiento").value;
+            const documento = document.getElementById("documento").value;
+            const telefono = document.getElementById("telefono").value;
+            const email = document.getElementById("email").value;
+            const contrasena = document.getElementById("contrasena").value;
+            const confirmarContrasena = document.getElementById(
+              "confirmarContrasena"
+            ).value;
+
+            // Validar contraseñas
+            if (contrasena !== confirmarContrasena) {
+              document.getElementById("errorConfirmPassword").textContent =
+                "Las contraseñas no coinciden";
+              return;
+            } else {
+              document.getElementById("errorConfirmPassword").textContent = "";
+            }
+
+            // Calcular edad
+            const fechaNac = new Date(fechaNacimiento);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - fechaNac.getFullYear();
+            const mes = hoy.getMonth() - fechaNac.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+              edad--;
+            }
+
+            // Agregar nuevo usuario a la tabla
+            const tbody = document.querySelector("#usuariosTable tbody");
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+            <td>${nombre}</td>
+            <td>${email}</td>
+            <td>${telefono || "No especificado"}</td>
+            <td>${documento}</td>
+            <td>${edad}</td>
+            <td class="status-active">Activo</td>
+            <td>
+              <button class="btn-action btn-deactivate">Desactivar</button>
+              <button class="btn-action btn-activate" disabled>Activar</button>
+              <button class="btn-action btn-delete">Eliminar</button>
+            </td>
+          `;
+
+            tbody.appendChild(newRow);
+
+            // Agregar eventos a los nuevos botones
+            newRow
+              .querySelector(".btn-deactivate")
+              .addEventListener("click", function () {
+                const row = this.closest("tr");
+                const statusCell = row.querySelector("td:nth-child(6)");
+
+                statusCell.textContent = "Inactivo";
+                statusCell.className = "status-inactive";
+
+                this.disabled = true;
+                row.querySelector(".btn-activate").disabled = false;
+              });
+
+            newRow
+              .querySelector(".btn-activate")
+              .addEventListener("click", function () {
+                const row = this.closest("tr");
+                const statusCell = row.querySelector("td:nth-child(6)");
+
+                statusCell.textContent = "Activo";
+                statusCell.className = "status-active";
+
+                this.disabled = true;
+                row.querySelector(".btn-deactivate").disabled = false;
+              });
+
+            newRow
+              .querySelector(".btn-delete")
+              .addEventListener("click", function () {
+                if (confirm("¿Está seguro de eliminar este usuario?")) {
+                  this.closest("tr").remove();
+                }
+              });
+
+            // Cerrar modal y limpiar formulario
+            const modal = bootstrap.Modal.getInstance(
+              document.getElementById("registroModal")
+            );
+            modal.hide();
+            document.getElementById("registroForm").reset();
+          });
       });
     </script>
-
-    <!-- Scripts de Bootstrap y librerías -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="/js/buscar.js"></script>
-    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-    <script src="../js/sweetalert2@9.js"></script>
-    <script src="../js/logout.js"></script>
   </body>
 </html>

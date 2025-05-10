@@ -3,208 +3,507 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notificaciones</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <title>Notificaciones - Moto Store</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+
     <style>
+      :root {
+        --primary-color: #235dbc;
+        --secondary-color: #000;
+        --accent-color: #0056ff;
+        --hover-accent: #0041cc;
+        --success-color: #28a745;
+        --danger-color: #dc3545;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f8f9fa;
+        padding-top: 70px;
+        padding-left: 250px;
+        transition: all 0.3s;
+      }
+
+      /* Header compacto */
+      .compact-header {
+        background-color: var(--primary-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        height: 70px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .compact-header .navbar-brand img {
+        height: 40px;
+      }
+
+      /* Sidebar compacto */
+      .compact-sidebar {
+        background-color: var(--secondary-color);
+        width: 250px;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        bottom: 0;
+        padding: 20px 0;
+        z-index: 1020;
+        overflow-y: auto;
+      }
+
+      .compact-sidebar .nav-link {
+        color: white;
+        padding: 10px 15px;
+        margin: 2px 10px;
+        border-radius: 5px;
+        transition: all 0.3s;
+      }
+
+      .compact-sidebar .nav-link:hover,
+      .compact-sidebar .nav-link.active {
+        background-color: #333;
+      }
+
+      .compact-sidebar .nav-link i {
+        width: 20px;
+        text-align: center;
+        margin-right: 10px;
+      }
+
+      /* Contenido principal */
+      .main-content {
+        padding: 20px;
+        min-height: calc(100vh - 70px);
+      }
+
+      /* Estilos específicos para notificaciones */
       .breadcrumb {
         background: none;
         padding: 0;
       }
-      .product-card {
+
+      .notification-card {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        background-color: #f8f9fa;
-        padding: 15px;
-        margin-bottom: 10px;
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 15px;
         border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
       }
-      .product-card img {
-        width: 80px;
-        height: auto;
+
+      .notification-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .notification-content {
+        flex: 1;
+        padding-right: 20px;
+      }
+
+      .notification-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-width: 120px;
+      }
+
+      .status-active {
+        color: var(--success-color);
+        font-weight: 500;
+      }
+
+      .status-inactive {
+        color: var(--danger-color);
+        font-weight: 500;
+      }
+
+      .btn-toggle {
+        color: var(--success-color);
+        border-color: var(--success-color);
+      }
+
+      .btn-toggle:hover {
+        background-color: var(--success-color);
+        color: white;
+      }
+
+      .btn-toggle.off {
+        color: #6c757d;
+        border-color: #6c757d;
+      }
+
+      .btn-toggle.off:hover {
+        background-color: #6c757d;
+        color: white;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        body {
+          padding-left: 0;
+        }
+
+        .compact-sidebar {
+          transform: translateX(-100%);
+        }
+
+        .compact-sidebar.show {
+          transform: translateX(0);
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg text-center">
-        <a class="navbar-brand" href="sesion-administrador.html">
-          <img
-            src="../img/logo_moto_store-1-5.png"
-            style="width: 200px; height: 150px"
-            alt="logo"
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-categoria-baquen.html"
-                >Conf.categorias</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-notificaciones.html"
-                >Conf.notificaciones</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="Informe-admi.html">Informes</a>
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="administracion-cuentas.html"
-                >Conf.cuentas</a
-              >
-            </li>
-            <li class="nav-item dropdown mx-4">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user fa-2x"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="perfil-administrador.html"
-                  >Ver perfil</a
+    <!-- Header compacto -->
+    <header class="compact-header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="sesion-administrador.html">
+            <img src="../img/logo_moto_store-1-5.png" alt="Logo Moto Store" />
+          </a>
+
+          <button
+            class="navbar-toggler d-lg-none"
+            type="button"
+            id="sidebarToggle"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="ms-auto d-none d-lg-block">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-              </div>
-            </li>
-          </ul>
+                  <i class="fas fa-user-circle"></i>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <a class="dropdown-item" href="perfil-administrador.html">
+                      <i class="fas fa-user me-2"></i>Ver perfil
+                    </a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" id="logout" href="#">
+                      <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
 
-    <main class="container mt-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="sesion-administrador.html">Inicio</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Notificaciones
-          </li>
-        </ol>
-      </nav>
-      <div class="publish-btn-container">
-        <div class="dropdown">
+    <!-- Sidebar compacto -->
+    <aside class="compact-sidebar" id="sidebar">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="gestion-categoria-baquen.html">
+            <i class="fas fa-list"></i> Config. categorías
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="gestion-notificaciones.html">
+            <i class="fas fa-bell"></i> Config. notificaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Informe-admi.html">
+            <i class="fas fa-chart-bar"></i> Informes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="administracion-cuentas.html">
+            <i class="fas fa-users"></i> Config. cuentas
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="sesion-administrador.html">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Notificaciones
+            </li>
+          </ol>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0">Gestión de Notificaciones</h2>
           <button
-            class="btn btn-primary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#nuevaNotificacionModal"
           >
-            Crear nueva notificacion
+            <i class="fas fa-plus-circle me-2"></i>Nueva Notificación
           </button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div>
-          <h5><a href="#">Notificacion 1</a></h5>
-          <p>Detalles</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
-            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
-            qui voluptatum tempore officia?
-          </p>
-        </div>
-        <div>
-          <p class="text-success">Activo</p>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="fas fa-toggle-on"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div>
-          <h5><a href="#">Notificacion 2</a></h5>
-          <p>Detalles</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
-            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
-            qui voluptatum tempore officia?
-          </p>
-        </div>
-        <div>
-          <p class="text-success">Activo</p>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="fas fa-toggle-on"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-      <div class="product-card">
-        <div>
-          <h5><a href="#">Notificacion 3</a></h5>
-          <p>Detalles</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            cupiditate omnis optio rem alias sed nihil, mollitia sit enim
-            reiciendis hic, commodi cumque, dignissimos pariatur reprehenderit
-            qui voluptatum tempore officia?
-          </p>
         </div>
 
-        <div>
-          <p class="text-success">Activo</p>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="fas fa-toggle-on"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
+        <!-- Lista de notificaciones -->
+        <div class="notification-list">
+          <div class="notification-card">
+            <div class="notification-content">
+              <h5>
+                <a href="#" class="text-decoration-none">Notificación 1</a>
+              </h5>
+              <p class="text-muted mb-2">Última actualización: 15/05/2023</p>
+              <p class="mb-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia
+                sit enim reiciendis hic, commodi cumque, dignissimos pariatur
+                reprehenderit qui voluptatum tempore officia?
+              </p>
+            </div>
+            <div class="notification-actions">
+              <span class="status-active mb-2">Activo</span>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-toggle">
+                  <i class="fas fa-toggle-on"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
 
-      <nav>
-        <ul class="pagination justify-content-center mt-3">
-          <li class="page-item disabled">
-            <a class="page-link" href="#">«</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">»</a></li>
-        </ul>
-      </nav>
+          <div class="notification-card">
+            <div class="notification-content">
+              <h5>
+                <a href="#" class="text-decoration-none">Notificación 2</a>
+              </h5>
+              <p class="text-muted mb-2">Última actualización: 10/05/2023</p>
+              <p class="mb-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia
+                sit enim reiciendis hic, commodi cumque, dignissimos pariatur
+                reprehenderit qui voluptatum tempore officia?
+              </p>
+            </div>
+            <div class="notification-actions">
+              <span class="status-active mb-2">Activo</span>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-toggle">
+                  <i class="fas fa-toggle-on"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-card">
+            <div class="notification-content">
+              <h5>
+                <a href="#" class="text-decoration-none">Notificación 3</a>
+              </h5>
+              <p class="text-muted mb-2">Última actualización: 05/05/2023</p>
+              <p class="mb-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia
+                sit enim reiciendis hic, commodi cumque, dignissimos pariatur
+                reprehenderit qui voluptatum tempore officia?
+              </p>
+            </div>
+            <div class="notification-actions">
+              <span class="status-inactive mb-2">Inactivo</span>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-toggle off">
+                  <i class="fas fa-toggle-off"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paginación -->
+        <nav aria-label="Page navigation" class="mt-4">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >«</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">»</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </main>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-    <script src="../js/sweetalert2@9.js"></script>
-    <script src="../js/logout.js"></script>
+
+    <!-- Modal para nueva notificación -->
+    <div
+      class="modal fade"
+      id="nuevaNotificacionModal"
+      tabindex="-1"
+      aria-labelledby="nuevaNotificacionModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nuevaNotificacionModalLabel">
+              Crear Nueva Notificación
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="tituloNotificacion" class="form-label"
+                  >Título</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tituloNotificacion"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contenidoNotificacion" class="form-label"
+                  >Contenido</label
+                >
+                <textarea
+                  class="form-control"
+                  id="contenidoNotificacion"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="activarNotificacion"
+                  checked
+                />
+                <label class="form-check-label" for="activarNotificacion"
+                  >Activar notificación</label
+                >
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Guardar Notificación
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script personalizado -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Toggle sidebar en móviles
+        document
+          .getElementById("sidebarToggle")
+          .addEventListener("click", function () {
+            document.getElementById("sidebar").classList.toggle("show");
+          });
+
+        // Logout
+        document
+          .getElementById("logout")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            if (confirm("¿Desea cerrar sesión?")) {
+              window.location.href = "../index.html";
+            }
+          });
+
+        // Toggle para activar/desactivar notificaciones
+        document.querySelectorAll(".btn-toggle").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const card = this.closest(".notification-card");
+            const status = card.querySelector(".notification-actions span");
+
+            if (this.classList.contains("off")) {
+              // Activar
+              this.classList.remove("off");
+              this.innerHTML = '<i class="fas fa-toggle-on"></i>';
+              this.classList.add("btn-toggle");
+              status.textContent = "Activo";
+              status.className = "status-active mb-2";
+            } else {
+              // Desactivar
+              this.classList.add("off");
+              this.innerHTML = '<i class="fas fa-toggle-off"></i>';
+              status.textContent = "Inactivo";
+              status.className = "status-inactive mb-2";
+            }
+          });
+        });
+
+        // Eliminar notificación
+        document.querySelectorAll(".btn-outline-danger").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            if (confirm("¿Está seguro de eliminar esta notificación?")) {
+              this.closest(".notification-card").remove();
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

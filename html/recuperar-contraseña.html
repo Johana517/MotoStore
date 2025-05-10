@@ -134,6 +134,9 @@
                 >
                   Verificar Código
                 </button>
+                <p class="text-muted mt-2">
+                  ¿No recibiste el código? <a href="#" id="resend-code">Reenviar código</a>
+                </p>
               </div>
               <!-- Paso 3: Contraseña y Confirmar Contraseña -->
               <div id="password-step" style="display: none">
@@ -239,6 +242,19 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- JavaScript personalizado -->
     <script>
+      // Simulación de base de datos de usuarios registrados
+      const registeredUsers = ["juanitoperez@gmail.com", "juanmtsolarte@gmail.com"];
+      
+      // Simulación de códigos de verificación
+      let verificationCodes = {};
+      let codeExpirationTimes = {};
+      
+      // Probabilidad de fallo del servidor de correo (10% para pruebas)
+      const mailServerFailureProbability = 0.1;
+      
+      // Tiempo de expiración del código (5 minutos)
+      const CODE_EXPIRATION_TIME = 5 * 60 * 1000; // 5 minutos en milisegundos
+
       // Elementos del formulario
       const emailStep = document.getElementById("email-step");
       const codeStep = document.getElementById("code-step");
@@ -246,6 +262,7 @@
       const continueBtn = document.getElementById("continue-btn");
       const verifyCodeBtn = document.getElementById("verify-code-btn");
       const submitPasswordBtn = document.getElementById("submit-password-btn");
+      const resendCodeLink = document.getElementById("resend-code");
       const emailInput = document.getElementById("email");
       const codeInput = document.getElementById("code");
       const passwordInput = document.getElementById("password");
@@ -271,9 +288,16 @@
         this.classList.toggle("fa-eye-slash");
       });
 
+      // Generar un código de verificación aleatorio
+      function generateVerificationCode() {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+      }
+
       // Paso 1: Validar correo
       continueBtn.addEventListener("click", function () {
-        if (emailInput.value.trim() === "") {
+        const email = emailInput.value.trim();
+        
+        if (email === "") {
           Swal.fire({
             icon: "error",
             title: "Error",
@@ -281,11 +305,34 @@
           });
           return;
         }
+        
+        // Verificar si el correo está registrado
+        if (!registeredUsers.includes(email)) {
+          Swal.fire({
+            icon: "error",
+            title: "Correo no registrado",
+            text: "El correo electrónico no está registrado. Por favor, verifica tu información.",
+          });
+          return;
+        }
+        
+        // Simular fallo del servidor de correo
+        if (Math.random() < mailServerFailureProbability) {
+          showMailServerError();
+          return;
+        }
+        
+        // Generar y guardar código de verificación
+        const verificationCode = generateVerificationCode();
+        verificationCodes[email] = verificationCode;
+        codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
+        
+        // Mostrar mensaje de éxito (simulando envío de correo)
         Swal.fire({
           icon: "success",
           title: "Correo enviado",
-          text: "Se ha enviado un código de verificación a tu correo.",
-          timer: 1500,
+          html: `Se ha enviado un código de verificación a <strong>${email}</strong>.<br>El código expirará en 5 minutos.`,
+          timer: 2000,
           showConfirmButton: false,
         }).then(() => {
           emailStep.style.display = "none";
@@ -294,9 +341,47 @@
         });
       });
 
+      // Función para reenviar código
+      resendCodeLink.addEventListener("click", function(e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        
+        // Verificar si el correo está registrado
+        if (!registeredUsers.includes(email)) {
+          Swal.fire({
+            icon: "error",
+            title: "Correo no registrado",
+            text: "El correo electrónico no está registrado. Por favor, verifica tu información.",
+          });
+          return;
+        }
+        
+        // Simular fallo del servidor de correo
+        if (Math.random() < mailServerFailureProbability) {
+          showMailServerError();
+          return;
+        }
+        
+        // Generar y guardar nuevo código de verificación
+        const verificationCode = generateVerificationCode();
+        verificationCodes[email] = verificationCode;
+        codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
+        
+        Swal.fire({
+          icon: "success",
+          title: "Código reenviado",
+          html: `Se ha enviado un nuevo código de verificación a <strong>${email}</strong>.<br>El código expirará en 5 minutos.`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      });
+
       // Paso 2: Validar código
       verifyCodeBtn.addEventListener("click", function () {
-        if (codeInput.value.trim() === "") {
+        const email = emailInput.value.trim();
+        const code = codeInput.value.trim();
+        
+        if (code === "") {
           Swal.fire({
             icon: "error",
             title: "Error",
@@ -304,6 +389,46 @@
           });
           return;
         }
+        
+        // Verificar si el código ha expirado
+        if (Date.now() > codeExpirationTimes[email]) {
+          Swal.fire({
+            icon: "error",
+            title: "Código expirado",
+            html: "El código de verificación ha expirado. <br>Por favor, solicita uno nuevo.",
+            showCancelButton: true,
+            confirmButtonText: "Reenviar código",
+            cancelButtonText: "Cancelar"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Generar y guardar nuevo código de verificación
+              const verificationCode = generateVerificationCode();
+              verificationCodes[email] = verificationCode;
+              codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
+              
+              Swal.fire({
+                icon: "success",
+                title: "Código reenviado",
+                html: `Se ha enviado un nuevo código de verificación a <strong>${email}</strong>.<br>El código expirará en 5 minutos.`,
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            }
+          });
+          return;
+        }
+        
+        // Verificar si el código es correcto
+        if (verificationCodes[email] !== code) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "El código de verificación es incorrecto. Por favor, inténtalo nuevamente.",
+          });
+          return;
+        }
+        
+        // Código correcto
         Swal.fire({
           icon: "success",
           title: "Código verificado",
@@ -348,6 +473,16 @@
           window.location.href = "index.html";
         });
       });
+
+      // Función para mostrar error de servidor de correo
+      function showMailServerError() {
+        Swal.fire({
+          icon: "error",
+          title: "Error en el servidor",
+          text: "No se pudo enviar el correo de recuperación en este momento. Por favor, inténtalo más tarde.",
+          confirmButtonText: "Entendido"
+        });
+      }
     </script>
   </body>
 </html>
