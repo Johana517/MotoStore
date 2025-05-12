@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pantalla de Inicio</title>
+  <style>
+    body {
+      background-color: hwb(210 88% 2%);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      align-items: center;
+    }
+
+    .logo {
+      margin: 20px 0;
+    }
+
+    .logo img {
+      width: 250px; /* Ajusta este tamaño según tu imagen */
+    }
+
+    h1 {
+      font-weight: normal;
+      color: #555;
+    }
+
+    p {
+      color: #777;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    .options {
+      display: flex;
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .option-link {
+      text-decoration: none;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      background-color: white;
+    }
+
+    .option-link:hover {
+      background-color: #D9534F;
+      color: white;
+      border-color: #D9534F;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenido a</h1>
+
+    <div class="logo">
+      <img src="../img/logo_moto_store-1-5.png alt="Logo TuMoto" />
+      <!-- Asegúrate de tener la imagen "tumoto.png" en tu carpeta -->
+    </div>
+
+    <p>Elige una opción</p>
+
+    <div class="options">
+      <a href="motos.html" class="option-link">Motos</a>
+      <a href="repuestos.html" class="option-link">Repuestos</a>
+    </div>
+  </div>
+
+</body>
+</html>
