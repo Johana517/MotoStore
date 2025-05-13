@@ -77,6 +77,21 @@
   </head>
   <body>
     <!-- [El header y navbar se mantienen igual que en tu código original] -->
+    <header class="header-container">
+      <div class="container-fluid">
+        <div class="row align-items-center text-center">
+          <div class="col-md-4 text-md-start">
+            <a id="logo"
+              ><img
+                src="../img/logo_moto_store-1-5.png"
+                id="Logo"
+                style="width: 200px; height: 150px"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <div class="container text-center my-5">
       <h2>¿Como podemos ayudarte?</h2>
@@ -226,6 +241,20 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script>
       // Mostrar vista de preguntas frecuentes
+      const seccion = localStorage.getItem("seccion");
+      const logo = document.getElementById("logo");
+
+      if (seccion === "motos") {
+        logo.href = "Home-motos.html";
+      } else if (seccion === "repuestos") {
+        logo.href = "home-repuestos.html";
+      } else if (seccion === "catemoto") {
+        logo.href = "categoriamoto.html";
+      } else if (seccion === "caterepuesto") {
+        logo.href = "categoriaRepuesto.html";
+      } else {
+        logo.href = "index.html"; // por si no hay valor guardado
+      }
       document
         .getElementById("faqButton")
         .addEventListener("click", function () {

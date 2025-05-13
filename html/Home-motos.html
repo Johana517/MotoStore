@@ -119,10 +119,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto ms-2">
             <li class="nav-item">
-              <a class="nav-link" href="categoria.html">Categorias</a>
+              <a class="nav-link" href="categoriamoto.html">Categorias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
+              <a class="nav-link" href="ayuda-frontend.html" id="ir-a-ayuda">Ayuda</a>
+              <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "motos");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
             </li>
             
             <!-- Barra de búsqueda (solo en desktop) -->
@@ -137,7 +143,13 @@
             
   
             <li class="nav-item">
-              <a class="nav-link" href="QuienesSomos.html">Quienes somos</a>
+              <a class="nav-link" href="QuienesSomos.html" id="ir-a-ayuda">Quienes somos</a>
+                            <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "motos");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="iniciar-sesion.html">Vender</a>
@@ -221,7 +233,7 @@
                                         <p>Moto todoterreno con suspensión de largo recorrido.</p>
                                         <p><strong>Precio:</strong> 11.500.000 COP</p>
                                         <p><strong>Marca:</strong> Kawasaki</p>
-                                        <p><strong>Tipo de moto:</strong> Enduro</p>
+                                        <p><strong>Tipo:</strong> Enduro</p>
                                         <p><strong>Cilindraje:</strong> 230 cc</p>
                                     </div>
                                 </div>
@@ -271,7 +283,7 @@
                                         <p>Moto honda 2024 para sentirte libre y andar tranquilo</p>
                                         <p><strong>Precio:</strong> $3.500.000 COP</p>
                                         <p><strong>Marca:</strong> Honda</p>
-                                        <p><strong>Tipo de Moto:</strong> Deportiva</p>
+                                        <p><strong>Tipo:</strong> Deportiva</p>
                                         <p><strong>Cilindraje:</strong> 125</p>
 
                                     </div>
@@ -323,9 +335,8 @@
                                         <p>La moto scooter que necesitas</p>
                                         <p><strong>Precio:</strong> $7.500.000 COP</p>
                                         <p><strong>Marca:</strong> Yamaha</p>
-                                        <p><strong>Tipo de Moto:</strong> Scooter</p>
+                                        <p><strong>Tipo:</strong> Scooter</p>
                                         <p><strong>Cilindraje:</strong> 150</p>
-                                        <p><strong>Estado:</strong>Nueva</p>
                                     </div>
                                 </div>
                             </div>
@@ -347,9 +358,9 @@
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="../img/Motocicleta.png" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">Moto yamaha</h5>
-                <p class="card-text">$8.400.000</p>
-                <p class="card-text">Moto yamaha XTZ</p>
+                <h5 class="card-title">Moto yamaha 150</h5>
+                <p class="card-text">$8.400.000 COP</p>
+                <p class="card-text">yamaha XTZ 150</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal3">
                   Ver Detalles
                 </button>
@@ -370,12 +381,12 @@
                                     </div>
                                     <!-- Espacio para los detalles del producto -->
                                     <div class="col-md-6">
-                                      <h5>Bujia</h5>
-                                      <p>Bujia para clima frio</p>
-                                      <p><strong>Precio:</strong> $24.000 COP</p>
-                                      <p><strong>Tipo de repuesto:</strong> Original</p>
-                                      <p><strong>Cantidad:</strong> 18</p>
-                                      <p><strong>Referencia:</strong> WR7DC</p>
+                                      <h5>Moto yamaha 150</h5>
+                                      <p>Yamaha XTZ 150 todo terreno</p>
+                                      <p><strong>Precio:</strong> $8.400.000</p>
+                                      <p><strong>Marca:</strong> Yamaha</p>
+                                      <p><strong>Tipo:</strong> Enduro</p>
+                                      <p><strong>Cilindraje:</strong> 150</p>
                                     </div>
                                 </div>
                             </div>
@@ -397,9 +408,9 @@
             <div class="card" style="width: 18rem;">
               <img class="card-img-top" src="../img/yamaha.jpg" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">Moto Yamaha X</h5>
+                <h5 class="card-title">Moto Yamaha XTZ</h5>
                 <p class="card-text">Moto Yamaha XTZ 125</p>
-                <p class="card-text">8.700.000 COP</p>
+                <p class="card-text">$8.700.000 COP</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal4">
                   Ver Detalles
                 </button>
@@ -424,9 +435,8 @@
                                       <p>La motos que necesitas para todo tipos de terrenos terrestres</p>
                                       <p><strong>Precio:</strong> $6.700.000 COP</p>
                                       <p><strong>Marca:</strong> Yamaha</p>
-                                      <p><strong>Tipo de Moto:</strong> Enduro</p>
+                                      <p><strong>Tipo:</strong> Enduro</p>
                                       <p><strong>Cilindraje:</strong> 125</p>
-                                      <p><strong>Estado de la moto:</strong>Nueva</p>
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +486,7 @@
                                       <p>Aventurera con motor monocilíndrico y ABS.</p>
                                       <p><strong>Precio:</strong> $12.000.000 COP</p>
                                       <p><strong>Marca:</strong> Honda</p>
-                                      <p><strong>Tipo de moto:</strong> Enduro</p>
+                                      <p><strong>Tipo:</strong> Enduro</p>
                                       <p><strong>Cilindraje:</strong> 300 cc</p>
                                     </div>
                                 </div>
@@ -559,7 +569,6 @@
         <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
           <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
-      </div>
     </div>
   </footer>
   <script src="../js/bootstrap.bundle.min.js"></script>
