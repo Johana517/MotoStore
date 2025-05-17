@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías | Moto Store</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+      /* Estilos existentes que se mantienen */
+      :root {
+          --color-primary: #000957;
+          --color-secondary: #f3b95f;
+          --color-accent: #007bff;
+          --color-whatsapp: #25D366;
+          --color-sidebar: #e8e8e8;
+          --color-border: #37bf0a;
+      }
+      
+      body {
+          background-color: #f5f5f5;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      /* Contenedor principal */
+      .main-container {
+          padding: 2rem;
+      }
+      header {
+      background-color: #235dbc; /* Gris metálico */
+      padding: 10px;
+      }
+
+      /* Links */
+      .nav-link {
+        color: #ffd700; /* Azul eléctrico */
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .nav-link:hover{
+        color: #ff4500; /* Naranja fuego */
+      }
+      footer a {
+        color: #ffd700; /* Azul eléctrico */
+        text-decoration: none;
+        font-weight: bold;
+      }
+      footer a:hover {
+        color: #ff4500; /* Naranja fuego */
+      }
+      /* Layout principal */
+      .main-layout {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+      }
+      
+      /* Aside (Filtro de búsqueda) */
+      .filter-aside {
+          flex: 0 0 280px;
+          background: var(--color-sidebar);
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          padding: 1.5rem;
+          height: fit-content;
+          position: sticky;
+          top: 20px;
+      }
+      
+      .filter-aside h2 {
+          color: var(--color-primary);
+          border-bottom: 2px solid var(--color-secondary);
+          padding-bottom: 0.5rem;
+          margin-bottom: 1.5rem;
+      }
+      
+      /* Contenido principal - Ajustado para mostrar tarjetas completas */
+      .main-content {
+          flex: 1;
+          min-width: 0; /* Permite que el contenido se ajuste correctamente */
+      }
+      
+      /* Grid de productos mejorado */
+      .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 1.5rem;
+          width: 100%;
+      }
+      
+      /* Tarjetas de producto - Ajustadas para mostrar contenido completo */
+      .product-card {
+          display: flex;
+          flex-direction: column;
+          height: 100%; /* Ocupa todo el alto disponible */
+          border: none;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          transition: all 0.3s;
+          background: white;
+      }
+      
+      .product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      }
+      
+      .card-img-container {
+          height: 220px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #f8f9fa;
+          padding: 1rem;
+      }
+      
+      .card-img-top {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+      }
+      
+      .card-body {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1; /* Hace que el cuerpo ocupe el espacio restante */
+          padding: 1.25rem;
+      }
+      
+      .card-title {
+          color: var(--color-primary);
+          font-weight: 700;
+          font-size: 1.25rem;
+          margin-bottom: 0.5rem;
+      }
+      
+      .card-subtitle {
+          color: #6c757d;
+          font-weight: 600;
+          font-size: 0.9rem;
+          margin-bottom: 0.75rem;
+      }
+      
+      .card-text {
+          flex-grow: 1; /* Hace que la descripción ocupe el espacio disponible */
+          margin-bottom: 1rem;
+          color: #555;
+      }
+      
+      .card-price {
+          color: var(--color-accent);
+          font-weight: 700;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+      }
+      
+      .btn-details {
+          background-color: var(--color-primary);
+          color: white;
+          font-weight: 600;
+          padding: 0.5rem;
+          border-radius: 5px;
+          transition: all 0.3s;
+          margin-top: auto; /* Empuja el botón hacia abajo */
+      }
+      
+      .btn-details:hover {
+          background-color: var(--color-secondary);
+          color: #f10909;
+      }
+      
+      /* Responsive */
+      @media (max-width: 992px) {
+          .main-layout {
+              flex-direction: column;
+          }
+          
+          .filter-aside {
+              position: static;
+              width: 100%;
+          }
+          
+          .product-grid {
+              grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          }
+      }
+      
+      @media (max-width: 768px) {
+          .main-container {
+              padding: 1rem;
+          }
+          
+          .card-img-container {
+              height: 180px;
+          }
+      }
+      
+      @media (max-width: 576px) {
+          .product-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+  </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-4">
+              <!-- Logo -->
+              <a class="navbar-brand" href="Home-motos.html">
+                <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+              </a>
+            </div>
+            <div class="col-4 col-md-4">
+              <!-- Barra de búsqueda (siempre visible) -->
+              <div class="search-mobile d-lg-none ms-2">
+                <form class="d-flex">
+                  <input type="search" class="form-control" placeholder="Search" size="100">
+                  <button class="btn btn-success ms-2" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Botón hamburguesa -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Menú colapsable -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto ms-2">
+              <li class="nav-item">
+                <a class="nav-link" href="categoria.html">Categorias</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ayuda-frontend.html" id="ir-a-ayuda">Ayuda</a>
+              <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "catemoto");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
+            </li>
+              
+              <!-- Barra de búsqueda (solo en desktop) -->
+              <li class="nav-item search-desktop d-none d-lg-block">
+                <form class="form-inline">
+                  <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search" size="30">
+                    <button class="btn btn-success" type="submit">Search</button>
+                  </div>
+                </form>
+              </li>
+              
+    
+              <li class="nav-item">
+                <a class="nav-link" href="QuienesSomos.html" id="ir-a-ayuda">Quienes somos</a>
+                <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "catemoto");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="iniciar-sesion.html">Vender</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>  
+
+    <!-- Main Content -->
+<div class="main-container">
+  <div class="container">
+      <div class="main-layout">
+          <!-- Aside con filtros -->
+          <aside class="filter-aside">
+              <div class="sidebar">
+                <h2>Filtro de Búsqueda</h2>
+                <label>Marca:</label>
+                <select id="marcaMoto" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="Yamaha">Yamaha</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Suzuki">Suzuki</option>
+                  <option value="Kawasaki">Kawasaki</option>
+                  <option value="Auteco">Auteco</option>
+                </select>
+
+                <label>Tipo de Moto:</label>
+                <select id="tipoMoto" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="Deportiva">Deportiva</option>
+                  <option value="Scooter">Scooter</option>
+                  <option value="Enduro">Enduro</option>
+                  <option value="Chopper">Chopper</option>
+                  <option value="Naked">Naked</option>
+                </select>
+
+                <label>Cilindraje:</label>
+                <select id="tipoCilindraje" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="100">100</option>
+                  <option value="110">110</option>
+                  <option value="125">125</option>
+                  <option value="150">150</option>
+                  <option value="200">200</option>
+                  <option value="250">250</option>
+                  <option value="300">300</option>
+                </select>
+
+                <label>Año de fabricación:</label>
+                <select id="tipoAños" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                </select>
+
+                <!-- Nuevo rango de precios con formato -->
+                <label>Rango de precios (COP):</label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="precioMinimo">Mínimo</label>
+                    <input type="text" id="precioMinimo" class="form-control precio-input" placeholder="0" data-prefix="$">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="precioMaximo">Máximo</label>
+                    <input type="text" id="precioMaximo" class="form-control precio-input" placeholder="$1.000.000" data-prefix="$">
+                  </div>
+                </div>
+
+                <button id="btn-filtrar" class="btn btn-primary w-100 mt-2">Aplicar Filtros</button>
+              </div>
+          </aside>
+          
+          <!-- Contenido principal -->
+          <main class="main-content">
+              <h2 class="mb-4 text-center">Motos Disponibles</h2>
+              
+              <div class="product-grid">
+                  <!-- Card 1 - Bujía -->
+                  <div class="card product-card">
+                      <div class="card-img-container">
+                          <img src="../img/yamaha.jpg" class="card-img-top" alt="Bujía NGK">
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">Moto Yamaha XTZ 125</h5>
+                          <h6 class="card-subtitle">Moto Yamaha XTZ 125</h6>
+                          <p class="card-text">La motos que necesitas para todo tipos de terrenos terrestres</p>
+                          <p class="card-price">$8.700.000 COP</p>
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Corona">
+                            Ver Detalles
+                          </button>
+                      </div>
+                  </div>
+                  
+                  <!-- Card 2 - Rines -->
+                  <div class="card product-card">
+                      <div class="card-img-container">
+                          <img src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" class="card-img-top" alt="Rines Estrella">
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">Honda XRE 300</h5>
+                          <h6 class="card-subtitle">Honda XRE 300</h6>
+                          <p>Aventurera con motor monocilíndrico y ABS.</p>
+                          <p class="card-price">$12.000.000 COP</p>
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pistones">
+                            Ver Detalles
+                          </button>
+                      </div>
+                  </div>
+                  
+                  <!-- Card 3 - Filtro de Aire -->
+                  <div class="card product-card">
+                      <div class="card-img-container">
+                          <img src="../img/Motocicleta.png" class="card-img-top" alt="Filtro de Aire">
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">Moto yamaha 150</h5>
+                          <h6 class="card-subtitle">Moto yamaha 150</h6>
+                          <p>Yamaha XTZ 150 todo terreno</p>
+                          <p class="card-price">$8.400.000 COP</p>
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Vàlvula">
+                            Ver Detalles
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </main>
+      </div>
+  </div>
+</div>
+
+    <!-- Modal Bujía -->
+    <div class="modal fade" id="Corona" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <!-- Espacio para la imagen -->
+                      <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                          <img src="../img/yamaha.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                      </div>
+                      <!-- Espacio para los detalles del producto -->
+                      <div class="col-md-6">
+                          <h5>Moto Yamaha XTZ</h5>
+                          <p>Moto Yamaha XTZ 125</p>
+                          <p><strong>Precio:</strong> $8.700.000 COP</p>
+                          <p><strong>Marca:</strong> Yamaha</p>
+                          <p><strong>Tipo:</strong> Enduro</p>
+                          <p><strong>Cilindraje:</strong> 125 cc</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                  <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                    <button class="btn btn-success" data-bs-dismiss="modal">
+                      Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                    </button>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Modal Filtro de Aire -->
+    <div class="modal fade" id="pistones" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <!-- Espacio para la imagen -->
+                      <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                          <img src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                      </div>
+                      <!-- Espacio para los detalles del producto -->
+                      <div class="col-md-6">
+                          <h5>Honda XRE 300</h5>
+                          <p>Aventurera con motor monocilíndrico y ABS.</p>
+                          <p><strong>Precio:</strong> $12.000.000 COP</p>
+                          <p><strong>Marca:</strong> Honda</p>
+                          <p><strong>Tipo: </strong> Enduro</p>
+                          <p><strong>Cilindraje:</strong> 300 cc</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                  <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                    <button class="btn btn-success" data-bs-dismiss="modal">
+                      Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                    </button>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    <!-- Modal Filtro de Aire -->
+    <div class="modal fade" id="Vàlvula" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <!-- Espacio para la imagen -->
+                      <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                          <img src="../img/Motocicleta.png" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                      </div>
+                      <!-- Espacio para los detalles del producto -->
+                      <div class="col-md-6">
+                          <h5>Moto yamaha 150</h5>
+                          <p>Moto yamaha 150</p>
+                          <p><strong>Precio:</strong> $8.400.000 COP</p>
+                          <p><strong>Marca:</strong> yamaha</p>
+                          <p><strong>Tipo:</strong> Enduro</p>
+                          <p><strong>Cilindraje:</strong> 150 cc</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                  <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                    <button class="btn btn-success" data-bs-dismiss="modal">
+                      Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                    </button>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <footer class="py-4 bg-dark">
+      <div class="container">
+        <!-- Primera fila: Enlaces y redes sociales -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <!-- Enlaces legales - Izquierda -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Redes sociales - Derecha (iconos más grandes) -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          
+          <!-- Copyright centrado -->
+          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+            <p class="mb-0 text-white">https://Motostore.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+      
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+       // Esperar a que el DOM esté cargado
+      document.addEventListener('DOMContentLoaded', function() {
+        // Función para formatear números con separadores de miles
+        function formatNumber(input) {
+          // Eliminar todos los caracteres no numéricos
+          let value = input.value.replace(/[^\d]/g, '');
+          
+          // Formatear con puntos cada 3 dígitos
+          if (value.length > 3) {
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          }
+          
+          // Agregar el prefijo (si existe)
+          const prefix = input.dataset.prefix || '';
+          input.value = prefix + value;
+        }
+        
+        // Función para obtener el valor numérico real (sin formato)
+        function getNumericValue(input) {
+          return parseInt(input.value.replace(/[^\d]/g, '')) || 0;
+        }
+        
+        // Event listeners para los inputs de precio
+        document.querySelectorAll('.precio-input').forEach(input => {
+          // Formatear al perder el foco
+          input.addEventListener('blur', function() {
+            formatNumber(this);
+          });
+          
+          // Eliminar formato al obtener el foco para facilitar la edición
+          input.addEventListener('focus', function() {
+            this.value = getNumericValue(this);
+          });
+          
+          // Validar mientras se escribe
+          input.addEventListener('input', function() {
+            // Permitir solo números y borrado
+            this.value = this.value.replace(/[^\d]/g, '');
+          });
+        });
+        
+        // Event listener para el botón de filtrar
+        document.getElementById('btnFiltrar').addEventListener('click', function() {
+          const marca = document.getElementById('marcaMoto').value;
+          const tipoMoto = document.getElementById('tipoMoto').value;
+          const cilindraje = document.getElementById('tipoCilindraje').value;
+          const año = document.getElementById('tipoAños').value;
+          const precioMin = getNumericValue(document.getElementById('precioMinimo'));
+          const precioMax = getNumericValue(document.getElementById('precioMaximo'));
+          
+          // Validar que el mínimo no sea mayor que el máximo
+          if (precioMin > 0 && precioMax > 0 && precioMin > precioMax) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en rango de precios',
+              text: 'El precio mínimo no puede ser mayor que el precio máximo',
+              confirmButtonText: 'Entendido',
+              confirmButtonColor: '#000957',
+              backdrop: `
+                rgba(0,0,123,0.4)
+                url("/images/nyan-cat.gif")
+                left top
+                no-repeat
+              `
+            });
+            return;
+          }
+          
+          // Mostrar confirmación con SweetAlert2
+          Swal.fire({
+            title: 'Filtros aplicados',
+            html: `
+              <div class="text-start">
+                <p><strong>Marca:</strong> ${marca || 'Cualquiera'}</p>
+                <p><strong>Tipo:</strong> ${tipoMoto || 'Cualquiera'}</p>
+                <p><strong>Cilindraje:</strong> ${cilindraje || 'Cualquiera'}</p>
+                <p><strong>Año:</strong> ${año || 'Cualquiera'}</p>
+                <p><strong>Precio:</strong> 
+                  ${precioMin ? `Desde $${precioMin.toLocaleString('es-CO')}` : 'Sin mínimo'} 
+                  ${precioMax ? `hasta $${precioMax.toLocaleString('es-CO')}` : 'Sin máximo'}
+                </p>
+              </div>
+            `,
+            icon: 'success',
+            confirmButtonText: 'Aplicar filtros',
+            confirmButtonColor: '#000957',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: '#6c757d'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Aquí iría la lógica real para filtrar los productos en la página
+              filtrarProductos(marca, tipoMoto, cilindraje, año, precioMin, precioMax);
+              
+              // Mostrar notificación de éxito
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Filtros aplicados correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          });
+        });
+
+        // Función para filtrar productos (implementación básica)
+        function filtrarProductos(marca, tipo, cilindraje, año, minPrecio, maxPrecio) {
+          const productos = document.querySelectorAll('.product-card');
+          
+          productos.forEach(producto => {
+            const precioTexto = producto.querySelector('.card-price').textContent;
+            const precioProducto = parseInt(precioTexto.replace(/[^\d]/g,''));
+            const mostrar = 
+              (!marca || producto.dataset.marca === marca) &&
+              (!tipo || producto.dataset.tipo === tipo) &&
+              (!cilindraje || producto.dataset.cilindraje === cilindraje) &&
+              (!año || producto.dataset.año === año) &&
+              (!minPrecio || precioProducto >= minPrecio) &&
+              (!maxPrecio || precioProducto <= maxPrecio);
+              
+            producto.style.display = mostrar ? 'block' : 'none';
+          });
+        }
+      });
+    </script>
+</body>
+</html>

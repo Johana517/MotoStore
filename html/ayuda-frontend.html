@@ -12,6 +12,12 @@
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
     <link rel="stylesheet" href="../css/style.css" />
     <style>
+      body {
+      background-color: #ffffff;
+      }
+      .faq-section {
+        margin: 30px 0;
+      }
       /* Estilos personalizados para las preguntas frecuentes */
       .faq-section {
         margin: 30px 0;
@@ -27,7 +33,7 @@
       }
 
       .faq-btn:hover {
-        background-color: #f8f9fa;
+        background-color: darkgreen;
         transform: translateY(-2px);
       }
 
@@ -41,7 +47,7 @@
       }
 
       .modal-faq-title {
-        color: #198754;
+        color: darkgreen;
         font-weight: bold;
       }
 
@@ -73,10 +79,34 @@
         color: #25d366;
         font-weight: bold;
       }
+       #mainView a {
+      color: green;
+      text-decoration: none;
+      transition: color 0.3s;
+      }
+
+      #mainView a:hover {
+        color: darkblue;
+      }  
     </style>
   </head>
   <body>
     <!-- [El header y navbar se mantienen igual que en tu código original] -->
+    <header class="header-container">
+      <div class="container-fluid">
+        <div class="row align-items-center text-center">
+          <div class="col-md-4 text-md-start">
+            <a id="logo"
+              ><img
+                src="../img/logo_moto_store-1-5.png"
+                id="Logo"
+                style="width: 200px; height: 150px"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <div class="container text-center my-5">
       <h2>¿Como podemos ayudarte?</h2>
@@ -95,7 +125,7 @@
             <i class="fas fa-arrow-left me-2"></i>Volver atrás
           </span>
         </div>
-
+         
         <h3 class="mb-4">Preguntas Frecuentes</h3>
 
         <div class="row">
@@ -208,7 +238,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-success"
+              class="btn btn-danger"
               data-bs-dismiss="modal"
             >
               Cerrar
@@ -226,6 +256,20 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script>
       // Mostrar vista de preguntas frecuentes
+      const seccion = localStorage.getItem("seccion");
+      const logo = document.getElementById("logo");
+
+      if (seccion === "motos") {
+        logo.href = "Home-motos.html";
+      } else if (seccion === "repuestos") {
+        logo.href = "home-repuestos.html";
+      } else if (seccion === "catemoto") {
+        logo.href = "categoriamoto.html";
+      } else if (seccion === "caterepuesto") {
+        logo.href = "categoriaRepuesto.html";
+      } else {
+        logo.href = "index.html"; // por si no hay valor guardado
+      }
       document
         .getElementById("faqButton")
         .addEventListener("click", function () {
@@ -263,21 +307,16 @@
               
               <div class="mb-3">
                 <span class="step-number">2</span>
-                <strong>Crea tu perfil de vendedor:</strong> Añade información sobre tu negocio y experiencia.
-              </div>
-              
-              <div class="mb-3">
-                <span class="step-number">3</span>
                 <strong>Publica tus productos:</strong> Sube fotos de calidad, escribe descripciones detalladas y fija precios competitivos.
               </div>
               
               <div class="mb-3">
-                <span class="step-number">4</span>
+                <span class="step-number">3</span>
                 <strong>Gestiona tus contactos:</strong> Cuando un comprador muestre interés, coordina la venta directamente por WhatsApp.
               </div>
               
               <div class="mb-3">
-                <span class="step-number">5</span>
+                <span class="step-number">4</span>
                 <strong>Acuerda condiciones:</strong> Negocia precios, métodos de pago y envío directamente con el comprador.
               </div>
               
@@ -429,7 +468,7 @@
               
               <div class="mb-3">
                 <span class="step-number">1</span>
-                <strong>Registro gratuito:</strong> No cobramos por crear una cuenta ni por publicar productos.
+                <strong>Registro gratuito:</strong> En Motostore te ofrecemos una prueba gratuita en nuestros planes, para que descubras las ventajas y beneficios de publicar tus productos en nuestra plataforma. La duración de la prueba gratuita está sujeta al plan que elijas.
               </div>
               
               <div class="mb-3">
@@ -460,3 +499,12 @@
     </script>
   </body>
 </html>
+<style>
+  body {
+    background-color: #ffffff;
+  }
+  .faq-section {
+    margin: 30px 0;
+  }
+</style>
+
