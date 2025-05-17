@@ -61,12 +61,6 @@
         </nav>
     </header>
     
-    <script>
-        $(document).ready(function() {
-            $(".dropdown-toggle").dropdown();
-        });
-    </script> 
-
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-4 text-center">
@@ -82,19 +76,17 @@
                     <li class="list-group-item"><strong>Edad:</strong> 23</li>
                     <li class="list-group-item"><strong>Teléfono:</strong> 3216598706</li>
                     <li class="list-group-item"><strong>Correo Electrónico:</strong> juanitoperez@gmail.com</li>
-                    <li class="list-group-item"><strong>C.C:</strong> 1036558942589</li>
-                    <li class="list-group-item"><strong>Fecha de nacimiento:</strong> 31/12/2003</li>
                     <li class="list-group-item"><strong>Dirección:</strong> B/ EL prado</li>
+                    <li class="list-group-item"><strong>Descripción:</strong> Hola soy un emprendedor</li>
                 </ul>
-                <button class="btn btn-dark mt-3">Editar</button>
+                <button class="btn btn-dark mt-3" id="btnEditarPerfil">Editar</button>
             </div>
         </div>
     </div>
+
     <footer class="py-4">
       <div class="container">
-        <!-- Primera fila: Enlaces y redes sociales -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <!-- Enlaces legales - Izquierda -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -106,7 +98,6 @@
             </ul>
           </div>
           
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -133,18 +124,212 @@
           </div>
         </div>
           
-          <!-- Copyright centrado -->
           <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
             <p class="mb-0 text-white">https://Motostore.com</p>
           </div>
         </div>
       </div>
     </footer>
+
+    <!-- Modal para editar perfil -->
+    <div class="modal fade modal-perfil" id="editarPerfilModal" tabindex="-1" role="dialog" aria-labelledby="editarPerfilModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-dark text-white">
+            <h5 class="modal-title" id="editarPerfilModalLabel">Editar Perfil</h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="formularioPerfil" class="needs-validation" novalidate>
+              <!-- Sección Foto de Perfil -->
+              <div class="text-center mb-4">
+                <div class="profile-pic-container mx-auto" onclick="document.getElementById('fotoPerfil').click()">
+                  <img src="../img/perfil.png" class="profile-pic" id="profileImage" alt="Foto de perfil">
+                  <div class="profile-pic-overlay">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                </div>
+                <input type="file" id="fotoPerfil" class="d-none" accept="image/*">
+                <small class="text-muted d-block mt-2">Haz clic en la imagen para cambiar tu foto</small>
+              </div>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <!-- Columna Izquierda -->
+                  <div class="col-md-6">
+                    <div class="card mb-4 border-0 shadow-sm">
+                      <div class="card-body">
+                        <h5 class="section-title mb-4">
+                          <i class="fas fa-user-circle mr-2"></i>Información Personal
+                        </h5>
+                        <div class="form-group">
+                          <label for="nombre"><i class="fas fa-user mr-2"></i>Nombre Completo</label>
+                          <input type="text" class="form-control" id="nombre" value="JUANITO PEREZ" required>
+                          <div class="invalid-feedback">Por favor ingresa tu nombre completo</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Columna Derecha -->
+                  <div class="col-md-6">
+                    <div class="card mb-4 border-0 shadow-sm">
+                      <div class="card-body">
+                        <h5 class="section-title mb-4">
+                          <i class="fas fa-address-book mr-2"></i>Contacto
+                        </h5>
+                        <div class="form-group">
+                          <label for="email"><i class="fas fa-envelope mr-2"></i>Correo Electrónico</label>
+                          <input type="email" class="form-control" id="email" value="juanitoperez@gmail.com" required>
+                          <div class="invalid-feedback">Ingresa un correo válido</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="telefono"><i class="fas fa-mobile-alt mr-2"></i>Teléfono</label>
+                          <input type="tel" class="form-control" id="telefono" value="3216598706" required>
+                          <div class="invalid-feedback">Teléfono requerido</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dirección -->
+                <div class="card mb-3 border-0 shadow-sm">
+                  <div class="card-body">
+                    <h5 class="section-title mb-4">
+                      <i class="fas fa-map-marker-alt mr-2"></i>Dirección
+                    </h5>
+                    <div class="form-group">
+                      <label for="direccion"><i class="fas fa-home mr-2"></i>Dirección Residencial</label>
+                      <input type="text" class="form-control" id="direccion" value="B/ EL prado" required>
+                      <div class="invalid-feedback">Por favor ingresa tu dirección</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Acerca de mí -->
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body">
+                    <h5 class="section-title mb-4">
+                      <i class="fas fa-info-circle mr-2"></i>Acerca de mí
+                    </h5>
+                    <div class="form-group">
+                      <label for="acercaDe"><i class="fas fa-pencil-alt mr-2"></i>Descripción</label>
+                      <textarea class="form-control" id="acercaDe" rows="3">Hola soy un emprendedor</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+              <i class="fas fa-times mr-2"></i>Cancelar
+            </button>
+            <button type="button" class="btn btn-dark" id="guardarCambios">
+              <i class="fas fa-save mr-2"></i>Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
     <script src="../js/sweetalert2@9.js"></script>
     <script src="../js/logout.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        // Inicializar dropdowns
+        $(".dropdown-toggle").dropdown();
+
+        // Mostrar modal al hacer clic en Editar
+        $('#btnEditarPerfil').click(function() {
+          // Cargar valores actuales en el formulario
+          $('#nombre').val($('.list-group-item:eq(0)').text().replace('Nombre y Apellido:', '').trim());
+          $('#email').val($('.list-group-item:eq(3)').text().replace('Correo Electrónico:', '').trim());
+          $('#telefono').val($('.list-group-item:eq(2)').text().replace('Teléfono:', '').trim());
+          $('#direccion').val($('.list-group-item:eq(4)').text().replace('Dirección:', '').trim());
+          $('#acercaDe').val($('.list-group-item:eq(5)').text().replace('Descripción:', '').trim());
+          
+          $('#editarPerfilModal').modal('show');
+        });
+
+        // Validación de formulario
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+
+        // Cargar imagen seleccionada
+        $('#fotoPerfil').change(function(e) {
+          if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              $('#profileImage').attr('src', event.target.result);
+            }
+            reader.readAsDataURL(e.target.files[0]);
+          }
+        });
+
+        // Guardar cambios
+        $('#guardarCambios').click(function() {
+          const formulario = document.getElementById('formularioPerfil');
+
+          if (formulario.checkValidity()) {
+            // Actualizar los datos en la vista
+            $('.rounded-circle').attr('src', $('#profileImage').attr('src'));
+            $('h3').text($('#nombre').val());
+            $('p:first').text($('#email').val());
+            
+            // Actualizar la lista de datos
+            $('.list-group-item:eq(0)').html('<strong>Nombre y Apellido:</strong> ' + $('#nombre').val());
+            $('.list-group-item:eq(2)').html('<strong>Teléfono:</strong> ' + $('#telefono').val());
+            $('.list-group-item:eq(3)').html('<strong>Correo Electrónico:</strong> ' + $('#email').val());
+            $('.list-group-item:eq(4)').html('<strong>Dirección:</strong> ' + $('#direccion').val());
+            $('.list-group-item:eq(5)').html('<strong>Descripción:</strong> ' + $('#acercaDe').val());
+
+            Swal.fire({
+              title: '¡Perfil actualizado!',
+              text: 'Tus cambios se han guardado correctamente',
+              icon: 'success',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#343a40',
+              timer: 2000,
+              timerProgressBar: true
+            }).then(() => {
+              $('#editarPerfilModal').modal('hide');
+            });
+          } else {
+            Swal.fire({
+              title: 'Campos incompletos',
+              text: 'Por favor completa todos los campos requeridos',
+              icon: 'warning',
+              confirmButtonText: 'Entendido',
+              confirmButtonColor: '#343a40'
+            });
+          }
+
+          formulario.classList.add('was-validated');
+        });
+      });
+    </script>
 </body>
 </html>
