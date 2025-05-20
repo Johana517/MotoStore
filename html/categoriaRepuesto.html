@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías | Moto Store</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+      /* Estilos existentes que se mantienen */
+      :root {
+          --color-primary: #000957;
+          --color-secondary: #f3b95f;
+          --color-accent: #007bff;
+          --color-whatsapp: #25D366;
+          --color-sidebar: #e8e8e8;
+          --color-border: #37bf0a;
+      }
+
+      body {
+          background-color: #f5f5f5;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      /* Contenedor principal */
+      .main-container {
+          padding: 2rem;
+      }
+      header {
+      background-color: #235dbc; /* Gris metálico */
+      padding: 10px;
+      }
+
+      /* Links */
+      .nav-link {
+        color: #ffd700; /* Azul eléctrico */
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .nav-link:hover{
+        color: #ff4500; /* Naranja fuego */
+      }
+      footer a {
+        color: #ffd700; /* Azul eléctrico */
+        text-decoration: none;
+        font-weight: bold;
+      }
+      footer a:hover {
+        color: #ff4500; /* Naranja fuego */
+      }
+      /* Layout principal */
+      .main-layout {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+      }
+      
+      /* Aside (Filtro de búsqueda) */
+      .filter-aside {
+          flex: 0 0 280px;
+          background: var(--color-sidebar);
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          padding: 1.5rem;
+          height: fit-content;
+          position: sticky;
+          top: 20px;
+      }
+      
+      .filter-aside h2 {
+          color: var(--color-primary);
+          border-bottom: 2px solid var(--color-secondary);
+          padding-bottom: 0.5rem;
+          margin-bottom: 1.5rem;
+      }
+      
+      /* Contenido principal - Ajustado para mostrar tarjetas completas */
+      .main-content {
+          flex: 1;
+          min-width: 0; /* Permite que el contenido se ajuste correctamente */
+      }
+      
+      /* Grid de productos mejorado */
+      .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 1.5rem;
+          width: 100%;
+      }
+      
+      /* Tarjetas de producto - Ajustadas para mostrar contenido completo */
+      .product-card {
+          display: flex;
+          flex-direction: column;
+          height: 100%; /* Ocupa todo el alto disponible */
+          border: none;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          transition: all 0.3s;
+          background: white;
+      }
+      
+      .product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      }
+      
+      .card-img-container {
+          height: 220px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #f8f9fa;
+          padding: 1rem;
+      }
+      
+      .card-img-top {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+      }
+      
+      .card-body {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1; /* Hace que el cuerpo ocupe el espacio restante */
+          padding: 1.25rem;
+      }
+      
+      .card-title {
+          color: var(--color-primary);
+          font-weight: 700;
+          font-size: 1.25rem;
+          margin-bottom: 0.5rem;
+      }
+      
+      .card-subtitle {
+          color: #6c757d;
+          font-weight: 600;
+          font-size: 0.9rem;
+          margin-bottom: 0.75rem;
+      }
+      
+      .card-text {
+          flex-grow: 1; /* Hace que la descripción ocupe el espacio disponible */
+          margin-bottom: 1rem;
+          color: #555;
+      }
+      
+      .card-price {
+          color: var(--color-accent);
+          font-weight: 700;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+      }
+      
+      .btn-details {
+          background-color: var(--color-primary);
+          color: white;
+          font-weight: 600;
+          padding: 0.5rem;
+          border-radius: 5px;
+          transition: all 0.3s;
+          margin-top: auto; /* Empuja el botón hacia abajo */
+      }
+      
+      .btn-details:hover {
+          background-color: var(--color-secondary);
+          color: #f10909;
+      }
+      
+      /* Responsive */
+      @media (max-width: 992px) {
+          .main-layout {
+              flex-direction: column;
+          }
+          
+          .filter-aside {
+              position: static;
+              width: 100%;
+          }
+          
+          .product-grid {
+              grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          }
+      }
+      
+      @media (max-width: 768px) {
+          .main-container {
+              padding: 1rem;
+          }
+          
+          .card-img-container {
+              height: 180px;
+          }
+      }
+      
+      @media (max-width: 576px) {
+          .product-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+
+      /* Estilos para el filtro de precios */
+      .filter-group {
+          margin-bottom: 1.5rem;
+      }
+      
+      .filter-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: var(--color-primary);
+      }
+      
+      .price-inputs {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+      }
+      
+      .price-inputs input {
+          flex: 1;
+          padding: 0.5rem;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+      }
+      
+      .filter-aside {
+                flex: 0 0 280px;
+                background: var(--color-sidebar);
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 1.5rem;
+                height: fit-content;
+                position: sticky;
+                top: 20px;
+            }
+      
+      .filter-aside h2 {
+          color: var(--color-primary);
+          border-bottom: 2px solid var(--color-secondary);
+          padding-bottom: 0.5rem;
+          margin-bottom: 1.5rem;
+      }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-4">
+              <!-- Logo -->
+              <a class="navbar-brand" href="home-repuestos.html">
+                <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+              </a>
+            </div>
+            <div class="col-4 col-md-4">
+              <!-- Barra de búsqueda (siempre visible) -->
+              <div class="search-mobile d-lg-none ms-2">
+                <form class="d-flex">
+                  <input type="search" class="form-control" placeholder="Search" size="100">
+                  <button class="btn btn-success ms-2" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Botón hamburguesa -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Menú colapsable -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto ms-2">
+              <li class="nav-item">
+                <a class="nav-link" href="categoria.html">Categorias</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ayuda-frontend.html" id="ir-a-ayuda">Ayuda</a>
+              <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "caterepuesto");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
+            </li>
+
+          <!-- Barra de búsqueda (solo en desktop) -->
+          <li class="nav-item search-desktop d-none d-lg-block">
+            <form class="form-inline">
+              <div class="input-group">
+                <input type="search" class="form-control" placeholder="Search" size="30">
+                <button class="btn btn-success" type="submit">Search</button>
+              </div>
+            </form>
+          </li>
+          
+
+          <li class="nav-item">
+            <a class="nav-link" href="QuienesSomos.html" id="ir-a-ayuda">Quienes somos</a>
+                <script>
+                document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "caterepuesto");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+              </script>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="iniciar-sesion.html">Vender</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>  
+
+<!-- Main Content -->
+<div class="main-container">
+  <div class="container">
+      <div class="main-layout">
+          <!-- Aside con filtros -->
+          <aside class="filter-aside">
+              <h2>Filtro de Búsqueda</h2>
+
+          <div class="filter-group">
+              <label for="marca">Marca:</label>
+              <select id="marca" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="yamaha">Yamaha</option>
+                  <option value="honda">Honda</option>
+                  <option value="suzuki">Suzuki</option>
+                  <option value="kawasaki">Kawasaki</option>
+              </select>
+          </div>
+          
+          <div class="filter-group">
+              <label for="categoria">Categoría:</label>
+              <select id="categoria" class="form-select">
+                  <option value="">Seleccionar</option>
+                  <option value="motor">Motor</option>
+                  <option value="transmision">Transmisión</option>
+                  <option value="frenos">Frenos</option>
+                  <option value="suspension">Suspensión</option>
+              </select>
+          </div>
+          
+          <div class="filter-group">
+              <label for="subcategoria">Subcategoría:</label>
+              <select id="subcategoria" class="form-select" disabled>
+                  <option value="">Seleccione primero una categoría</option>
+              </select>
+          </div>
+          
+          <!-- Filtro de rango de precios añadido aquí -->
+          <div class="filter-group">
+              <label>Rango de Precio:</label>
+              <div class="price-inputs">
+                  <input type="number" id="precio-min" class="form-control" placeholder="Mínimo" min="0">
+                  <span>-</span>
+                  <input type="number" id="precio-max" class="form-control" placeholder="Máximo" min="0">
+              </div>
+          </div>
+          
+          <!-- Botón de filtrar -->
+        <button id="btn-filtrar" class="btn btn-primary w-100">Aplicar Filtros</button>
+      </aside>
+      
+      <!-- Contenido principal -->
+      <main class="main-content">
+          <h2 class="mb-4 text-center">Repuestos Destacados</h2>
+          
+          <div class="product-grid">
+              <!-- Card 1 - Bujía -->
+              <div class="card product-card">
+                  <div class="card-img-container">
+                      <img src="https://http2.mlstatic.com/D_NQ_NP_718344-CBT76132351249_052024-O.webp" class="card-img-top" alt="Bujía NGK">
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Corona diferencial</h5>
+                      <h6 class="card-subtitle">Corona diferencial</h6>
+                      <p class="card-text">Corona para diferenciales traseros</p>
+                      <p class="card-price">$210000 COP</p>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Corona">
+                        Ver Detalles
+                      </button>
+                  </div>
+              </div>
+              
+              <!-- Card 2 - Rines -->
+              <div class="card product-card">
+                  <div class="card-img-container">
+                      <img src="https://masterservice.com.co/wp-content/uploads/2022/09/KIT-PISTON-186F-DIESEL-MASTERSERVICE1080X1080.jpg" class="card-img-top" alt="Rines Estrella">
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Kit de pistones</h5>
+                      <h6 class="card-subtitle">Kit de pistones</h6>
+                      <p class="card-text">Juego completo de pistones para motor 4 cilindros</p>
+                      <p class="card-price">$220000 COP</p>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pistones">
+                        Ver Detalles
+                      </button>
+                  </div>
+              </div>
+              
+              <!-- Card 3 - Filtro de Aire -->
+              <div class="card product-card">
+                  <div class="card-img-container">
+                      <img src="https://http2.mlstatic.com/D_NQ_NP_844341-MCO49367705389_032022-O.webp" class="card-img-top" alt="Filtro de Aire">
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Válvula de admisión</h5>
+                      <h6 class="card-subtitle">Válvula de admisión</h6>
+                      <p class="card-text">Válvula estándar para motores 1.6L</p>
+                      <p class="card-price">$32.500 COP</p>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Vàlvula">
+                        Ver Detalles
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  </div>
+</div>
+
+<!-- Modal Bujía -->
+<div class="modal fade" id="Corona" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <!-- Espacio para la imagen -->
+                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                      <img src="https://http2.mlstatic.com/D_NQ_NP_718344-CBT76132351249_052024-O.webp" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                  </div>
+                  <!-- Espacio para los detalles del producto -->
+                  <div class="col-md-6">
+                      <h5>Corona</h5>
+                      <p>Moto todoterreno con suspensión de largo recorrido.</p>
+                      <p><strong>Precio:</strong> 210000 COP</p>
+                      <p><strong>Marca:</strong> Eaton</p>
+                      <p><strong>Tipo de moto:</strong> Original</p>
+                      <p><strong>Cilindraje:</strong> 230 cc</p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                <button class="btn btn-success" data-bs-dismiss="modal">
+                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                </button>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal Filtro de Aire -->
+<div class="modal fade" id="pistones" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <!-- Espacio para la imagen -->
+                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                      <img src="https://masterservice.com.co/wp-content/uploads/2022/09/KIT-PISTON-186F-DIESEL-MASTERSERVICE1080X1080.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                  </div>
+                  <!-- Espacio para los detalles del producto -->
+                  <div class="col-md-6">
+                      <h5>pistones</h5>
+                      <p>Moto todoterreno con suspensión de largo recorrido.</p>
+                      <p><strong>Precio:</strong> 220000 COP</p>
+                      <p><strong>Marca:</strong> Mahle</p>
+                      <p><strong>Tipo de moto:</strong> Original</p>
+                      <p><strong>Cilindraje:</strong> 230 cc</p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                <button class="btn btn-success" data-bs-dismiss="modal">
+                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                </button>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal Filtro de Aire -->
+<div class="modal fade" id="Vàlvula" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <!-- Espacio para la imagen -->
+                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                      <img src="https://http2.mlstatic.com/D_NQ_NP_844341-MCO49367705389_032022-O.webp" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                  </div>
+                  <!-- Espacio para los detalles del producto -->
+                  <div class="col-md-6">
+                      <h5>Valvula</h5>
+                      <p>Moto todoterreno con suspensión de largo recorrido.</p>
+                      <p><strong>Precio:</strong> 45000 COP</p>
+                      <p><strong>Marca:</strong> Delphi</p>
+                      <p><strong>Tipo de moto:</strong> Generico</p>
+                      <p><strong>Cilindraje:</strong> 230 cc</p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                <button class="btn btn-success" data-bs-dismiss="modal">
+                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                </button>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<footer class="py-4 bg-dark">
+  <div class="container">
+    <!-- Primera fila: Enlaces y redes sociales -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <!-- Enlaces legales - Izquierda -->
+      <div class="mb-3 mb-md-0">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3">
+            <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Redes sociales - Derecha (iconos más grandes) -->
+      <div class="mb-3 mb-md-0">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3">
+            <a href="#" class="text-white">
+              <i class="fab fa-youtube fa-3x"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="#" class="text-white">
+              <i class="fab fa-facebook fa-3x"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="#" class="text-white">
+              <i class="fab fa-x-twitter fa-3x"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="text-white">
+              <i class="fab fa-instagram fa-3x"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+      
+      <!-- Copyright centrado -->
+      <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+        <p class="mb-0 text-white">https://Motostore.com</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  // Configuración de subcategorías
+  const subcategorias = {
+    motor: [
+      "Bujías",
+      "Filtros de Aire",
+      "Cilindros",
+      "Pistones",
+      "Árbol de levas",
+      "Válvulas",
+      "Juntas"
+    ],
+    transmision: [
+      "Cadena",
+      "Piñón",
+      "Corona",
+      "Embrague",
+      "Caja de cambios",
+      "Kit de arrastre"
+    ],
+    frenos: [
+      "Pastillas de freno",
+      "Discos de freno",
+      "Zapatas",
+      "Bombas de freno",
+      "Líneas de freno",
+      "Líquido de frenos"
+    ],
+    suspension: [
+      "Amortiguadores",
+      "Resortes",
+      "Bujes",
+      "Rodamientos",
+      "Ejes",
+      "Rines"
+    ]
+  };
+
+  // Esperar a que el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoriaSelect = document.getElementById('categoria');
+    const subcategoriaSelect = document.getElementById('subcategoria');
+    
+    // Event listener para cambios en la categoría
+    categoriaSelect.addEventListener('change', function() {
+      const categoriaSeleccionada = this.value;
+      
+      // Limpiar y deshabilitar subcategoría si no hay categoría seleccionada
+      if (!categoriaSeleccionada) {
+        subcategoriaSelect.innerHTML = '<option value="">Seleccione primero una categoría</option>';
+        subcategoriaSelect.disabled = true;
+        return;
+      }
+      
+      // Habilitar subcategoría y cargar opciones
+      subcategoriaSelect.disabled = false;
+      subcategoriaSelect.innerHTML = '<option value="">Seleccione subcategoría</option>';
+      
+      // Agregar las subcategorías correspondientes
+      if (subcategorias[categoriaSeleccionada]) {
+        subcategorias[categoriaSeleccionada].forEach(function(subcat) {
+          const option = document.createElement('option');
+          option.value = subcat.toLowerCase().replace(/\s/g, '-');
+          option.textContent = subcat;
+          subcategoriaSelect.appendChild(option);
+        });
+      }
+    });
+    
+    // Event listener para el botón de filtrar
+    document.getElementById('btn-filtrar').addEventListener('click', function() {
+      const marca = document.getElementById('marca').value;
+      const categoria = document.getElementById('categoria').value;
+      const subcategoria = document.getElementById('subcategoria').value;
+      const precioMinimo = document.getElementById('precio-min').value;
+      const precioMaximo = document.getElementById('precio-max').value;
+      
+      // Validar que el mínimo no sea mayor que el máximo
+      if (precioMinimo && precioMaximo && parseInt(precioMinimo) > parseInt(precioMaximo)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en rango de precios',
+          text: 'El precio mínimo no puede ser mayor que el precio máximo',
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#000957'
+        });
+        return;
+      }
+      
+      // Mostrar confirmación con SweetAlert2
+      Swal.fire({
+        title: 'Filtros aplicados',
+        html: `
+          <div class="text-start">
+            <p><strong>Marca:</strong> ${marca || 'Cualquiera'}</p>
+            <p><strong>Categoría:</strong> ${categoria || 'Cualquiera'}</p>
+            <p><strong>Subcategoría:</strong> ${subcategoria || 'Cualquiera'}</p>
+            <p><strong>Precio:</strong> 
+              ${precioMinimo ? `Desde $${parseInt(precioMinimo).toLocaleString('es-CO')}` : 'Sin mínimo'} 
+              ${precioMaximo ? `hasta $${parseInt(precioMaximo).toLocaleString('es-CO')}` : 'Sin máximo'}
+            </p>
+          </div>
+        `,
+        icon: 'success',
+        confirmButtonText: 'Aplicar filtros',
+        confirmButtonColor: '#000957',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#6c757d'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Aquí iría la lógica real para filtrar los productos en la página
+          filtrarProductos(marca, categoria, subcategoria, precioMinimo, precioMaximo);
+          
+          // Mostrar notificación de éxito
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Filtros aplicados correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
+    });
+
+    // Función para filtrar productos (implementación básica)
+    function filtrarProductos(marca, categoria, subcategoria, minPrecio, maxPrecio) {
+      const productos = document.querySelectorAll('.product-card');
+      
+      productos.forEach(producto => {
+        const precioTexto = producto.querySelector('.card-price').textContent;
+        const precioProducto = parseInt(precioTexto.replace(/[^\d]/g,''));
+        const mostrar = 
+          (!marca || producto.dataset.marca === marca) &&
+          (!categoria || producto.dataset.categoria === categoria) &&
+          (!subcategoria || producto.dataset.subcategoria === subcategoria) &&
+          (!minPrecio || precioProducto >= parseInt(minPrecio)) &&
+          (!maxPrecio || precioProducto <= parseInt(maxPrecio));
+          
+        producto.style.display = mostrar ? 'block' : 'none';
+      });
+    }
+    
+    // Validación para que precio máximo no sea menor que precio mínimo
+    document.getElementById('precio-max').addEventListener('change', function() {
+      const precioMin = document.getElementById('precio-min').value;
+      if (precioMin && parseInt(this.value) < parseInt(precioMin)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en rango de precios',
+          text: 'El precio máximo no puede ser menor que el precio mínimo',
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#000957'
+        });
+        this.value = precioMin;
+      }
+    });
+  });
+</script>
+</body>
+</html>
