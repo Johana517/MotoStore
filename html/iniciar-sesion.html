@@ -95,18 +95,20 @@
     </style>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
-            <img
-              src="../img/logo_moto_store-1-5.png"
-              style="height: 130px"
-              alt="logo"
-            />
-          </a>
+    <header class="header-container">
+      <div class="container-fluid">
+        <div class="row align-items-center text-center">
+          <div class="col-md-4 text-md-start">
+            <a id="logo"
+              ><img
+                src="../img/logo_moto_store-1-5.png"
+                id="Logo"
+                style="width: 200px; height: 150px"
+              />
+            </a>
+          </div>
         </div>
-      </nav>
+      </div>
     </header>
     <main>
       <div class="container my-5">
@@ -380,6 +382,23 @@
     <!-- JavaScript personalizado -->
     <script>
       // Simulamos una base de datos de usuarios registrados
+      if (seccion === "motos") {
+        logo.href = "Home-motos.html";
+      } else if (seccion === "repuestos") {
+        logo.href = "home-repuestos.html";
+      } else if (seccion === "catemoto") {
+        logo.href = "categoriamoto.html";
+      } else if (seccion === "caterepuesto") {
+        logo.href = "categoriaRepuesto.html";
+      } else if (seccion === "vendedor") {
+        logo.href = "sesion-vendedor.html";
+      } else if (seccion === "productos") {
+        logo.href = "MisProductos.html";
+      } else if (seccion === "membresia") {
+        logo.href = "membresia.html";
+      } else {
+        logo.href = "index.html"; // por si no hay valor guardado
+      }
       const registeredUsers = {
         "juanitoperez@gmail.com": {
           password: "12345",
