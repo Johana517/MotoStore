@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuración de Productos - Motos y Repuestos</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Estilos personalizados -->
+    <style>
+      :root {
+        --header-height: 150px;
+        --sidebar-width: 250px;
+        --primary-color: #0a2647;
+        --secondary-color: #1a1a2e;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        padding-top: var(--header-height);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Header Styles */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--header-height);
+        z-index: 1000;
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-brand img {
+        height: 130px;
+      }
+
+      /* Sidebar Styles */
+      aside {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: var(--sidebar-width);
+        height: calc(100vh - var(--header-height));
+        background-color: var(--secondary-color);
+        padding: 20px 0;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+        z-index: 900;
+      }
+
+      /* Main Content Styles */
+      main {
+        margin-left: var(--sidebar-width);
+        padding: 20px;
+        min-height: calc(100vh - var(--header-height));
+      }
+
+      /* Profile Menu Styles */
+      .profile-menu {
+        margin-left: auto;
+      }
+
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+      }
+
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+
+      .profile-dropdown .dropdown-item {
+        color: #333;
+        padding: 8px 15px;
+      }
+
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+
+      /* Product Section Styles */
+      .product-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-title {
+        color: #0d6efd;
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #0d6efd;
+        font-weight: 600;
+      }
+
+      .table-responsive {
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .nav-tabs .nav-link.active {
+        font-weight: bold;
+        border-bottom: 3px solid #0d6efd;
+      }
+
+      .search-box {
+        margin-bottom: 25px;
+      }
+
+      .search-box input {
+        border-radius: 20px;
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+      }
+
+      /* Status Styles */
+      .status-active {
+        color: #198754;
+        font-weight: bold;
+      }
+
+      .status-inactive {
+        color: #dc3545;
+        font-weight: bold;
+      }
+
+      /* Button Styles */
+      .btn-sm {
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+      }
+
+      /* Table Styles */
+      .table {
+        margin-bottom: 0;
+      }
+
+      .table thead th {
+        background-color: #343a40;
+        color: white;
+        border-bottom: none;
+      }
+
+      .table-hover tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        aside {
+          width: 0;
+          overflow: hidden;
+        }
+
+        main {
+          margin-left: 0;
+        }
+
+        .navbar-brand img {
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="sesion-administrador.html">
+            <img src="../img/logo_moto_store-1-5.png" alt="logo" />
+          </a>
+
+          <div class="profile-menu">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown profile-dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fas fa-user"></i> Mi cuenta
+                </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="perfil-vendedor.html">
+                    <i class="fas fa-user-circle me-2"></i>Ver perfil
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" id="logout" href="#">
+                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa-regular fa-bell"></i></i>Notificaciones
+                  </a>
+                </li>
+              </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="gestion-categoria-baquen.html">
+            <i class="fas fa-list me-2"></i>Conf. categorías
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gestion-notificaciones.html">
+            <i class="fas fa-bell me-2"></i>Conf. notificaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Informe-admi.html">
+            <i class="fas fa-chart-bar me-2"></i>Informes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="administracion-cuentas.html">
+            <i class="fas fa-users me-2"></i>Conf. cuentas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gestionMembresia.html">
+            <i class="fas fa-id-card me-2"></i>Conf. membresía
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pagoadmin.html">
+            <i class="fas fa-money-bill-wave me-2"></i>Gestión pagos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="administracion-cuentas.html">
+            <i class="fas fa-boxes me-2"></i>Conf. productos
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container-fluid">
+        <h1 class="text-center mb-4">Configuración de Productos</h1>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs" id="productTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="motos-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#motos"
+              type="button"
+              role="tab"
+              aria-controls="motos"
+              aria-selected="true"
+            >
+              Motos
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="repuestos-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#repuestos"
+              type="button"
+              role="tab"
+              aria-controls="repuestos"
+              aria-selected="false"
+            >
+              Repuestos
+            </button>
+          </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="productTabsContent">
+          <!-- Motos Tab -->
+          <div
+            class="tab-pane fade show active product-section"
+            id="motos"
+            role="tabpanel"
+            aria-labelledby="motos-tab"
+          >
+            <h2 class="section-title">Motos</h2>
+
+            <!-- Search Box -->
+            <div class="row search-box">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="fas fa-search"></i
+                  ></span>
+                  <input
+                    type="text"
+                    id="searchMotos"
+                    class="form-control"
+                    placeholder="Buscar motos..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Motos Table -->
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="motosTable">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Cilindraje</th>
+                    <th>Precio</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-id="1">
+                    <td>YZF-R1</td>
+                    <td>Yamaha</td>
+                    <td>1000cc</td>
+                    <td>$15,000</td>
+                    <td>R1</td>
+                    <td>2023</td>
+                    <td class="status-active">Activo</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger btn-deactivate">
+                        Desactivar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr data-id="2">
+                    <td>Ninja ZX-10R</td>
+                    <td>Kawasaki</td>
+                    <td>1000cc</td>
+                    <td>$16,500</td>
+                    <td>ZX-10R</td>
+                    <td>2023</td>
+                    <td class="status-active">Activo</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger btn-deactivate">
+                        Desactivar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr data-id="3">
+                    <td>Panigale V4</td>
+                    <td>Ducati</td>
+                    <td>1103cc</td>
+                    <td>$22,000</td>
+                    <td>V4</td>
+                    <td>2023</td>
+                    <td class="status-inactive">Inactivo</td>
+                    <td>
+                      <button class="btn btn-sm btn-success btn-activate">
+                        Activar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Repuestos Tab -->
+          <div
+            class="tab-pane fade product-section"
+            id="repuestos"
+            role="tabpanel"
+            aria-labelledby="repuestos-tab"
+          >
+            <h2 class="section-title">Repuestos</h2>
+
+            <!-- Search Box -->
+            <div class="row search-box">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="fas fa-search"></i
+                  ></span>
+                  <input
+                    type="text"
+                    id="searchRepuestos"
+                    class="form-control"
+                    placeholder="Buscar repuestos..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Repuestos Table -->
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover"
+                id="repuestosTable"
+              >
+                <thead class="table-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Categoría</th>
+                    <th>Subcategoría</th>
+                    <th>Tipo de Repuesto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-id="1">
+                    <td>Freno delantero</td>
+                    <td>Brembo</td>
+                    <td>Frenos</td>
+                    <td>Pastillas</td>
+                    <td>Pastillas de freno</td>
+                    <td class="status-active">Activo</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger btn-deactivate">
+                        Desactivar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr data-id="2">
+                    <td>Cadena de transmisión</td>
+                    <td>DID</td>
+                    <td>Transmisión</td>
+                    <td>Cadenas</td>
+                    <td>Cadena y piñones</td>
+                    <td class="status-inactive">Inactivo</td>
+                    <td>
+                      <button class="btn btn-sm btn-success btn-activate">
+                        Activar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr data-id="3">
+                    <td>Filtro de aire</td>
+                    <td>K&N</td>
+                    <td>Motor</td>
+                    <td>Filtros</td>
+                    <td>Filtro de aire</td>
+                    <td class="status-active">Activo</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger btn-deactivate">
+                        Desactivar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript personalizado -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Función de búsqueda para motos
+        document
+          .getElementById("searchMotos")
+          .addEventListener("input", function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#motosTable tbody tr");
+
+            rows.forEach((row) => {
+              const text = row.textContent.toLowerCase();
+              row.style.display = text.includes(searchValue) ? "" : "none";
+            });
+          });
+
+        // Función de búsqueda para repuestos
+        document
+          .getElementById("searchRepuestos")
+          .addEventListener("input", function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#repuestosTable tbody tr");
+
+            rows.forEach((row) => {
+              const text = row.textContent.toLowerCase();
+              row.style.display = text.includes(searchValue) ? "" : "none";
+            });
+          });
+
+        // Función para manejar el cambio de estado (activar/desactivar)
+        function toggleStatus(button) {
+          const row = button.closest("tr");
+          const statusCell = row.querySelector("td:nth-child(7)");
+          const isActive = statusCell.classList.contains("status-active");
+
+          if (isActive) {
+            // Cambiar a inactivo
+            statusCell.classList.remove("status-active");
+            statusCell.classList.add("status-inactive");
+            statusCell.textContent = "Inactivo";
+
+            // Cambiar botón
+            button.classList.remove("btn-danger");
+            button.classList.add("btn-success");
+            button.textContent = "Activar";
+            button.classList.remove("btn-deactivate");
+            button.classList.add("btn-activate");
+          } else {
+            // Cambiar a activo
+            statusCell.classList.remove("status-inactive");
+            statusCell.classList.add("status-active");
+            statusCell.textContent = "Activo";
+
+            // Cambiar botón
+            button.classList.remove("btn-success");
+            button.classList.add("btn-danger");
+            button.textContent = "Desactivar";
+            button.classList.remove("btn-activate");
+            button.classList.add("btn-deactivate");
+          }
+
+          // Aquí podrías agregar una llamada AJAX para guardar el cambio en el servidor
+          console.log(
+            `Producto ID ${row.dataset.id} cambiado a ${
+              isActive ? "inactivo" : "activo"
+            }`
+          );
+        }
+
+        // Eventos para los botones de activar/desactivar
+        document.addEventListener("click", function (e) {
+          if (
+            e.target.classList.contains("btn-activate") ||
+            e.target.classList.contains("btn-deactivate")
+          ) {
+            toggleStatus(e.target);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

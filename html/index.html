@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <title>Pantalla de Inicio</title>
     <style>
       body {
-        background-color: hwb(210 88% 2%);
+        background-color: #0a2647;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
@@ -31,7 +32,7 @@
 
       h1 {
         font-weight: normal;
-        color: #555;
+        color: white;
       }
 
       p {
@@ -76,8 +77,14 @@
       <p>Elige una opción</p>
 
       <div class="options">
-        <a href="Home-motos.html" class="option-link">Motos</a>
-        <a href="home-repuestos.html" class="option-link">Repuestos</a>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 pb-5">
+            <a href="Home-motos.html" class="option-link">Motos</a>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <a href="home-repuestos.html" class="option-link">Repuestos</a>
+          </div>
+        </div>
       </div>
     </div>
   </body>

@@ -25,7 +25,7 @@
         background-color: lightgray;
         font-family: Arial, sans-serif;
       }
-      .container {
+      .marta {
         background-color: white;
         padding: 2rem;
         border-radius: 8px;
@@ -39,9 +39,6 @@
         border-radius: 6px;
         padding: 10px;
         width: 100%;
-      }
-      footer {
-        background-color: #343a40;
       }
       .password-container {
         position: relative;
@@ -74,7 +71,7 @@
       </nav>
     </header>
     <main>
-      <div class="container mt-5 mb-5 pb-5 pt-5">
+      <div class="container mt-5 mb-5 pb-5 pt-5 marta">
         <div class="row">
           <div class="col-md-6">
             <h2 class="fs-4">Recupera tu contraseña</h2>
@@ -135,7 +132,8 @@
                   Verificar Código
                 </button>
                 <p class="text-muted mt-2">
-                  ¿No recibiste el código? <a href="#" id="resend-code">Reenviar código</a>
+                  ¿No recibiste el código?
+                  <a href="#" id="resend-code">Reenviar código</a>
                 </p>
               </div>
               <!-- Paso 3: Contraseña y Confirmar Contraseña -->
@@ -179,24 +177,33 @@
             </form>
           </div>
         </div>
+        <a href="iniciar-sesion.html">¿Ya tienes una cuenta?</a>
       </div>
     </main>
     <footer class="py-4">
-      <div class="container1">
+      <div class="container">
         <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center px-5">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
           <!-- Enlaces legales - Izquierda -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item me-3">
-                <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  >Aviso Legal</a
+                >
               </li>
-              <li class="list-inline-item">
-                <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
+              <li class="list-inline-item mar">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5"
+                  >Ayuda</a
+                >
               </li>
             </ul>
           </div>
-          
+
           <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
@@ -212,7 +219,7 @@
               </li>
               <li class="list-inline-item me-3">
                 <a href="#" class="text-white">
-                  <i class="fab fa-x-twitter fa-3x"></i>
+                  <i class="fa-brands fa-x-twitter fa-3x"></i>
                 </a>
               </li>
               <li class="list-inline-item">
@@ -223,11 +230,10 @@
             </ul>
           </div>
         </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+
+        <!-- Copyright centrado -->
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
     </footer>
@@ -243,15 +249,18 @@
     <!-- JavaScript personalizado -->
     <script>
       // Simulación de base de datos de usuarios registrados
-      const registeredUsers = ["juanitoperez@gmail.com", "juanmtsolarte@gmail.com"];
-      
+      const registeredUsers = [
+        "juanitoperez@gmail.com",
+        "juanmtsolarte@gmail.com",
+      ];
+
       // Simulación de códigos de verificación
       let verificationCodes = {};
       let codeExpirationTimes = {};
-      
+
       // Probabilidad de fallo del servidor de correo (10% para pruebas)
       const mailServerFailureProbability = 0.1;
-      
+
       // Tiempo de expiración del código (5 minutos)
       const CODE_EXPIRATION_TIME = 5 * 60 * 1000; // 5 minutos en milisegundos
 
@@ -296,7 +305,7 @@
       // Paso 1: Validar correo
       continueBtn.addEventListener("click", function () {
         const email = emailInput.value.trim();
-        
+
         if (email === "") {
           Swal.fire({
             icon: "error",
@@ -305,7 +314,7 @@
           });
           return;
         }
-        
+
         // Verificar si el correo está registrado
         if (!registeredUsers.includes(email)) {
           Swal.fire({
@@ -315,18 +324,18 @@
           });
           return;
         }
-        
+
         // Simular fallo del servidor de correo
         if (Math.random() < mailServerFailureProbability) {
           showMailServerError();
           return;
         }
-        
+
         // Generar y guardar código de verificación
         const verificationCode = generateVerificationCode();
         verificationCodes[email] = verificationCode;
         codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
-        
+
         // Mostrar mensaje de éxito (simulando envío de correo)
         Swal.fire({
           icon: "success",
@@ -342,10 +351,10 @@
       });
 
       // Función para reenviar código
-      resendCodeLink.addEventListener("click", function(e) {
+      resendCodeLink.addEventListener("click", function (e) {
         e.preventDefault();
         const email = emailInput.value.trim();
-        
+
         // Verificar si el correo está registrado
         if (!registeredUsers.includes(email)) {
           Swal.fire({
@@ -355,18 +364,18 @@
           });
           return;
         }
-        
+
         // Simular fallo del servidor de correo
         if (Math.random() < mailServerFailureProbability) {
           showMailServerError();
           return;
         }
-        
+
         // Generar y guardar nuevo código de verificación
         const verificationCode = generateVerificationCode();
         verificationCodes[email] = verificationCode;
         codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
-        
+
         Swal.fire({
           icon: "success",
           title: "Código reenviado",
@@ -380,7 +389,7 @@
       verifyCodeBtn.addEventListener("click", function () {
         const email = emailInput.value.trim();
         const code = codeInput.value.trim();
-        
+
         if (code === "") {
           Swal.fire({
             icon: "error",
@@ -389,7 +398,7 @@
           });
           return;
         }
-        
+
         // Verificar si el código ha expirado
         if (Date.now() > codeExpirationTimes[email]) {
           Swal.fire({
@@ -398,14 +407,14 @@
             html: "El código de verificación ha expirado. <br>Por favor, solicita uno nuevo.",
             showCancelButton: true,
             confirmButtonText: "Reenviar código",
-            cancelButtonText: "Cancelar"
+            cancelButtonText: "Cancelar",
           }).then((result) => {
             if (result.isConfirmed) {
               // Generar y guardar nuevo código de verificación
               const verificationCode = generateVerificationCode();
               verificationCodes[email] = verificationCode;
               codeExpirationTimes[email] = Date.now() + CODE_EXPIRATION_TIME;
-              
+
               Swal.fire({
                 icon: "success",
                 title: "Código reenviado",
@@ -417,7 +426,7 @@
           });
           return;
         }
-        
+
         // Verificar si el código es correcto
         if (verificationCodes[email] !== code) {
           Swal.fire({
@@ -427,7 +436,7 @@
           });
           return;
         }
-        
+
         // Código correcto
         Swal.fire({
           icon: "success",
@@ -480,7 +489,7 @@
           icon: "error",
           title: "Error en el servidor",
           text: "No se pudo enviar el correo de recuperación en este momento. Por favor, inténtalo más tarde.",
-          confirmButtonText: "Entendido"
+          confirmButtonText: "Entendido",
         });
       }
     </script>

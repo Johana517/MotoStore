@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Productos</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .breadcrumb {
+            background: none;
+            padding: 0;
+        }
+        .product-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .product-card img {
+            width: 80px;
+            height: auto;
+        }
+        .publish-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 3rem;
+        }
+        .dropdown-toggle::after {
+            margin-left: 0.5em;
+        }
+        
+        /* Switch styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin: 0 10px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #007bff;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .estado-texto {
+            font-weight: 500;
+            min-width: 70px;
+            display: inline-block;
+        }
+        .text-active {
+            color: #007bff;
+        }
+        .btn-options {
+            font-size: 1.2rem;
+            padding: 0.15rem 0.5rem;
+            line-height: 1;
+            border: none;
+            background: transparent;
+            color: #6c757d;
+        }
+
+        /* Nuevos estilos para filtros */
+        .search-filter-container {
+            margin-bottom: 20px;
+        }
+        .dropdown-menu .filter-option.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .dropdown-menu .filter-option:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="sesion-vendedor.html">
+            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item mx-2"> 
+                <a class="nav-link" href="membresia.html">Membresia</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="MisProductos.html">Mis productos</a>
+              </li>
+              <form class="form-inline">
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+              </form>
+              <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Vender 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="vender-moto.html">Moto</a>
+                  <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+                </div>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
+              </li>
+              <li class="nav-item dropdown mx-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user fa-2x"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
+                  <a class="dropdown-item" id="logout" href="">Cerrar sesion</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+    <main class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="sesion-vendedor.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mis productos</li>
+            </ol>
+        </nav>
+
+        <!-- Barra de búsqueda y filtro desplegable -->
+        <div class="row mb-4 search-filter-container">
+            <div class="col-md-6 mb-2">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre, detalles...">
+                    <button class="btn btn-primary" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 text-md-right">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
+                        <a class="dropdown-item filter-option active" href="#" data-filter="all">Todos</a>
+                        <a class="dropdown-item filter-option" href="#" data-filter="active">Activados</a>
+                        <a class="dropdown-item filter-option" href="#" data-filter="paused">Pausados</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Publicar nuevo producto -->
+        <div class="publish-btn-container">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Publicar nuevo producto
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="vender-moto.html">Moto</a>
+              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 1 -->
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Scooter Eléctrico</a></h5>
+                <p>Modelo 2023, 50km de autonomía</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/scooter.png" alt="Moto">
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-active">Activado</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="modificar-moto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Yamaha R15</a></h5>
+                <p>150cc, 2000km, color azul</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/yamaha.jpg" alt="Moto">
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-warning">Pausado</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="modificar-moto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card">
+            <div>
+                <h5><a href="#">Bujía NGK</a></h5>
+                <p>Para motos 150cc, paquete x4</p>
+                <p>$50.00</p>
+            </div>
+            <img src="../img/bujia.jpg" alt="Moto">
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <span class="estado-texto text-warning">Pausado</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-options dropdown-toggle" 
+                            type="button" 
+                            data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="modificar-repuesto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <nav>
+            <ul class="pagination justify-content-center mt-3">
+                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer class="py-4">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          
+          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+            <p class="mb-0 text-white">https://Motostore.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/logout.js"></script>
+    
+    <!-- Script para el switch -->
+    <script>
+        document.querySelectorAll('.switch input').forEach(toggle => {
+            const texto = toggle.closest('.product-card').querySelector('.estado-texto');
+            
+            toggle.addEventListener('change', function() {
+                if(this.checked) {
+                    texto.textContent = "Activado";
+                    texto.classList.remove('text-warning');
+                    texto.classList.add('text-active');
+                } else {
+                    texto.textContent = "Pausado";
+                    texto.classList.remove('text-active');
+                    texto.classList.add('text-warning');
+                }
+            });
+        });
+
+        // Script para búsqueda y filtrado
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const filterOptions = document.querySelectorAll('.filter-option');
+            const productCards = document.querySelectorAll('.product-card');
+
+            function filterProducts() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filterValue = document.querySelector('.filter-option.active').dataset.filter;
+
+                productCards.forEach(card => {
+                    const title = card.querySelector('h5').textContent.toLowerCase();
+                    const details = card.querySelector('p').textContent.toLowerCase();
+                    const isActive = card.querySelector('.estado-texto').textContent.includes('Activado');
+
+                    const matchesSearch = title.includes(searchTerm) || details.includes(searchTerm);
+                    const matchesFilter = 
+                        filterValue === 'all' || 
+                        (filterValue === 'active' && isActive) || 
+                        (filterValue === 'paused' && !isActive);
+
+                    card.style.display = (matchesSearch && matchesFilter) ? 'flex' : 'none';
+                });
+            }
+
+            // Eventos
+            searchButton.addEventListener('click', filterProducts);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') filterProducts();
+            });
+
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    filterOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    filterProducts();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

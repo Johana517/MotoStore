@@ -5,39 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moto Store</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+    />
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
-    
+    <link rel="stylesheet" href="/css/style.css" />
+
     <style>
-      .profile-img-container {
-        position: relative;
-        display: inline-block;
-      }
-      .profile-img-container:hover .profile-img-overlay {
-        opacity: 1;
-      }
-      .profile-img-overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
+      /* Header Styles */
+      .header-container {
         width: 100%;
-        opacity: 0;
-        transition: .3s ease;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        cursor: pointer;
+        padding: 10px 0;
       }
-      .profile-img-overlay-text {
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .navbar-brand img {
+        height: 150px;
+        width: auto;
+      }
+
+      /* Profile Image Styles */
+      .profile-menu {
+        margin-left: auto;
+      }
+
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+
+      .profile-dropdown .dropdown-item {
+        color: black;
+      }
+
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
         color: white;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
       }
+
+      /* Section Title */
       .section-title {
         color: #343a40;
         font-weight: 600;
@@ -45,71 +72,67 @@
         padding-bottom: 8px;
         margin-bottom: 20px;
       }
+
+      /* Dropdown Customization */
+      .profile-dropdown .dropdown-menu {
+        min-width: 150px;
+        top: 100%;
+        left: auto;
+        right: 0;
+        margin-top: 0;
+        position: absolute;
+      }
+
+      /* Modal Enhancements */
+      .modal-perfil .modal-header {
+        background-color: #343a40;
+        color: #fff;
+      }
+      .modal-perfil .modal-footer {
+        background-color: #f8f9fa;
+      }
+      .card {
+        border: none;
+        border-radius: 8px;
+      }
+      .form-group label {
+        font-weight: 500;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .navbar-brand img {
+          margin-bottom: 10px;
+        }
+        .row {
+          flex-direction: column;
+        }
+        .col-md-4,
+        .col-md-8 {
+          width: 100%;
+          max-width: 100%;
+        }
+        .profile-dropdown .dropdown-menu {
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
     </style>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg text-center">
+    <header class="header-container">
+      <div class="header-content">
         <a class="navbar-brand" href="sesion-administrador.html">
           <img
             src="../img/logo_moto_store-1-5.png"
-            style="width: 200px; height: 150px"
+            style="height: 150px; width: 150px"
             alt="logo"
           />
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item mx-4">
-              <a class="nav-link btn" href="gestion-categoria-baquen.html"
-                >Conf.categorias</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="gestion-notificaciones.html"
-                >Conf.notificaciones</a
-              >
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="Informe-admi.html">Informes</a>
-            </li>
-            <li class="nav-item mx-4">
-              <a class="nav-link" href="administracion-cuentas.html"
-                >Conf.cuentas</a
-              >
-            </li>
-            <li class="nav-item dropdown mx-4">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user fa-2x"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="perfil-administrador.html"
-                  >Ver perfil</a
-                >
-                <a class="dropdown-item" id="logout" href="#">Cerrar sesion</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </header>
 
     <div class="container mt-4">
@@ -123,9 +146,13 @@
               width="200"
               height="200"
             />
-            <div class="profile-img-overlay" data-toggle="modal" data-target="#editarPerfilModal">
+            <div
+              class="profile-img-overlay"
+              data-bs-toggle="modal"
+              data-bs-target="#editarPerfilModal"
+            >
               <div class="profile-img-overlay-text">
-                <i class="fas fa-camera fa-2x"></i>
+                <i class="fas fa-camera"></i>
                 <p>Cambiar foto</p>
               </div>
             </div>
@@ -133,14 +160,22 @@
           <h3>JUAN MANUEL TAPIAS SOLARTE</h3>
           <p>juanmtapias2021@gmail.com</p>
           <p>administrador</p>
-          </div>
-          <div class="col-md-8">
-              <h4>Datos Personales</h4>
-              <ul class="list-group">
-                  <li class="list-group-item"><strong>Nombre y Apellido:</strong> juan manuel tapias solarte</li>
-                  <li class="list-group-item"><strong>Teléfono:</strong> 3134123616</li>
-                  <li class="list-group-item"><strong>Correo Electrónico:</strong> juanmtapias2021@gmail.com</li>
-                  <li class="list-group-item"><strong>Dirección:</strong> B/ EL CARMEN</li>
+        </div>
+        <div class="col-md-8">
+          <h4 class="section-title">Datos Personales</h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Nombre y Apellido:</strong> juan manuel tapias solarte
+            </li>
+            <li class="list-group-item">
+              <strong>Teléfono:</strong> 3134123616
+            </li>
+            <li class="list-group-item">
+              <strong>Correo Electrónico:</strong> juanmtapias2021@gmail.com
+            </li>
+            <li class="list-group-item">
+              <strong>Dirección:</strong> B/ EL CARMEN
+            </li>
           </ul>
           <button class="btn btn-dark mt-3" id="btnEditarPerfil">Editar</button>
         </div>
@@ -148,65 +183,115 @@
     </div>
 
     <!-- Modal para editar perfil -->
-    <div class="modal fade modal-perfil" id="editarPerfilModal" tabindex="-1" role="dialog" aria-labelledby="editarPerfilModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+    <div
+      class="modal fade modal-perfil"
+      id="editarPerfilModal"
+      tabindex="-1"
+      aria-labelledby="editarPerfilModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header bg-dark text-white">
-            <h5 class="modal-title" id="editarPerfilModalLabel">Editar Perfil</h5>
-            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <h5 class="modal-title" id="editarPerfilModalLabel">
+              Editar Perfil
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form id="formularioPerfil" class="needs-validation" novalidate>
               <!-- Sección Foto de Perfil -->
               <div class="text-center mb-4">
-                <div class="profile-img-container mx-auto" onclick="document.getElementById('fotoPerfil').click()">
-                  <img src="../img/perfil.png" class="rounded-circle" id="profileImage" alt="Foto de perfil" width="200" height="200">
+                <div
+                  class="profile-img-container mx-auto"
+                  onclick="document.getElementById('fotoPerfil').click()"
+                >
+                  <img
+                    src="../img/perfil.png"
+                    class="rounded-circle"
+                    id="profileImage"
+                    alt="Foto de perfil"
+                    width="200"
+                    height="200"
+                  />
                   <div class="profile-img-overlay">
                     <div class="profile-img-overlay-text">
-                      <i class="fas fa-camera fa-2x"></i>
+                      <i class="fas fa-camera"></i>
                       <p>Cambiar foto</p>
                     </div>
                   </div>
                 </div>
-                <input type="file" id="fotoPerfil" class="d-none" accept="image/*">
-                <small class="text-muted d-block mt-2">Haz clic en la imagen para cambiar tu foto</small>
+                <input
+                  type="file"
+                  id="fotoPerfil"
+                  class="d-none"
+                  accept="image/*"
+                />
+                <small class="text-muted d-block mt-2"
+                  >Haz clic en la imagen para cambiar tu foto</small
+                >
               </div>
 
               <div class="container-fluid">
                 <div class="row">
-                  <!-- Columna Izquierda -->
                   <div class="col-md-6">
-                    <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card mb-4 shadow-sm">
                       <div class="card-body">
-                        <h5 class="section-title mb-4">
-                          <i class="fas fa-user-circle mr-2"></i>Información Personal
+                        <h5 class="section-title">
+                          <i class="fas fa-user-circle"></i> Información
+                          Personal
                         </h5>
                         <div class="form-group">
-                          <label for="nombre"><i class="fas fa-user mr-2"></i>Nombre Completo</label>
-                          <input type="text" class="form-control" id="nombre" value="JUAN MANUEL TAPIAS SOLARTE" required>
-                          <div class="invalid-feedback">Por favor ingresa tu nombre completo</div>
+                          <label for="nombre">Nombre Completo</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="nombre"
+                            value="JUAN MANUEL TAPIAS SOLARTE"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Por favor ingresa tu nombre completo
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Columna Derecha -->
                   <div class="col-md-6">
-                    <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card mb-4 shadow-sm">
                       <div class="card-body">
-                        <h5 class="section-title mb-4">
-                          <i class="fas fa-address-book mr-2"></i>Contacto
+                        <h5 class="section-title">
+                          <i class="fas fa-address-book"></i> Contacto
                         </h5>
                         <div class="form-group">
-                          <label for="email"><i class="fas fa-envelope mr-2"></i>Correo Electrónico</label>
-                          <input type="email" class="form-control" id="email" value="juanmtapias2021@gmail.com" required>
-                          <div class="invalid-feedback">Ingresa un correo válido</div>
+                          <label for="email">Correo Electrónico</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            value="juanmtapias2021@gmail.com"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Ingresa un correo válido
+                          </div>
                         </div>
                         <div class="form-group">
-                          <label for="telefono"><i class="fas fa-mobile-alt mr-2"></i>Teléfono</label>
-                          <input type="tel" class="form-control" id="telefono" value="3134123616" required>
+                          <label for="telefono">Teléfono</label>
+                          <input
+                            type="tel"
+                            class="form-control"
+                            id="telefono"
+                            value="3134123616"
+                            pattern="[0-9]{10}"
+                            required
+                          />
                           <div class="invalid-feedback">Teléfono requerido</div>
                         </div>
                       </div>
@@ -214,124 +299,186 @@
                   </div>
                 </div>
 
-                <!-- Dirección -->
-                <div class="card mb-3 border-0 shadow-sm">
+                <div class="card mb-3 shadow-sm">
                   <div class="card-body">
-                    <h5 class="section-title mb-4">
-                      <i class="fas fa-map-marker-alt mr-2"></i>Dirección
+                    <h5 class="section-title">
+                      <i class="fas fa-map-marker-alt"></i> Dirección
                     </h5>
                     <div class="form-group">
-                      <label for="direccion"><i class="fas fa-home mr-2"></i>Dirección Residencial</label>
-                      <input type="text" class="form-control" id="direccion" value="B/ EL CARMEN" required>
-                      <div class="invalid-feedback">Por favor ingresa tu dirección</div>
+                      <label for="direccion">Dirección Residencial</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="direccion"
+                        value="B/ EL CARMEN"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Por favor ingresa tu dirección
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-
           <div class="modal-footer bg-light">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
-              <i class="fas fa-times mr-2"></i>Cancelar
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              <i class="fas fa-times"></i> Cancelar
             </button>
             <button type="button" class="btn btn-dark" id="guardarCambios">
-              <i class="fas fa-save mr-2"></i>Guardar Cambios
+              <i class="fas fa-save"></i> Guardar Cambios
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/sweetalert2@11.js"></script>
     <script src="../js/logout.js"></script>
 
     <script>
-      $(document).ready(function() {
-        // Inicializar dropdowns
-        $(".dropdown-toggle").dropdown();
-
-        // Mostrar modal al hacer clic en Editar
-        $('#btnEditarPerfil').click(function() {
-          // Cargar valores actuales en el formulario
-          $('#nombre').val($('.list-group-item:eq(0)').text().replace('Nombre y Apellido:', '').trim());
-          $('#email').val($('.list-group-item:eq(2)').text().replace('Correo Electrónico:', '').trim());
-          $('#telefono').val($('.list-group-item:eq(1)').text().replace('Teléfono:', '').trim());
-          $('#direccion').val($('.list-group-item:eq(3)').text().replace('Dirección:', '').trim());
-          
-          $('#editarPerfilModal').modal('show');
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize dropdowns
+        const dropdowns = document.querySelectorAll(".dropdown-toggle");
+        dropdowns.forEach((dropdown) => {
+          dropdown.addEventListener("click", (e) => {
+            e.preventDefault();
+            const menu = dropdown.nextElementSibling;
+            menu.classList.toggle("show");
+          });
         });
 
-        // Validación de formulario
-        (function() {
-          'use strict';
-          window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
-          }, false);
-        })();
+        // Show modal on Edit click
+        document
+          .getElementById("btnEditarPerfil")
+          .addEventListener("click", () => {
+            const nombre = document
+              .querySelector(".list-group-item:nth-child(1)")
+              .textContent.split(":")[1]
+              .trim();
+            const telefono = document
+              .querySelector(".list-group-item:nth-child(2)")
+              .textContent.split(":")[1]
+              .trim();
+            const email = document
+              .querySelector(".list-group-item:nth-child(3)")
+              .textContent.split(":")[1]
+              .trim();
+            const direccion = document
+              .querySelector(".list-group-item:nth-child(4)")
+              .textContent.split(":")[1]
+              .trim();
 
-        // Cargar imagen seleccionada
-        $('#fotoPerfil').change(function(e) {
-          if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-              $('#profileImage').attr('src', event.target.result);
+            document.getElementById("nombre").value = nombre;
+            document.getElementById("telefono").value = telefono;
+            document.getElementById("email").value = email;
+            document.getElementById("direccion").value = direccion;
+
+            new bootstrap.Modal(
+              document.getElementById("editarPerfilModal")
+            ).show();
+          });
+
+        // Form validation
+        const form = document.getElementById("formularioPerfil");
+        form.addEventListener("submit", (e) => {
+          if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        });
+
+        // Load selected image
+        document
+          .getElementById("fotoPerfil")
+          .addEventListener("change", (e) => {
+            if (e.target.files && e.target.files[0]) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                document.getElementById("profileImage").src =
+                  event.target.result;
+              };
+              reader.readAsDataURL(e.target.files[0]);
             }
-            reader.readAsDataURL(e.target.files[0]);
-          }
-        });
+          });
 
-        // Guardar cambios
-        $('#guardarCambios').click(function() {
-          const formulario = document.getElementById('formularioPerfil');
+        // Save changes
+        document
+          .getElementById("guardarCambios")
+          .addEventListener("click", () => {
+            if (form.checkValidity()) {
+              const profileImg = document.querySelector(".rounded-circle");
+              const nameDisplay = document.querySelector("h3");
+              const emailDisplay = document.querySelector("p:first-child");
 
-          if (formulario.checkValidity()) {
-            // Actualizar los datos en la vista
-            $('.rounded-circle').attr('src', $('#profileImage').attr('src'));
-            $('h3').text($('#nombre').val().split(' ')[0] + ' ' + $('#nombre').val().split(' ')[1]);
-            $('p:first').text($('#email').val());
-            
-            // Actualizar la lista de datos
-            $('.list-group-item:eq(0)').html('<strong>Nombre y Apellido:</strong> ' + $('#nombre').val());
-            $('.list-group-item:eq(1)').html('<strong>Teléfono:</strong> ' + $('#telefono').val());
-            $('.list-group-item:eq(2)').html('<strong>Correo Electrónico:</strong> ' + $('#email').val());
-            $('.list-group-item:eq(3)').html('<strong>Dirección:</strong> ' + $('#direccion').val());
+              profileImg.src = document.getElementById("profileImage").src;
+              nameDisplay.textContent = `${
+                document.getElementById("nombre").value.split(" ")[0]
+              } ${document.getElementById("nombre").value.split(" ")[1]}`;
+              emailDisplay.textContent = document.getElementById("email").value;
 
-            Swal.fire({
-              title: '¡Perfil actualizado!',
-              text: 'Tus cambios se han guardado correctamente',
-              icon: 'success',
-              confirmButtonText: 'Aceptar',
-              confirmButtonColor: '#343a40',
-              timer: 2000,
-              timerProgressBar: true
-            }).then(() => {
-              $('#editarPerfilModal').modal('hide');
-            });
-          } else {
-            Swal.fire({
-              title: 'Campos incompletos',
-              text: 'Por favor completa todos los campos requeridos',
-              icon: 'warning',
-              confirmButtonText: 'Entendido',
-              confirmButtonColor: '#343a40'
-            });
-          }
+              document.querySelector(
+                ".list-group-item:nth-child(1)"
+              ).textContent = `Nombre y Apellido: ${
+                document.getElementById("nombre").value
+              }`;
+              document.querySelector(
+                ".list-group-item:nth-child(2)"
+              ).textContent = `Teléfono: ${
+                document.getElementById("telefono").value
+              }`;
+              document.querySelector(
+                ".list-group-item:nth-child(3)"
+              ).textContent = `Correo Electrónico: ${
+                document.getElementById("email").value
+              }`;
+              document.querySelector(
+                ".list-group-item:nth-child(4)"
+              ).textContent = `Dirección: ${
+                document.getElementById("direccion").value
+              }`;
 
-          formulario.classList.add('was-validated');
+              Swal.fire({
+                title: "¡Perfil actualizado!",
+                text: "Tus cambios se han guardado correctamente",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: "#343a40",
+                timer: 2000,
+                timerProgressBar: true,
+              }).then(() => {
+                bootstrap.Modal.getInstance(
+                  document.getElementById("editarPerfilModal")
+                ).hide();
+              });
+            } else {
+              Swal.fire({
+                title: "Campos incompletos",
+                text: "Por favor completa todos los campos requeridos",
+                icon: "warning",
+                confirmButtonText: "Entendido",
+                confirmButtonColor: "#343a40",
+              });
+            }
+            form.classList.add("was-validated");
+          });
+
+        // Hide dropdown on outside click
+        document.addEventListener("click", (e) => {
+          dropdowns.forEach((dropdown) => {
+            const menu = dropdown.nextElementSibling;
+            if (!dropdown.contains(e.target) && !menu.contains(e.target)) {
+              menu.classList.remove("show");
+            }
+          });
         });
       });
     </script>

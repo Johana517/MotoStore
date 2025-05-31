@@ -3,27 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modificar Moto</title>
-    <!-- Bootstrap CSS -->
+    <title>Modificar Repuesto</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- Estilos personalizados -->
     <style>
       .header-section {
         margin-bottom: 30px;
         padding: 20px 0;
         border-bottom: 1px solid #eee;
       }
-
       .repuesto-image-container {
         display: flex;
         justify-content: center;
@@ -35,49 +35,40 @@
         background-color: #f9f9f9;
         min-height: 200px;
       }
-
       .repuesto-image-preview {
         max-width: 100%;
         max-height: 300px;
         object-fit: contain;
       }
-
       .form-section {
         padding: 30px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
       }
-
       .price-input {
         font-weight: bold;
         text-align: right;
       }
-
       .quantity-input {
         text-align: center;
       }
-
       .price-recommendation {
         background-color: #f8f9fa;
         border-radius: 8px;
         padding: 15px;
         margin-top: 20px;
       }
-
       @media (max-width: 768px) {
         .header-section {
           text-align: center;
         }
-
         .repuesto-title {
           margin-bottom: 20px;
         }
-
         .repuesto-image-container {
           margin-top: 20px;
         }
-
         .price-input,
         .quantity-input {
           text-align: left;
@@ -91,7 +82,6 @@
         <div class="container-fluid">
           <div class="row align-items-center">
             <div class="col-4 col-md-4">
-              <!-- Logo -->
               <a class="navbar-brand" href="sesion-vendedor.html">
                 <img
                   src="../img/logo_moto_store-1-5.png"
@@ -105,7 +95,6 @@
       </nav>
     </header>
     <div class="container py-5">
-      <!-- Encabezado con título e imagen -->
       <div class="header-section row align-items-center bg-white">
         <div class="col-md-6 repuesto-title">
           <h1 class="display-4">Modificar Repuesto</h1>
@@ -122,13 +111,10 @@
           </div>
         </div>
       </div>
-
-      <!-- Formulario de modificación -->
       <div class="form-section">
         <form id="formRepuesto">
           <div class="row">
             <div class="col-md-6">
-              <!-- Campo Precio con formato automático -->
               <div class="mb-3">
                 <label for="precio" class="form-label">Precio unitario</label>
                 <div class="input-group">
@@ -139,14 +125,13 @@
                     id="precio"
                     placeholder="Ej: 25.000"
                     data-raw-value=""
+                    required
                   />
                   <span class="input-group-text">
                     <i class="bi bi-currency-dollar text-success"></i>
                   </span>
                 </div>
               </div>
-
-              <!-- Campo Cantidad -->
               <div class="mb-3">
                 <label for="cantidad" class="form-label"
                   >Cantidad disponible</label
@@ -162,14 +147,13 @@
                     placeholder="Ej: 10"
                     min="0"
                     step="1"
+                    required
                   />
                   <span class="input-group-text">Unidades</span>
                 </div>
               </div>
             </div>
-
             <div class="col-md-6">
-              <!-- Subida de imagen -->
               <div class="mb-3">
                 <label for="imagenRepuesto" class="form-label"
                   >Cambiar imagen del repuesto</label
@@ -184,8 +168,6 @@
                   Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 5MB
                 </div>
               </div>
-
-              <!-- Recomendaciones de precio -->
               <div class="price-recommendation">
                 <h5>Recomendaciones de precio</h5>
                 <ul class="list-unstyled mt-3">
@@ -205,8 +187,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Campo Descripción -->
           <div class="row mt-3">
             <div class="col-12">
               <div class="mb-3">
@@ -218,16 +198,18 @@
                   id="descripcion"
                   rows="4"
                   placeholder="Describa las características, medidas, modelo compatible, etc."
+                  required
                 ></textarea>
               </div>
             </div>
           </div>
-
-          <!-- Botones de acción -->
           <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-danger"><a href="MisProductos.html" class="text-white">
-                Cancelar
-            </a>
+            <button type="button" class="btn btn-danger">
+              <a
+                href="MisProductos.html"
+                class="text-white text-decoration-none"
+                >Cancelar</a
+              >
             </button>
             <button type="submit" class="btn btn-primary">
               Guardar Cambios
@@ -236,22 +218,27 @@
         </form>
       </div>
     </div>
-    <div class="container-fluid bg-dark">
-        <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center px-5 pt-3">
-          <!-- Enlaces legales - Izquierda -->
+    <footer class="py-4">
+      <div class="container">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
           <div class="mb-3 mb-md-0">
-            <ul class="list-inline mb-0 p">
-              <li class="list-inline-item me-3">
-                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  >Aviso Legal</a
+                >
               </li>
-              <li class="list-inline-item">
-                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              <li class="list-inline-item mar">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5"
+                  >Ayuda</a
+                >
               </li>
             </ul>
           </div>
-          
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -277,20 +264,109 @@
             </ul>
           </div>
         </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
     </footer>
-
-    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script para previsualizar la imagen -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/logout.js"></script>
     <script>
+      // Obtener ID del repuesto desde la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const repuestoId = urlParams.get("id");
+
+      // Inicializar repuestos estáticos si localStorage está vacío
+      function initializeStaticRepuestos() {
+        const staticRepuestos = [
+          {
+            id: "repuesto_1",
+            imagen: "../img/bujia.jpg",
+            marca: "Bosch",
+            cantidad: 10,
+            categoria: "Partes del motor",
+            tipo: "Original",
+            subcategoria: "Bujías",
+            precio: "$45.000 COP",
+            descripcion: "Bujía NGK para clima frío, referencia CPR8EA-9",
+            estado: "Pausado",
+          },
+          {
+            id: "repuesto_2",
+            imagen: "https://gxmotor.co/cdn/shop/files/301605.jpg?v=1692971419",
+            marca: "Gates",
+            cantidad: 5,
+            categoria: "Transmisión",
+            tipo: "Genérico",
+            subcategoria: "Cadenas",
+            precio: "$120.000 COP",
+            descripcion:
+              "Cadena de transmisión para motos 150cc, 428H-120 eslabones",
+            estado: "Activado",
+          },
+          {
+            id: "repuesto_3",
+            imagen:
+              "https://todohonda.com/wp-content/uploads/2020/11/pastilla-freno-de-cbf-150-orig-1.jpg",
+            marca: "Febibilstein",
+            cantidad: 8,
+            categoria: "Sistema de frenos",
+            tipo: "Original",
+            subcategoria: "Pastillas de freno",
+            precio: "$85.000 COP",
+            descripcion:
+              "Pastillas de freno delantero para Yamaha 150cc, material cerámico",
+            estado: "Activado",
+          },
+        ];
+
+        let repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+        if (repuestos.length === 0) {
+          localStorage.setItem("repuestos", JSON.stringify(staticRepuestos));
+        }
+      }
+
+      // Cargar datos existentes del repuesto
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeStaticRepuestos();
+
+        if (!repuestoId) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se especificó un repuesto para modificar.",
+          }).then(() => {
+            window.location.href = "MisProductos.html";
+          });
+          return;
+        }
+
+        const repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+        const repuesto = repuestos.find((r) => r.id === repuestoId);
+        if (repuesto) {
+          const rawPrice = repuesto.precio.replace(/[^0-9]/g, "");
+          document.getElementById("precio").value = new Intl.NumberFormat(
+            "es-CO"
+          ).format(rawPrice);
+          document.getElementById("precio").dataset.rawValue = rawPrice;
+          document.getElementById("cantidad").value = repuesto.cantidad;
+          document.getElementById("descripcion").value = repuesto.descripcion;
+          document.getElementById("repuestoImagePreview").src = repuesto.imagen;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Repuesto no encontrado",
+            text: "El repuesto especificado no existe.",
+          }).then(() => {
+            window.location.href = "MisProductos.html";
+          });
+        }
+      });
+
+      // Previsualizar imagen
       document
         .getElementById("imagenRepuesto")
         .addEventListener("change", function (event) {
@@ -304,54 +380,87 @@
             reader.readAsDataURL(file);
           }
         });
-    </script>
 
-    <!-- Script para el formato automático del precio -->
-    <script>
+      // Formatear precio
       const precioInput = document.getElementById("precio");
-
       precioInput.addEventListener("input", function (e) {
-        // Obtener valor sin formato
         let rawValue = this.value.replace(/[^\d]/g, "");
-
-        // Guardar el valor raw en el atributo data
         this.dataset.rawValue = rawValue;
-
-        // Formatear solo si hay valor
         if (rawValue.length > 0) {
-          // Convertir a número
           let numberValue = parseInt(rawValue, 10);
-
-          // Formatear con separadores de miles
           let formattedValue = new Intl.NumberFormat("es-CO").format(
             numberValue
           );
-
-          // Actualizar el valor mostrado
           this.value = formattedValue;
         }
       });
 
-      // Para enviar el formulario, usaríamos el valor raw
+      // Guardar cambios
       document
         .getElementById("formRepuesto")
         .addEventListener("submit", function (e) {
           e.preventDefault();
+          const precio = precioInput.dataset.rawValue;
+          const cantidad = document.getElementById("cantidad").value;
+          const descripcion = document
+            .getElementById("descripcion")
+            .value.trim();
+          const imagenFile = document.getElementById("imagenRepuesto").files[0];
 
-          const formData = {
-            precio: precioInput.dataset.rawValue || "0",
-            cantidad: document.getElementById("cantidad").value,
-            descripcion: document.getElementById("descripcion").value,
-            imagen:
-              document.getElementById("imagenRepuesto").files[0]?.name ||
-              "actual",
-          };
+          if (!precio || !cantidad || !descripcion) {
+            Swal.fire({
+              icon: "error",
+              title: "Campos incompletos",
+              text: "Por favor, completa el precio, la cantidad y la descripción.",
+            });
+            return;
+          }
 
-          console.log("Datos a enviar:", formData);
-          // Aquí iría tu lógica de envío del formulario
-          alert(
-            `Repuesto actualizado:\nPrecio: $${formData.precio}\nCantidad: ${formData.cantidad}`
-          );
+          const repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+          const repuestoIndex = repuestos.findIndex((r) => r.id === repuestoId);
+          if (repuestoIndex === -1) {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Repuesto no encontrado en el almacenamiento.",
+            });
+            return;
+          }
+
+          repuestos[repuestoIndex].precio = `$${parseFloat(
+            precio
+          ).toLocaleString("es-CO")} COP`;
+          repuestos[repuestoIndex].cantidad = parseInt(cantidad, 10);
+          repuestos[repuestoIndex].descripcion = descripcion;
+
+          if (imagenFile) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              repuestos[repuestoIndex].imagen = e.target.result;
+              localStorage.setItem("repuestos", JSON.stringify(repuestos));
+              Swal.fire({
+                icon: "success",
+                title: "¡Cambios guardados!",
+                text: "Los cambios han sido guardados exitosamente.",
+                timer: 1500,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.href = "MisProductos.html";
+              });
+            };
+            reader.readAsDataURL(imagenFile);
+          } else {
+            localStorage.setItem("repuestos", JSON.stringify(repuestos));
+            Swal.fire({
+              icon: "success",
+              title: "¡Cambios guardados!",
+              text: "Los cambios han sido guardados exitosamente.",
+              timer: 1500,
+              showConfirmButton: false,
+            }).then(() => {
+              window.location.href = "MisProductos.html";
+            });
+          }
         });
     </script>
   </body>

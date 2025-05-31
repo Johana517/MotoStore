@@ -4,26 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modificar Moto</title>
-    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
     />
-    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- Estilos personalizados -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="../css/style.css" />
     <style>
       .header-section {
         margin-bottom: 30px;
         padding: 20px 0;
         border-bottom: 1px solid #eee;
       }
-
       .moto-image-container {
         display: flex;
         justify-content: center;
@@ -34,38 +34,30 @@
         padding: 15px;
         background-color: #f9f9f9;
       }
-
       .moto-image-preview {
         max-width: 100%;
         max-height: 300px;
         object-fit: contain;
       }
-
       .form-section {
         padding: 30px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
       }
-
       .price-input {
         font-weight: bold;
-        text-align: right;
       }
-
       @media (max-width: 768px) {
         .header-section {
           text-align: center;
         }
-
         .moto-title {
           margin-bottom: 20px;
         }
-
         .moto-image-container {
           margin-top: 20px;
         }
-
         .price-input {
           text-align: left;
         }
@@ -77,13 +69,12 @@
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <div class="row align-items-center">
-            <div class="col-4 col-md-4">
-              <!-- Logo -->
+            <div class="col-4">
               <a class="navbar-brand" href="sesion-vendedor.html">
                 <img
                   src="../img/logo_moto_store-1-5.png"
                   style="width: 200px; height: 150px"
-                  alt="logo"
+                  alt="Logo"
                 />
               </a>
             </div>
@@ -92,7 +83,6 @@
       </nav>
     </header>
     <div class="container py-5">
-      <!-- Encabezado con título e imagen -->
       <div class="header-section row align-items-center bg-white">
         <div class="col-md-6 moto-title">
           <h1 class="display-4">Modificar Moto</h1>
@@ -111,31 +101,27 @@
           </div>
         </div>
       </div>
-
-      <!-- Formulario de modificación -->
       <div class="form-section">
-        <form>
+        <form id="modificarMotoForm">
           <div class="row">
             <div class="col-md-6">
-              <!-- Campo Precio con formato automático -->
               <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
                 <div class="input-group">
-                  <span class="input-group-text text-">$</span>
+                  <span class="input-group-text">$</span>
                   <input
                     type="text"
                     class="form-control price-input"
                     id="precio"
                     placeholder="Ej: 1.000.000"
                     data-raw-value=""
+                    required
                   />
                   <span class="input-group-text">
                     <i class="bi bi-currency-dollar text-success"></i>
                   </span>
                 </div>
               </div>
-
-              <!-- Campo Descripción -->
               <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <textarea
@@ -143,12 +129,11 @@
                   id="descripcion"
                   rows="5"
                   placeholder="Describa las características de la moto"
+                  required
                 ></textarea>
               </div>
             </div>
-
             <div class="col-md-6">
-              <!-- Subida de imagen -->
               <div class="mb-3">
                 <label for="imagenMoto" class="form-label"
                   >Cambiar imagen de la moto</label
@@ -163,8 +148,6 @@
                   Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 5MB
                 </div>
               </div>
-
-              <!-- Información adicional -->
               <div class="card mt-4">
                 <div class="card-body">
                   <h5 class="card-title">Recomendaciones de precio</h5>
@@ -182,10 +165,13 @@
               </div>
             </div>
           </div>
-
-          <!-- Botones de acción -->
           <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-danger text-white"><a href="MisProductos.html" class="text-white">Cancelar</a>
+            <button type="button" class="btn btn-danger text-white">
+              <a
+                href="MisProductos.html"
+                class="text-white text-decoration-none"
+                >Cancelar</a
+              >
             </button>
             <button type="submit" class="btn btn-primary">
               Guardar Cambios
@@ -194,77 +180,27 @@
         </form>
       </div>
     </div>
-
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script para previsualizar la imagen -->
-    <script>
-      document
-        .getElementById("imagenMoto")
-        .addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              document.getElementById("motoImagePreview").src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-    </script>
-
-    <!-- Script para el formato automático del precio -->
-    <script>
-      const precioInput = document.getElementById("precio");
-
-      precioInput.addEventListener("input", function (e) {
-        // Obtener valor sin formato
-        let rawValue = this.value.replace(/[^\d]/g, "");
-
-        // Guardar el valor raw en el atributo data
-        this.dataset.rawValue = rawValue;
-
-        // Formatear solo si hay valor
-        if (rawValue.length > 0) {
-          // Convertir a número
-          let numberValue = parseInt(rawValue, 10);
-
-          // Formatear con separadores de miles
-          let formattedValue = new Intl.NumberFormat("es-CO").format(
-            numberValue
-          );
-
-          // Actualizar el valor mostrado
-          this.value = formattedValue;
-        }
-      });
-
-      // Para enviar el formulario, usaríamos el valor raw
-      document.querySelector("form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const rawPrice = precioInput.dataset.rawValue || "0";
-        console.log("Precio a enviar:", rawPrice);
-        // Aquí iría tu lógica de envío del formulario
-        alert(`Precio a guardar: ${rawPrice}`);
-      });
-    </script>
-    <div class="container-fluid bg-dark">
-        <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center px-5 pt-3">
-          <!-- Enlaces legales - Izquierda -->
+    <footer class="py-4">
+      <div class="container">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
           <div class="mb-3 mb-md-0">
-            <ul class="list-inline mb-0 p">
-              <li class="list-inline-item me-3">
-                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  >Aviso Legal</a
+                >
               </li>
-              <li class="list-inline-item">
-                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              <li class="list-inline-item mar">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5"
+                  >Ayuda</a
+                >
               </li>
             </ul>
           </div>
-          
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -290,17 +226,197 @@
             </ul>
           </div>
         </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
     </footer>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="/js/buscar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
     <script src="../js/logout.js"></script>
+    <script>
+      // Obtener ID de la moto desde la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const motoId = urlParams.get("id");
+
+      // Inicializar motos estáticas si localStorage está vacío
+      function initializeStaticMotos() {
+        const staticMotos = [
+          {
+            id: "moto_1",
+            imagen: "../img/yamaha.jpg",
+            marca: "Yamaha",
+            cilindraje: "150cc",
+            modelo: "Scooter",
+            anio: "2023",
+            descripcion:
+              "Scooter Yamaha 150cc, modelo 2023, 5,000 km, excelente estado",
+            estado: "Activado",
+            precio: "$5.000.000 COP",
+          },
+          {
+            id: "moto_2",
+            imagen: "../img/honda.jpg",
+            marca: "Honda",
+            cilindraje: "125cc",
+            modelo: "Naked",
+            anio: "2022",
+            descripcion: "Honda CB 125F, modelo 2022, 8,000 km, color rojo",
+            estado: "Pausado",
+            precio: "$4.500.000 COP",
+          },
+          {
+            id: "moto_3",
+            imagen:
+              "https://motorsfan.com/wp-content/uploads/2024/09/01-kawasaki-ninja-zx-25r-2021-e1729360702917.webp",
+            marca: "Kawasaki",
+            cilindraje: "250cc",
+            modelo: "Deportiva",
+            anio: "2021",
+            descripcion:
+              "Kawasaki Ninja 250, modelo 2021, 12,000 km, full equipo",
+            estado: "Activado",
+            precio: "$8.000.000 COP",
+          },
+        ];
+
+        let motos = JSON.parse(localStorage.getItem("motos")) || [];
+        if (motos.length === 0) {
+          localStorage.setItem("motos", JSON.stringify(staticMotos));
+        }
+      }
+
+      // Cargar datos existentes de la moto
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeStaticMotos();
+
+        if (!motoId) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se especificó una moto para modificar.",
+          }).then(() => {
+            window.location.href = "MisProductos.html";
+          });
+          return;
+        }
+
+        const motos = JSON.parse(localStorage.getItem("motos")) || [];
+        const moto = motos.find((m) => m.id === motoId);
+        if (moto) {
+          const rawPrice = moto.precio.replace(/[^0-9]/g, "");
+          document.getElementById("precio").value = new Intl.NumberFormat(
+            "es-CO"
+          ).format(rawPrice);
+          document.getElementById("precio").dataset.rawValue = rawPrice;
+          document.getElementById("descripcion").value = moto.descripcion;
+          document.getElementById("motoImagePreview").src = moto.imagen;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Moto no encontrada",
+            text: "La moto especificada no existe.",
+          }).then(() => {
+            window.location.href = "MisProductos.html";
+          });
+        }
+      });
+
+      // Previsualizar imagen
+      document
+        .getElementById("imagenMoto")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("motoImagePreview").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Formatear precio
+      const precioInput = document.getElementById("precio");
+      precioInput.addEventListener("input", function (e) {
+        let rawValue = this.value.replace(/[^\d]/g, "");
+        this.dataset.rawValue = rawValue;
+        if (rawValue.length > 0) {
+          let numberValue = parseInt(rawValue, 10);
+          let formattedValue = new Intl.NumberFormat("es-CO").format(
+            numberValue
+          );
+          this.value = formattedValue;
+        }
+      });
+
+      // Guardar cambios
+      document
+        .getElementById("modificarMotoForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const precio = precioInput.dataset.rawValue;
+          const descripcion = document
+            .getElementById("descripcion")
+            .value.trim();
+          const imagenFile = document.getElementById("imagenMoto").files[0];
+
+          if (!precio || !descripcion) {
+            Swal.fire({
+              icon: "error",
+              title: "Campos incompletos",
+              text: "Por favor, completa el precio y la descripción.",
+            });
+            return;
+          }
+
+          const motos = JSON.parse(localStorage.getItem("motos")) || [];
+          const motoIndex = motos.findIndex((m) => m.id === motoId);
+          if (motoIndex === -1) {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Moto no encontrada en el almacenamiento.",
+            });
+            return;
+          }
+
+          motos[motoIndex].precio = `$${parseFloat(precio).toLocaleString(
+            "es-CO"
+          )} COP`;
+          motos[motoIndex].descripcion = descripcion;
+
+          if (imagenFile) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              motos[motoIndex].imagen = e.target.result;
+              localStorage.setItem("motos", JSON.stringify(motos));
+              Swal.fire({
+                icon: "success",
+                title: "¡Cambios guardados!",
+                text: "Los cambios han sido guardados exitosamente.",
+                timer: 1500,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.href = "MisProductos.html";
+              });
+            };
+            reader.readAsDataURL(imagenFile);
+          } else {
+            localStorage.setItem("motos", JSON.stringify(motos));
+            Swal.fire({
+              icon: "success",
+              title: "¡Cambios guardados!",
+              text: "Los cambios han sido guardados exitosamente.",
+              timer: 1500,
+              showConfirmButton: false,
+            }).then(() => {
+              window.location.href = "MisProductos.html";
+            });
+          }
+        });
+    </script>
   </body>
 </html>

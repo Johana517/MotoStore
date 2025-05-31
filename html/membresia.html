@@ -1,526 +1,1008 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Membresía - Motostore</title>
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.7.2-web/css/all.min.css" />
+    <!-- SweetAlert2 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
     <style>
-        :root {
-            --color-primary: #9466ff;
-            --color-secondary: #6c757d;
-            --color-danger: #dc3545;
-            --color-warning: #ffc107;
+      :root {
+        --color-primary: #9466ff;
+        --color-secondary: #6c757d;
+        --color-danger: #dc3545;
+        --color-warning: #ffc107;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        overflow-x: hidden;
+      }
+
+      /* Sidebar compacto */
+      .sidebar {
+        width: 80px;
+        min-height: 100vh;
+        transition: all 0.3s;
+        background-color: #343a40;
+      }
+
+      .sidebar:hover {
+        width: 220px;
+      }
+
+      .sidebar .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0.75rem 1rem;
+      }
+
+      .sidebar .nav-link:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar .nav-link.active {
+        color: white;
+        background-color: var(--color-primary);
+      }
+
+      .sidebar .nav-text {
+        opacity: 0;
+        transition: opacity 0.2s;
+        margin-left: 10px;
+      }
+
+      .sidebar:hover .nav-text {
+        opacity: 1;
+      }
+
+      .sidebar-brand {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Contenido principal */
+      .main-content {
+        margin-left: 80px;
+        transition: all 0.3s;
+      }
+
+      .sidebar:hover ~ .main-content {
+        margin-left: 220px;
+      }
+
+      /* Tarjeta de membresía compacta */
+      .membership-compact {
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+      }
+
+      .membership-compact.expired {
+        border-left-color: var(--color-danger);
+      }
+
+      .membership-compact.warning {
+        border-left-color: var(--color-warning);
+      }
+
+      .progress-thin {
+        height: 6px;
+      }
+
+      /* Sección ajustable */
+      .adjustable-section {
+        transition: all 0.3s;
+        max-height: 500px;
+        overflow: hidden;
+      }
+
+      .adjustable-section.collapsed {
+        max-height: 120px;
+      }
+
+      .toggle-section {
+        cursor: pointer;
+      }
+
+      /* Estilos para beneficios */
+      .benefit-item {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .benefit-item:last-child {
+        border-bottom: none;
+      }
+
+      .benefit-icon {
+        color: #28a745;
+        margin-right: 10px;
+      }
+
+      /* Selector de membresía */
+      .membership-selector {
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .membership-selector:hover {
+        border-color: var(--color-primary);
+        background-color: rgba(148, 102, 255, 0.05);
+      }
+
+      .membership-selector.selected {
+        border-color: var(--color-primary);
+        background-color: rgba(148, 102, 255, 0.1);
+        box-shadow: 0 0 0 2px var(--color-primary);
+      }
+
+      .membership-badge {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+
+      /* Botón de pago */
+      .payment-btn {
+        background: linear-gradient(135deg, #9466ff, #6a11cb);
+        border: none;
+        transition: all 0.3s;
+      }
+
+      .payment-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+      }
+
+      /* Notificación de vencimiento */
+      .expiry-notification {
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        transition: all 0.5s ease;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .expiry-notification.show {
+        opacity: 1;
+        height: auto;
+        padding: 15px;
+      }
+
+      .expiry-notification.warning {
+        background-color: rgba(255, 193, 7, 0.2);
+        border-left: 4px solid var(--color-warning);
+      }
+
+      .expiry-notification.danger {
+        background-color: rgba(220, 53, 69, 0.2);
+        border-left: 4px solid var(--color-danger);
+      }
+
+      /* Estilos para el dropdown de Vender */
+      .vender-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+      }
+
+      .vender-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+
+      .vender-dropdown .dropdown-item {
+        color: black;
+      }
+
+      .vender-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+
+      /* Estilo para el dropdown de Perfil */
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+
+      .profile-dropdown .dropdown-item {
+        color: black;
+      }
+
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+
+      /* Estilos responsivos para las cards */
+      .product-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -15px;
+      }
+
+      .product-col {
+        padding: 15px;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      @media (min-width: 768px) {
+        .product-col {
+          flex: 0 0 50%;
+          max-width: 50%;
         }
-        
-        body {
-            background-color: #f8f9fa;
-            overflow-x: hidden;
+      }
+
+      @media (min-width: 992px) {
+        .product-col {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
         }
-        
-        /* Sidebar compacto */
-        .sidebar {
-            width: 80px;
-            min-height: 100vh;
-            transition: all 0.3s;
-            background-color: #343a40;
-        }
-        
-        .sidebar:hover {
-            width: 220px;
-        }
-        
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            white-space: nowrap;
-            overflow: hidden;
-            padding: 0.75rem 1rem;
-        }
-        
-        .sidebar .nav-link:hover {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar .nav-link.active {
-            color: white;
-            background-color: var(--color-primary);
-        }
-        
-        .sidebar .nav-text {
-            opacity: 0;
-            transition: opacity 0.2s;
-            margin-left: 10px;
-        }
-        
-        .sidebar:hover .nav-text {
-            opacity: 1;
-        }
-        
-        .sidebar-brand {
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Contenido principal */
-        .main-content {
-            margin-left: 80px;
-            transition: all 0.3s;
-        }
-        
-        .sidebar:hover ~ .main-content {
-            margin-left: 220px;
-        }
-        
-        /* Tarjeta de membresía compacta */
-        .membership-compact {
-            border-left: 4px solid var(--color-primary);
-            border-radius: 8px;
-        }
-        
-        .membership-compact.expired {
-            border-left-color: var(--color-danger);
-        }
-        
-        .membership-compact.warning {
-            border-left-color: var(--color-warning);
-        }
-        
-        .progress-thin {
-            height: 6px;
-        }
-        
-        /* Sección ajustable */
-        .adjustable-section {
-            transition: all 0.3s;
-            max-height: 500px;
-            overflow: hidden;
-        }
-        
-        .adjustable-section.collapsed {
-            max-height: 120px;
-        }
-        
-        .toggle-section {
-            cursor: pointer;
-        }
-        
-        /* Estilos para beneficios */
-        .benefit-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .benefit-item:last-child {
-            border-bottom: none;
-        }
-        
-        .benefit-icon {
-            color: #28a745;
-            margin-right: 10px;
-        }
-        
-        /* Selector de membresía */
-        .membership-selector {
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-        
-        .membership-selector:hover {
-            border-color: var(--color-primary);
-            background-color: rgba(148, 102, 255, 0.05);
-        }
-        
-        .membership-selector.selected {
-            border-color: var(--color-primary);
-            background-color: rgba(148, 102, 255, 0.1);
-        }
-        
-        .membership-badge {
-            font-size: 0.8rem;
-            padding: 5px 10px;
-        }
-        
-        /* Botón de pago */
-        .payment-btn {
-            background: linear-gradient(135deg, #9466ff, #6a11cb);
-            border: none;
-            transition: all 0.3s;
-        }
-        
-        .payment-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
-        }
-        
-        /* Notificación de vencimiento */
-        .expiry-notification {
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-        }
-        
-        .expiry-notification.warning {
-            background-color: rgba(255, 193, 7, 0.2);
-            border-left: 4px solid var(--color-warning);
-        }
-        
-        .expiry-notification.danger {
-            background-color: rgba(220, 53, 69, 0.2);
-            border-left: 4px solid var(--color-danger);
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="d-flex">
-        <!-- Sidebar compacto -->
-        <div class="sidebar position-fixed">
-            <div class="sidebar-brand">
-                <i class="fas fa-motorcycle text-white" style="font-size: 1.5rem;"></i>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-4">
+              <!-- Logo -->
+              <a class="navbar-brand" href="sesion-vendedor.html">
+                <img
+                  src="../img/logo_moto_store-1-5.png"
+                  style="width: 200px; height: 150px"
+                  alt="logo"
+                />
+              </a>
             </div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span class="nav-text">Dashboard</span>
-                    </a>
+            <div class="col-4 col-md-4">
+              <!-- Barra de búsqueda (siempre visible) -->
+              <div class="search-mobile d-lg-none ms-2">
+                <form class="d-flex">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search"
+                    size="100"
+                  />
+                  <button class="btn btn-danger ms-2" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Botón hamburguesa -->
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent1"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Menú colapsable -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav me-auto ms-2">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="membresia.html">Membresia</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="MisProductos.html">Mis productos</a>
+              </li>
+              <!-- Barra de búsqueda (solo en desktop) -->
+              <li class="nav-item search-desktop d-none d-lg-block">
+                <form class="form-inline">
+                  <div class="input-group">
+                    <input
+                      type="search"
+                      class="form-control"
+                      placeholder="Search"
+                      size="30"
+                    />
+                    <button class="btn btn-danger" type="submit">Search</button>
+                  </div>
+                </form>
+              </li>
+              <!-- Dropdown de Vender con estilo blanco -->
+              <li class="nav-item dropdown mx-2 vender-dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownVender"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Vender
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownVender"
+                >
+                  <a class="dropdown-item" href="vender-moto.html">Moto</a>
+                  <a class="dropdown-item" href="vender-repuesto.html"
+                    >Repuesto</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="ayuda-frontend.html">Ayuda</a>
+              </li>
+              <!-- Dropdown de Perfil con estilo negro -->
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown profile-dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-user"></i> Mi cuenta
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="perfil-vendedor.html">
+                        <i class="fas fa-user-circle me-2"></i>Ver perfil
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" id="logout" href="#">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="notificaciones.html">
+                        <i class="fa-regular fa-bell"></i></i>Notificaciones
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        <i class="fas fa-id-card"></i>
-                        <span class="nav-text">Membresías</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-users"></i>
-                        <span class="nav-text">Clientes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-cog"></i>
-                        <span class="nav-text">Configuración</span>
-                    </a>
-                </li>
+              </ul>
             </ul>
+          </div>
         </div>
-
-        <!-- Contenido principal -->
-        <div class="main-content w-100">
-            <!-- Barra superior -->
-            <nav class="navbar navbar-light bg-white shadow-sm">
-                <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">Mi Membresía</span>
-                    <div class="d-flex">
-                        <button class="btn btn-outline-secondary me-2">
-                            <i class="fas fa-bell"></i>
-                        </button>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fas fa-user me-1"></i>
-                                <span>Mi Perfil</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i>Configuración</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Contenido -->
-            <div class="container-fluid py-4">
-                <!-- Notificación de vencimiento (se muestra dinámicamente) -->
-                <div class="expiry-notification danger" id="expiryNotification" style="display: none;">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <span id="notificationText">Tu membresía ha expirado</span>
-                        </div>
-                        <button class="btn btn-sm payment-btn text-white" onclick="redirectToPayment()">
-                            <i class="fas fa-credit-card me-1"></i> Renovar ahora
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Selector de membresía -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="membership-selector" id="basicMembership" onclick="selectMembership('basic')">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="mb-0">Membresía Básica</h4>
-                                <span class="badge bg-secondary membership-badge">$50/mes</span>
-                            </div>
-                            <ul class="list-unstyled">
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 10% en repuestos</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Acceso a promociones especiales</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Boletín mensual con novedades</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="membership-selector selected" id="premiumMembership" onclick="selectMembership('premium')">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="mb-0">Membresía Premium</h4>
-                                <span class="badge bg-primary membership-badge">$200/mes</span>
-                            </div>
-                            <ul class="list-unstyled">
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 20% en repuestos</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Talleres exclusivos</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Asistencia vial 24/7</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Envío gratuito en compras</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección de membresía compacta -->
-                <div class="card mb-4 membership-compact adjustable-section expired" id="membershipSection">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center toggle-section" onclick="toggleSection('membershipSection')">
-                            <div>
-                                <h5 class="mb-1 d-flex align-items-center">
-                                    <i class="fas fa-id-card me-2" style="color: var(--color-danger);"></i>
-                                    <span id="membershipTitle">Mi Membresía Premium</span>
-                                    <span class="badge bg-danger ms-2" id="membershipStatus">Vencida</span>
-                                </h5>
-                                <div class="progress progress-thin mt-2">
-                                    <div class="progress-bar bg-danger" id="progressBar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small class="text-muted" id="validUntil">Vencida el: 15/05/2025</small>
-                            </div>
-                            <i class="fas fa-chevron-up"></i>
-                        </div>
-                        
-                        <!-- Contenido expandido -->
-                        <div class="mt-3 pt-3 border-top">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <h6><i class="far fa-calendar me-2"></i>Fecha de Inicio</h6>
-                                    <p class="fw-bold">15/11/2024</p>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <h6><i class="far fa-calendar-check me-2"></i>Fecha de Fin</h6>
-                                    <p class="fw-bold" id="endDate">15/05/2025</p>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <h6><i class="far fa-clock me-2"></i>Duración</h6>
-                                    <p class="fw-bold" id="duration">6 meses</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailsModal">
-                                    <i class="fas fa-eye me-1"></i> Ver detalles
-                                </button>
-                                <button class="btn btn-sm payment-btn text-white" onclick="redirectToPayment()">
-                                    <i class="fas fa-credit-card me-1"></i> Renovar membresía
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección de perfil compacta -->
-                <div class="card mb-4 adjustable-section collapsed" id="profileSection">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center toggle-section" onclick="toggleSection('profileSection')">
-                            <div>
-                                <h5 class="mb-1 d-flex align-items-center">
-                                    <i class="fas fa-user me-2"></i>
-                                    <span>Mi Perfil</span>
-                                </h5>
-                                <small class="text-muted">@MotoLover23 - Juan Pérez López</small>
-                            </div>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        
-                        <!-- Contenido expandido -->
-                        <div class="mt-3 pt-3 border-top">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <h6><i class="fas fa-envelope me-2"></i>Email</h6>
-                                    <p class="fw-bold">juan@example.com</p>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <h6><i class="fas fa-phone me-2"></i>Teléfono</h6>
-                                    <p class="fw-bold">+52 55 1234 5678</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección de beneficios -->
-                <div class="card mb-4">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0"><i class="fas fa-gift me-2"></i>Beneficios Activos</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-warning" id="expiredBenefitsAlert" style="display: block;">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            Tu membresía ha expirado. Renueva para seguir disfrutando de estos beneficios.
-                        </div>
-                        <ul class="list-unstyled" id="activeBenefits">
-                            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 20% en repuestos</li>
-                            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Talleres exclusivos</li>
-                            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Asistencia vial 24/7</li>
-                            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Envío gratuito en compras</li>
-                        </ul>
-                    </div>
-                </div>
+      </nav>
+    </header>
+    <div class="d-flex">
+      <!-- Contenido principal -->
+      <div class="main-content w-100">
+        <!-- Contenido -->
+        <div class="container-fluid py-4">
+          <!-- Notificación de vencimiento (se muestra dinámicamente) -->
+          <div class="expiry-notification danger" id="expiryNotification">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span id="notificationText">Tu membresía ha expirado</span>
+              </div>
+              <a
+                class="btn btn-sm payment-btn text-white"
+                href="pagovendedor_mpremium.html"
+              >
+                <i class="fas fa-credit-card me-1"></i> Renovar ahora
+              </a>
             </div>
+          </div>
+
+          <!-- Selector de membresía -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div
+                class="membership-selector"
+                id="basicMembership"
+                onclick="selectMembership('basic')"
+              >
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h4 class="mb-0">Membresía Básica</h4>
+                  <span class="badge bg-secondary membership-badge"
+                    >$50/mes</span
+                  >
+                </div>
+                <ul class="list-unstyled">
+                  <li class="benefit-item">
+                    <i class="fas fa-check-circle benefit-icon"></i>Publicar 20
+                    productos
+                  </li>
+                  <li class="benefit-item">
+                    <i class="fas fa-check-circle benefit-icon"></i>Destacar 15
+                    productos
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="membership-selector"
+                id="premiumMembership"
+                onclick="selectMembership('premium')"
+              >
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h4 class="mb-0">Membresía Premium</h4>
+                  <span class="badge bg-primary membership-badge"
+                    >$200/mes</span
+                  >
+                </div>
+                <ul class="list-unstyled">
+                  <li class="benefit-item">
+                    <i class="fas fa-check-circle benefit-icon"></i>Publicar 50
+                    productos
+                  </li>
+                  <li class="benefit-item">
+                    <i class="fas fa-check-circle benefit-icon"></i>Destacar 40
+                    productos
+                  </li>
+                  <li class="benefit-item">
+                    <i class="fas fa-check-circle benefit-icon"></i>Posibilidad
+                    de aparecer en banner (sujeto a aprobación del
+                    administrador)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección de membresía compacta -->
+          <div
+            class="card mb-4 membership-compact adjustable-section"
+            id="membershipSection"
+          >
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center toggle-section"
+                onclick="toggleSection('membershipSection')"
+              >
+                <div>
+                  <h5 class="mb-1 d-flex align-items-center">
+                    <i
+                      class="fas fa-id-card me-2"
+                      style="color: var(--color-primary)"
+                    ></i>
+                    <span id="membershipTitle">Selecciona una membresía</span>
+                    <span class="badge bg-secondary ms-2" id="membershipStatus"
+                      >No seleccionada</span
+                    >
+                  </h5>
+                  <div class="progress progress-thin mt-2">
+                    <div
+                      class="progress-bar bg-primary"
+                      id="progressBar"
+                      role="progressbar"
+                      style="width: 0%"
+                      aria-valuenow="0"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                  <small class="text-muted" id="validUntil"
+                    >Selecciona una opción</small
+                  >
+                </div>
+                <i class="fas fa-chevron-up"></i>
+              </div>
+
+              <!-- Contenido expandido -->
+              <div class="mt-3 pt-3 border-top">
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <h6><i class="far fa-calendar me-2"></i>Fecha de Inicio</h6>
+                    <p class="fw-bold" id="startDate">--/--/----</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <h6>
+                      <i class="far fa-calendar-check me-2"></i>Fecha de Fin
+                    </h6>
+                    <p class="fw-bold" id="endDate">--/--/----</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <h6><i class="far fa-clock me-2"></i>Duración</h6>
+                    <p class="fw-bold" id="duration">--</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#detailsModal"
+                    id="detailsBtn"
+                    disabled
+                  >
+                    <i class="fas fa-eye me-1"></i> Ver detalles
+                  </button>
+                  <a
+                    class="btn btn-sm payment-btn text-white"
+                    href="pagovendedor_mpremium.html"
+                    id="renewBtn"
+                    disabled
+                  >
+                    <i class="fas fa-credit-card me-1"></i> Renovar membresía
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección de beneficios -->
+          <div class="card mb-4">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">
+                <i class="fas fa-gift me-2"></i>Beneficios Activos
+              </h5>
+            </div>
+            <div class="card-body">
+              <div
+                class="alert alert-warning"
+                id="expiredBenefitsAlert"
+                style="display: none"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Tu membresía ha expirado. Renueva para seguir disfrutando de
+                estos beneficios.
+              </div>
+              <ul class="list-unstyled" id="activeBenefits">
+                <li class="text-muted">
+                  Selecciona una membresía para ver los beneficios
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Modal para detalles de membresía -->
-    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="detailsModalLabel">Detalles de Membresía</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Información del Cliente</h5>
-                            <p><strong>Nombre:</strong> Juan Pérez López</p>
-                            <p><strong>Usuario:</strong> @MotoLover23</p>
-                            <p><strong>Correo:</strong> juan@example.com</p>
-                            <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Información de la Membresía</h5>
-                            <p><strong>Tipo:</strong> <span class="badge bg-primary">Premium</span></p>
-                            <p><strong>Fecha Inicio:</strong> 15/11/2024</p>
-                            <p><strong>Fecha Fin:</strong> 15/05/2025</p>
-                            <p><strong>Duración:</strong> 6 meses</p>
-                            <p><strong>Estado:</strong> <span class="badge bg-danger">Vencida</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-warning">
-                                <i class="fas fa-exclamation-circle me-2"></i>
-                                Tu membresía ha expirado. Renueva ahora para seguir disfrutando de estos beneficios.
-                            </div>
-                            <h5>Beneficios Incluidos</h5>
-                            <ul class="list-unstyled" id="modalBenefits">
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 20% en repuestos</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Talleres exclusivos</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Asistencia vial 24/7</li>
-                                <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Envío gratuito en compras</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn payment-btn text-white" onclick="redirectToPayment()">
-                        <i class="fas fa-credit-card me-1"></i> Renovar membresía
-                    </button>
-                </div>
+    <div
+      class="modal fade"
+      id="detailsModal"
+      tabindex="-1"
+      aria-labelledby="detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="detailsModalLabel">
+              Detalles de Membresía
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Información del Cliente</h5>
+                <p><strong>Nombre:</strong> Juan Pérez López</p>
+                <p><strong>Usuario:</strong> @MotoLover23</p>
+                <p><strong>Correo:</strong> juan@example.com</p>
+                <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
+              </div>
+              <div class="col-md-6">
+                <h5>Información de la Membresía</h5>
+                <p>
+                  <strong>Tipo:</strong>
+                  <span class="badge" id="modalMembershipType">--</span>
+                </p>
+                <p>
+                  <strong>Fecha Inicio:</strong>
+                  <span id="modalStartDate">--/--/----</span>
+                </p>
+                <p>
+                  <strong>Fecha Fin:</strong>
+                  <span id="modalEndDate">--/--/----</span>
+                </p>
+                <p>
+                  <strong>Duración:</strong> <span id="modalDuration">--</span>
+                </p>
+                <p>
+                  <strong>Estado:</strong>
+                  <span class="badge" id="modalStatus">--</span>
+                </p>
+              </div>
             </div>
+            <hr />
+            <div class="row">
+              <div class="col-md-12">
+                <div
+                  class="alert alert-warning"
+                  id="modalExpiryAlert"
+                  style="display: none"
+                >
+                  <i class="fas fa-exclamation-circle me-2"></i>
+                  Tu membresía ha expirado. Renueva ahora para seguir
+                  disfrutando de estos beneficios.
+                </div>
+                <h5>Beneficios Incluidos</h5>
+                <ul class="list-unstyled" id="modalBenefits">
+                  <li class="text-muted">
+                    Selecciona una membresía para ver los beneficios
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <a
+              type="button"
+              class="btn payment-btn text-white"
+              href="pagovendedor_mpremium.html"
+              id="modalRenewBtn"
+              disabled
+            >
+              <i class="fas fa-credit-card me-1"></i> Renovar membresía
+            </a>
+          </div>
         </div>
+      </div>
     </div>
+    <footer class="py-4">
+      <div class="container">
+        <!-- Primera fila: Enlaces y redes sociales -->
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
+          <!-- Enlaces legales - Izquierda -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  id="ir-aviso-legal"
+                  >Aviso Legal</a
+                >
+                <script>
+                  document
+                    .getElementById("ir-aviso-legal")
+                    .addEventListener("click", function (e) {
+                      localStorage.setItem("seccion", "membresia");
+                      // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                    });
+                </script>
+              </li>
+              <li class="list-inline-item mar">
+                <a
+                  href="ayuda-frontend.html"
+                  class="text-decoration-none fs-5"
+                  id="ir-a-ayuda"
+                  >Ayuda</a
+                >
+                <script>
+                  document
+                    .getElementById("ir-a-ayuda")
+                    .addEventListener("click", function (e) {
+                      localStorage.setItem("seccion", "membresia");
+                      // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                    });
+                </script>
+              </li>
+            </ul>
+          </div>
 
+          <!-- Redes sociales - Derecha (iconos más grandes) -->
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Copyright centrado -->
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
+        </div>
+      </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <!-- Bootstrap JS Bundle con Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
-        // Función para expandir/colapsar secciones
-        function toggleSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.classList.toggle('collapsed');
-            
-            // Rotar el ícono
-            const icon = section.querySelector('.toggle-section i');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
+      // Variables para controlar la membresía seleccionada
+      let selectedMembership = null;
+      let expiryTimer = null;
+      let countdownInterval = null;
+
+      // Función para expandir/colapsar secciones
+      function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.classList.toggle("collapsed");
+
+        // Rotar el ícono
+        const icon = section.querySelector(".toggle-section i");
+        icon.classList.toggle("fa-chevron-down");
+        icon.classList.toggle("fa-chevron-up");
+      }
+
+      // Función para iniciar el conteo regresivo
+      function startCountdown(seconds) {
+        const durationElement = document.getElementById("duration");
+        const modalDurationElement = document.getElementById("modalDuration");
+        let timeLeft = seconds;
+
+        // Limpiar cualquier intervalo previo
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
         }
-        
-        // Función para seleccionar tipo de membresía
-        function selectMembership(type) {
-            const basic = document.getElementById('basicMembership');
-            const premium = document.getElementById('premiumMembership');
-            
-            if (type === 'basic') {
-                basic.classList.add('selected');
-                premium.classList.remove('selected');
-                
-                // Actualizar información
-                document.getElementById('membershipTitle').textContent = 'Mi Membresía Básica';
-                document.getElementById('progressBar').style.width = '25%';
-                document.getElementById('validUntil').textContent = 'Válida hasta: 15/08/2025 (25% completado)';
-                document.getElementById('endDate').textContent = '15/08/2025';
-                document.getElementById('duration').textContent = '3 meses';
-                
-                // Actualizar beneficios
-                const benefitsList = document.getElementById('activeBenefits');
-                benefitsList.innerHTML = `
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 10% en repuestos</li>
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Acceso a promociones especiales</li>
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Boletín mensual con novedades</li>
-                `;
-                
-                // Actualizar modal
-                document.getElementById('modalBenefits').innerHTML = benefitsList.innerHTML;
-            } else {
-                premium.classList.add('selected');
-                basic.classList.remove('selected');
-                
-                // Actualizar información
-                document.getElementById('membershipTitle').textContent = 'Mi Membresía Premium';
-                document.getElementById('progressBar').style.width = '25%';
-                document.getElementById('validUntil').textContent = 'Válida hasta: 15/11/2025 (25% completado)';
-                document.getElementById('endDate').textContent = '15/11/2025';
-                document.getElementById('duration').textContent = '6 meses';
-                
-                // Actualizar beneficios
-                const benefitsList = document.getElementById('activeBenefits');
-                benefitsList.innerHTML = `
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Descuento 20% en repuestos</li>
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Talleres exclusivos</li>
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Asistencia vial 24/7</li>
-                    <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Envío gratuito en compras</li>
-                `;
-                
-                // Actualizar modal
-                document.getElementById('modalBenefits').innerHTML = benefitsList.innerHTML;
-            }
+
+        // Actualizar el conteo cada segundo
+        countdownInterval = setInterval(() => {
+          if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            durationElement.textContent = "0 segundos";
+            modalDurationElement.textContent = "0 segundos";
+            showExpiryNotification();
+          } else {
+            durationElement.textContent = `${timeLeft} segundos`;
+            modalDurationElement.textContent = `${timeLeft} segundos`;
+            timeLeft--;
+          }
+        }, 1000);
+      }
+
+      // Función para seleccionar tipo de membresía
+      function selectMembership(type) {
+        const basic = document.getElementById("basicMembership");
+        const premium = document.getElementById("premiumMembership");
+
+        // Cancelar cualquier temporizador previo
+        if (expiryTimer) {
+          clearTimeout(expiryTimer);
+          expiryTimer = null;
         }
-        
-        // Redirigir a página de pago
-        function redirectToPayment() {
-            // Aquí puedes cambiar la URL por tu página de pago real
-            window.location.href = '/pago-membresia';
-            
-            // Para propósitos de demostración, mostramos un mensaje
-            alert('Redirigiendo a la página de pago...');
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
         }
-        
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mostrar notificación de vencimiento
-            document.getElementById('expiryNotification').style.display = 'block';
-            document.getElementById('notificationText').innerHTML = '<strong>Tu membresía ha expirado</strong>. Renueva ahora para seguir disfrutando de los beneficios.';
-            
-            // Configurar tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
+
+        // Ocultar notificación de expiración
+        document.getElementById("expiryNotification").classList.remove("show");
+        document.getElementById("expiredBenefitsAlert").style.display = "none";
+        document.getElementById("modalExpiryAlert").style.display = "none";
+
+        // Actualizar la selección visual
+        if (type === "basic") {
+          basic.classList.add("selected");
+          premium.classList.remove("selected");
+          selectedMembership = "basic";
+
+          // Actualizar información
+          document.getElementById("membershipTitle").textContent =
+            "Mi Membresía Básica";
+          document.getElementById("membershipStatus").textContent = "Activa";
+          document.getElementById("membershipStatus").className =
+            "badge bg-success ms-2";
+          document.getElementById("progressBar").className =
+            "progress-bar bg-success";
+          document.getElementById("progressBar").style.width = "100%";
+          document.getElementById("validUntil").textContent =
+            "Válida hasta: 15/08/2025";
+          document.getElementById("startDate").textContent = "15/05/2025";
+          document.getElementById("endDate").textContent = "15/08/2025";
+          document.getElementById("duration").textContent = "10 segundos";
+
+          // Actualizar beneficios
+          const benefitsList = document.getElementById("activeBenefits");
+          benefitsList.innerHTML = `
+            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Publicar 20 productos</li>
+            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Destacar 15 productos</li>
+          `;
+
+          // Habilitar botones
+          document.getElementById("detailsBtn").disabled = false;
+          document.getElementById("renewBtn").disabled = false;
+          document.getElementById("modalRenewBtn").disabled = false;
+
+          // Actualizar modal
+          document.getElementById("modalMembershipType").textContent = "Básica";
+          document.getElementById("modalMembershipType").className =
+            "badge bg-secondary";
+          document.getElementById("modalStartDate").textContent = "15/05/2025";
+          document.getElementById("modalEndDate").textContent = "15/08/2025";
+          document.getElementById("modalDuration").textContent = "10 segundos";
+          document.getElementById("modalStatus").textContent = "Activa";
+          document.getElementById("modalStatus").className = "badge bg-success";
+          document.getElementById("modalBenefits").innerHTML =
+            benefitsList.innerHTML;
+
+          // Iniciar conteo regresivo
+          startCountdown(10);
+        } else {
+          premium.classList.add("selected");
+          basic.classList.remove("selected");
+          selectedMembership = "premium";
+
+          // Actualizar información
+          document.getElementById("membershipTitle").textContent =
+            "Mi Membresía Premium";
+          document.getElementById("membershipStatus").textContent = "Activa";
+          document.getElementById("membershipStatus").className =
+            "badge bg-success ms-2";
+          document.getElementById("progressBar").className =
+            "progress-bar bg-success";
+          document.getElementById("progressBar").style.width = "100%";
+          document.getElementById("validUntil").textContent =
+            "Válida hasta: 15/11/2025";
+          document.getElementById("startDate").textContent = "15/05/2025";
+          document.getElementById("endDate").textContent = "15/11/2025";
+          document.getElementById("duration").textContent = "10 segundos";
+
+          // Actualizar beneficios
+          const benefitsList = document.getElementById("activeBenefits");
+          benefitsList.innerHTML = `
+            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Publicar 50 productos</li>
+            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Destacar 40 productos</li>
+            <li class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i>Posibilidad de aparecer en banner (sujeto a aprobación del administrador)</li>
+          `;
+
+          // Habilitar botones
+          document.getElementById("detailsBtn").disabled = false;
+          document.getElementById("renewBtn").disabled = false;
+          document.getElementById("modalRenewBtn").disabled = false;
+
+          // Actualizar modal
+          document.getElementById("modalMembershipType").textContent =
+            "Premium";
+          document.getElementById("modalMembershipType").className =
+            "badge bg-primary";
+          document.getElementById("modalStartDate").textContent = "15/05/2025";
+          document.getElementById("modalEndDate").textContent = "15/11/2025";
+          document.getElementById("modalDuration").textContent = "10 segundos";
+          document.getElementById("modalStatus").textContent = "Activa";
+          document.getElementById("modalStatus").className = "badge bg-success";
+          document.getElementById("modalBenefits").innerHTML =
+            benefitsList.innerHTML;
+
+          // Iniciar conteo regresivo
+          startCountdown(10);
+        }
+
+        // Configurar temporizador para mostrar mensaje de expiración
+        expiryTimer = setTimeout(showExpiryNotification, 10000);
+      }
+
+      // Función para mostrar la notificación de expiración
+      function showExpiryNotification() {
+        if (!selectedMembership) return;
+
+        // Mostrar notificación
+        const notification = document.getElementById("expiryNotification");
+        notification.classList.add("show");
+        notification.classList.add("danger");
+        document.getElementById("notificationText").textContent =
+          "Tu membresía ha expirado";
+
+        // Actualizar estado de membresía
+        document.getElementById("membershipStatus").textContent = "Vencida";
+        document.getElementById("membershipStatus").className =
+          "badge bg-danger ms-2";
+        document.getElementById("progressBar").className =
+          "progress-bar bg-danger";
+        document.getElementById("validUntil").textContent =
+          "Vencida el: " + document.getElementById("endDate").textContent;
+
+        // Mostrar alerta de beneficios expirados
+        document.getElementById("expiredBenefitsAlert").style.display = "block";
+        document.getElementById("modalExpiryAlert").style.display = "block";
+
+        // Actualizar estado en el modal
+        document.getElementById("modalStatus").textContent = "Vencida";
+        document.getElementById("modalStatus").className = "badge bg-danger";
+      }
+
+      // Redirigir a página de pago
+
+      // Inicialización
+      $(document).ready(function () {
+        // Configurar tooltips
+        var tooltipTriggerList = [].slice.call(
+          document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl);
         });
+
+        // Configurar logout
+        $("#logout").click(function (event) {
+          event.preventDefault();
+          Swal.fire({
+            title: "¿Cerrar sesión?",
+            text: "Tu sesión se cerrará y volverás a la página de inicio.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+            timer: 10000,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "¡Sesión cerrada!",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.href = "index.html";
+              });
+            }
+          });
+        });
+      });
     </script>
-</body>
+  </body>
 </html>

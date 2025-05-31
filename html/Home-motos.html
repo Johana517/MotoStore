@@ -136,7 +136,7 @@
               <form class="form-inline">
                 <div class="input-group">
                   <input type="search" class="form-control" placeholder="Search" size="30">
-                  <button class="btn btn-success" type="submit">Search</button>
+                  <button class="btn btn-danger" type="submit">Search</button>
                 </div>
               </form>
             </li>
@@ -144,7 +144,7 @@
   
             <li class="nav-item">
               <a class="nav-link" href="QuienesSomos.html" id="ir-a-ayuda">Quienes somos</a>
-                            <script>
+                <script>
                 document.getElementById("ir-a-ayuda").addEventListener("click", function (e) {
                   localStorage.setItem("seccion", "motos");
                   // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
@@ -160,7 +160,7 @@
     </nav>
   </header>  
   <main>
-       <div id="carouselExampleCaptions" class="carousel slide">
+    <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -198,328 +198,328 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-      <div class="container-fluid bg-light my-5 pl-5 py-5 text-center fs-1">
-        <h2>Motos disponibles</h2>
-        <div class="row">
-          <div class="col-lg-4 ms-5 col-md-6 mt-3">
-            <div class="card" style="width: 300px;">
-              <img class="card-img-top"  src="https://peru.kawasaki-la.com/Content/Images/SubBrand/2024-klx/24klx230s_sblp.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Kawasaki KLX 230</h5>
-                <p class="card-text">Moto todoterreno con suspensión de largo recorrido.</p>
-                <p class="card-text">$11.500.000 COP</p>
-                <!-- Botón para abrir el modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal">
-                  Ver Detalles
-                </button>
+    <div class="container-fluid bg-light my-5 pl-5 py-5 text-center fs-1">
+      <h2>Motos disponibles</h2>
+      <div class="row">
+        <div class="col-lg-4 ms-5 col-md-6 mt-3">
+          <div class="card" style="width: 300px;">
+            <img class="card-img-top"  src="https://peru.kawasaki-la.com/Content/Images/SubBrand/2024-klx/24klx230s_sblp.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Kawasaki KLX 230</h5>
+              <p class="card-text">Moto todoterreno con suspensión de largo recorrido.</p>
+              <p class="card-text">$11.500.000 COP</p>
+              <!-- Botón para abrir el modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal">
+                Ver Detalles
+              </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="https://peru.kawasaki-la.com/Content/Images/SubBrand/2024-klx/24klx230s_sblp.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                        <h5>Kawasaki KLX 230</h5>
-                                        <p>Moto todoterreno con suspensión de largo recorrido.</p>
-                                        <p><strong>Precio:</strong> 11.500.000 COP</p>
-                                        <p><strong>Marca:</strong> Kawasaki</p>
-                                        <p><strong>Tipo:</strong> Enduro</p>
-                                        <p><strong>Cilindraje:</strong> 230 cc</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
-                        </div>
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-3 ">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/honda.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Moto Honda</h5>
-                <p class="card-text">Moto honda CB 125f</p>
-                <p class="card-text">$3.500.000 COP</p>
-                <p class="card-text">Moto de segunda</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal1">
-                  Ver Detalles
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal1" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="../img/honda.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                        <h5>Moto Honda</h5>
-                                        <p>Moto honda 2024 para sentirte libre y andar tranquilo</p>
-                                        <p><strong>Precio:</strong> $3.500.000 COP</p>
-                                        <p><strong>Marca:</strong> Honda</p>
-                                        <p><strong>Tipo:</strong> Deportiva</p>
-                                        <p><strong>Cilindraje:</strong> 125</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <!-- Espacio para la imagen -->
+                        <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                          <img src="https://peru.kawasaki-la.com/Content/Images/SubBrand/2024-klx/24klx230s_sblp.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
                         </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/scooter.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Moto yamaha scooter</h5>
-                <p class="card-text">Scooter 150 Deportivo.</p>
-                <p class="card-text">$7.500.000 COP.</p>
-                <p class="card-text">Moto de segunda.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal2">
-                  Ver Detalles
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal2" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="../img/scooter.png" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                        <h5>Scooter</h5>
-                                        <p>La moto scooter que necesitas</p>
-                                        <p><strong>Precio:</strong> $7.500.000 COP</p>
-                                        <p><strong>Marca:</strong> Yamaha</p>
-                                        <p><strong>Tipo:</strong> Scooter</p>
-                                        <p><strong>Cilindraje:</strong> 150</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
+                        <!-- Espacio para los detalles del producto -->
+                        <div class="col-md-6">
+                          <h5>Kawasaki KLX 230</h5>
+                          <p>Moto todoterreno con suspensión de largo recorrido.</p>
+                          <p><strong>Precio:</strong> 11.500.000 COP</p>
+                          <p><strong>Marca:</strong> Kawasaki</p>
+                          <p><strong>Tipo:</strong> Enduro</p>
+                          <p><strong>Cilindraje:</strong> 230 cc</p>
                         </div>
+                      </div>
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/Motocicleta.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Moto yamaha 150</h5>
-                <p class="card-text">$8.400.000 COP</p>
-                <p class="card-text">yamaha XTZ 150</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal3">
-                  Ver Detalles
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal3" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="../img/Motocicleta.png" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                      <h5>Moto yamaha 150</h5>
-                                      <p>Yamaha XTZ 150 todo terreno</p>
-                                      <p><strong>Precio:</strong> $8.400.000</p>
-                                      <p><strong>Marca:</strong> Yamaha</p>
-                                      <p><strong>Tipo:</strong> Enduro</p>
-                                      <p><strong>Cilindraje:</strong> 150</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                      <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                        <button class="btn btn-success" data-bs-dismiss="modal">
+                          Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                        </button>
+                      </a>
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="../img/yamaha.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Moto Yamaha XTZ</h5>
-                <p class="card-text">Moto Yamaha XTZ 125</p>
-                <p class="card-text">$8.700.000 COP</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal4">
-                  Ver Detalles
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal4" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="../img/yamaha.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                      <h5>Moto yamaha XTZ</h5>
-                                      <p>La motos que necesitas para todo tipos de terrenos terrestres</p>
-                                      <p><strong>Precio:</strong> $6.700.000 COP</p>
-                                      <p><strong>Marca:</strong> Yamaha</p>
-                                      <p><strong>Tipo:</strong> Enduro</p>
-                                      <p><strong>Cilindraje:</strong> 125</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Honda XRE 300</h5>
-                <p class="card-text">$12.000.000 COP</p>
-                <p class="card-text">Aventurera con motor monocilíndrico y ABS.</p>
-                <a href=""></a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal5">
-                  Ver Detalles
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="verDetallesModal5" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Espacio para la imagen -->
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
-                                        <img src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
-                                    </div>
-                                    <!-- Espacio para los detalles del producto -->
-                                    <div class="col-md-6">
-                                      <h5>Honda XRE 300</h5>
-                                      <p>Aventurera con motor monocilíndrico y ABS.</p>
-                                      <p><strong>Precio:</strong> $12.000.000 COP</p>
-                                      <p><strong>Marca:</strong> Honda</p>
-                                      <p><strong>Tipo:</strong> Enduro</p>
-                                      <p><strong>Cilindraje:</strong> 300 cc</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="https://wa.me/573125257631?text=Hola,%20quiero%20más%20información" target="_blank">
-                                  <button class="btn btn-success" data-bs-dismiss="modal">
-                                    Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
-                                  </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation">
-          <ul class="pagination justify-content-center my-5">
-              <li class="page-item">
-                  <a class="page-link" href="#">«</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                  <a class="page-link" href="#">»</a>
-              </li>
-          </ul>
-      </nav>      
+        <div class="col-lg-4 col-md-6 mt-3 ">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../img/honda.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Moto Honda</h5>
+              <p class="card-text">Moto honda CB 125f</p>
+              <p class="card-text">$3.500.000 COP</p>
+              <p class="card-text">Moto de segunda</p>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal1">
+                Ver Detalles
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal1" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <!-- Espacio para la imagen -->
+                                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                                      <img src="../img/honda.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                                  </div>
+                                  <!-- Espacio para los detalles del producto -->
+                                  <div class="col-md-6">
+                                      <h5>Moto Honda</h5>
+                                      <p>Moto honda 2024 para sentirte libre y andar tranquilo</p>
+                                      <p><strong>Precio:</strong> $3.500.000 COP</p>
+                                      <p><strong>Marca:</strong> Honda</p>
+                                      <p><strong>Tipo:</strong> Deportiva</p>
+                                      <p><strong>Cilindraje:</strong> 125</p>
+
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                                <button class="btn btn-success" data-bs-dismiss="modal">
+                                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                                </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../img/scooter.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Moto yamaha scooter</h5>
+              <p class="card-text">Scooter 150 Deportivo.</p>
+              <p class="card-text">$7.500.000 COP.</p>
+              <p class="card-text">Moto de segunda.</p>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal2">
+                Ver Detalles
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal2" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <!-- Espacio para la imagen -->
+                                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                                      <img src="../img/scooter.png" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                                  </div>
+                                  <!-- Espacio para los detalles del producto -->
+                                  <div class="col-md-6">
+                                      <h5>Scooter</h5>
+                                      <p>La moto scooter que necesitas</p>
+                                      <p><strong>Precio:</strong> $7.500.000 COP</p>
+                                      <p><strong>Marca:</strong> Yamaha</p>
+                                      <p><strong>Tipo:</strong> Scooter</p>
+                                      <p><strong>Cilindraje:</strong> 150</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                                <button class="btn btn-success" data-bs-dismiss="modal">
+                                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                                </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../img/Motocicleta.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Moto yamaha 150</h5>
+              <p class="card-text">$8.400.000 COP</p>
+              <p class="card-text">yamaha XTZ 150</p>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal3">
+                Ver Detalles
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal3" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <!-- Espacio para la imagen -->
+                                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                                      <img src="../img/Motocicleta.png" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                                  </div>
+                                  <!-- Espacio para los detalles del producto -->
+                                  <div class="col-md-6">
+                                    <h5>Moto yamaha 150</h5>
+                                    <p>Yamaha XTZ 150 todo terreno</p>
+                                    <p><strong>Precio:</strong> $8.400.000</p>
+                                    <p><strong>Marca:</strong> Yamaha</p>
+                                    <p><strong>Tipo:</strong> Enduro</p>
+                                    <p><strong>Cilindraje:</strong> 150</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                                <button class="btn btn-success" data-bs-dismiss="modal">
+                                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                                </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../img/yamaha.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Moto Yamaha XTZ</h5>
+              <p class="card-text">Moto Yamaha XTZ 125</p>
+              <p class="card-text">$8.700.000 COP</p>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal4">
+                Ver Detalles
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal4" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <!-- Espacio para la imagen -->
+                                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                                      <img src="../img/yamaha.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                                  </div>
+                                  <!-- Espacio para los detalles del producto -->
+                                  <div class="col-md-6">
+                                    <h5>Moto yamaha XTZ</h5>
+                                    <p>La motos que necesitas para todo tipos de terrenos terrestres</p>
+                                    <p><strong>Precio:</strong> $6.700.000 COP</p>
+                                    <p><strong>Marca:</strong> Yamaha</p>
+                                    <p><strong>Tipo:</strong> Enduro</p>
+                                    <p><strong>Cilindraje:</strong> 125</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <a href="https://wa.me/573123355717?text=Hola,%20quiero%20más%20información" target="_blank">
+                                <button class="btn btn-success" data-bs-dismiss="modal">
+                                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                                </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Honda XRE 300</h5>
+              <p class="card-text">$12.000.000 COP</p>
+              <p class="card-text">Aventurera con motor monocilíndrico y ABS.</p>
+              <a href=""></a>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verDetallesModal5">
+                Ver Detalles
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="verDetallesModal5" tabindex="-1" aria-labelledby="verDetallesModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="verDetallesModalLabel">Detalles especificos</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <!-- Espacio para la imagen -->
+                                  <div class="col-md-6 d-flex justify-content-center align-items-center border-end">
+                                      <img src="https://motos.honda.com.co/images/blogs/Todoterreno_XRE300.jpg" alt="Imagen del producto" class="img-fluid" id="productoImagen">
+                                  </div>
+                                  <!-- Espacio para los detalles del producto -->
+                                  <div class="col-md-6">
+                                    <h5>Honda XRE 300</h5>
+                                    <p>Aventurera con motor monocilíndrico y ABS.</p>
+                                    <p><strong>Precio:</strong> $12.000.000 COP</p>
+                                    <p><strong>Marca:</strong> Honda</p>
+                                    <p><strong>Tipo:</strong> Enduro</p>
+                                    <p><strong>Cilindraje:</strong> 300 cc</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <a href="https://wa.me/573125257631?text=Hola,%20quiero%20más%20información" target="_blank">
+                                <button class="btn btn-success" data-bs-dismiss="modal">
+                                  Ir a WhatsApp<i class="fa-brands fa-whatsapp fa-1x"></i></button>
+                                </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center my-5">
+            <li class="page-item">
+                <a class="page-link" href="#">«</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">»</a>
+            </li>
+        </ul>
+    </nav>      
+    </div>
     </section>
   </main>
   <footer class="py-4">
@@ -529,10 +529,10 @@
         <!-- Enlaces legales - Izquierda -->
         <div class="mb-3 mb-md-0">
           <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
+            <li class="list-inline-item me-3 mar">
               <a href="aviso-legal-fronend.html" class="text-decoration-none fs-5">Aviso Legal</a>
             </li>
-            <li class="list-inline-item">
+            <li class="list-inline-item mar">
               <a href="ayuda-frontend.html" class="text-decoration-none fs-5">Ayuda</a>
             </li>
           </ul>

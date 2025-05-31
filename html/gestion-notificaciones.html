@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="/css/style.css" />
 
     <style>
       :root {
@@ -29,33 +30,36 @@
       body {
         font-family: "Arial", sans-serif;
         background-color: #f8f9fa;
-        padding-top: 70px;
-        padding-left: 250px;
         transition: all 0.3s;
       }
 
-      /* Header compacto */
+      /* Header ajustable */
       .compact-header {
-        background-color: var(--primary-color);
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 1030;
-        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        min-height: 70px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
 
-      .compact-header .navbar-brand img {
-        height: 40px;
+      /* Ajuste del padding del body basado en la altura del header */
+      body {
+        padding-top: var(--header-height, 70px);
+        padding-left: 250px;
       }
 
-      /* Sidebar compacto */
+      /* Sidebar ajustable */
       .compact-sidebar {
-        background-color: var(--secondary-color);
+        background-color: #1a1a2e;
         width: 250px;
         position: fixed;
-        top: 70px;
+        top: var(--header-height, 70px);
         left: 0;
         bottom: 0;
         padding: 20px 0;
@@ -63,29 +67,50 @@
         overflow-y: auto;
       }
 
-      .compact-sidebar .nav-link {
-        color: white;
-        padding: 10px 15px;
-        margin: 2px 10px;
-        border-radius: 5px;
+      /* Contenido principal ajustable */
+      .main-content {
+        padding: 20px;
+        min-height: calc(100vh - var(--header-height, 70px));
+      }
+
+      /* Estilos para el logo grande */
+      .navbar-brand img {
+        max-height: 150px;
+        width: auto;
         transition: all 0.3s;
       }
 
-      .compact-sidebar .nav-link:hover,
-      .compact-sidebar .nav-link.active {
-        background-color: #333;
+      .profile-menu {
+        margin-left: auto;
       }
 
-      .compact-sidebar .nav-link i {
-        width: 20px;
-        text-align: center;
-        margin-right: 10px;
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
       }
 
-      /* Contenido principal */
-      .main-content {
-        padding: 20px;
-        min-height: calc(100vh - 70px);
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+
+      .profile-dropdown .dropdown-item {
+        color: black;
+      }
+
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
       }
 
       /* Estilos específicos para notificaciones */
@@ -153,6 +178,16 @@
         color: white;
       }
 
+      .btn-enviar {
+        background-color: #17a2b8;
+        color: white;
+      }
+
+      .btn-enviar:hover {
+        background-color: #138496;
+        color: white;
+      }
+
       /* Responsive */
       @media (max-width: 992px) {
         body {
@@ -172,77 +207,88 @@
   <body>
     <!-- Header compacto -->
     <header class="compact-header">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="sesion-administrador.html">
-            <img src="../img/logo_moto_store-1-5.png" alt="Logo Moto Store" />
-          </a>
+      <a class="navbar-brand" href="sesion-administrador.html">
+        <img
+          src="../img/logo_moto_store-1-5.png"
+          style="height: 150px; width: auto"
+          alt="logo"
+        />
+      </a>
 
-          <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            id="sidebarToggle"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="ms-auto d-none d-lg-block">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-user-circle"></i>
+      <div class="profile-menu">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown profile-dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="fas fa-user"></i> Mi cuenta
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="perfil-vendedor.html">
+                  <i class="fas fa-user-circle me-2"></i>Ver perfil
                 </a>
-                <ul
-                  class="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a class="dropdown-item" href="perfil-administrador.html">
-                      <i class="fas fa-user me-2"></i>Ver perfil
-                    </a>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" id="logout" href="#">
-                      <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
-                    </a>
-                  </li>
-                </ul>
+              </li>
+              <li>
+                <a class="dropdown-item" id="logout" href="#">
+                  <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa-regular fa-bell"></i></i>Notificaciones
+                </a>
               </li>
             </ul>
-          </div>
-        </div>
-      </nav>
+          </li>
+        </ul>
+      </div>
     </header>
 
     <!-- Sidebar compacto -->
     <aside class="compact-sidebar" id="sidebar">
-      <ul class="nav flex-column">
+      <ul class="nav flex-column sidebar-nav">
         <li class="nav-item">
           <a class="nav-link" href="gestion-categoria-baquen.html">
-            <i class="fas fa-list"></i> Config. categorías
+            <i class="fas fa-list me-2"></i>Conf.categorias
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="gestion-notificaciones.html">
-            <i class="fas fa-bell"></i> Config. notificaciones
+          <a class="nav-link" href="gestion-notificaciones.html">
+            <i class="fas fa-bell me-2"></i>Conf.notificaciones
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Informe-admi.html">
-            <i class="fas fa-chart-bar"></i> Informes
+            <i class="fas fa-chart-bar me-2"></i>Informes
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="administracion-cuentas.html">
-            <i class="fas fa-users"></i> Config. cuentas
+            <i class="fas fa-users me-2"></i>Conf.cuentas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="administracion-cuentas.html">
+            <i class="fas fa-id-card me-2"></i>Conf.Membresia
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="administracion-cuentas.html">
+            <i class="fas fa-money-bill-wave me-2"></i>Gestion.Pago
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="administracion-cuentas.html">
+            <i class="fas fa-boxes me-2"></i>Conf.Productos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="conf-productos.html">
+            <i class="fa-regular fa-bell"></i></i> Conf.Notificacion
           </a>
         </li>
       </ul>
@@ -264,17 +310,27 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0">Gestión de Notificaciones</h2>
-          <button
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#nuevaNotificacionModal"
-          >
-            <i class="fas fa-plus-circle me-2"></i>Nueva Notificación
-          </button>
+          <div>
+            <button
+              class="btn btn-primary me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#nuevaNotificacionModal"
+            >
+              <i class="fas fa-plus-circle me-2"></i>Nueva Notificación
+            </button>
+            <button
+              class="btn btn-enviar"
+              data-bs-toggle="modal"
+              data-bs-target="#enviarNotificacionModal"
+            >
+              <i class="fas fa-paper-plane me-2"></i>Enviar Notificación
+            </button>
+          </div>
         </div>
 
         <!-- Lista de notificaciones -->
-        <div class="notification-list">
+        <div class="notification-list" id="notificationList">
+          <!-- Las notificaciones se agregarán dinámicamente aquí -->
           <div class="notification-card">
             <div class="notification-content">
               <h5>
@@ -319,32 +375,6 @@
               <div class="btn-group">
                 <button class="btn btn-sm btn-toggle">
                   <i class="fas fa-toggle-on"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="notification-card">
-            <div class="notification-content">
-              <h5>
-                <a href="#" class="text-decoration-none">Notificación 3</a>
-              </h5>
-              <p class="text-muted mb-2">Última actualización: 05/05/2023</p>
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repudiandae cupiditate omnis optio rem alias sed nihil, mollitia
-                sit enim reiciendis hic, commodi cumque, dignissimos pariatur
-                reprehenderit qui voluptatum tempore officia?
-              </p>
-            </div>
-            <div class="notification-actions">
-              <span class="status-inactive mb-2">Inactivo</span>
-              <div class="btn-group">
-                <button class="btn btn-sm btn-toggle off">
-                  <i class="fas fa-toggle-off"></i>
                 </button>
                 <button class="btn btn-sm btn-outline-danger">
                   <i class="fas fa-trash"></i>
@@ -397,7 +427,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="formNuevaNotificacion">
               <div class="mb-3">
                 <label for="tituloNotificacion" class="form-label"
                   >Título</label
@@ -441,8 +471,130 @@
             >
               Cancelar
             </button>
-            <button type="button" class="btn btn-primary">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="btnGuardarNotificacion"
+            >
               Guardar Notificación
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para enviar notificación -->
+    <div
+      class="modal fade"
+      id="enviarNotificacionModal"
+      tabindex="-1"
+      aria-labelledby="enviarNotificacionModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enviarNotificacionModalLabel">
+              Enviar Notificación
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formEnviarNotificacion">
+              <div class="mb-3">
+                <label for="tituloEnviarNotificacion" class="form-label"
+                  >Título</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tituloEnviarNotificacion"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contenidoEnviarNotificacion" class="form-label"
+                  >Contenido</label
+                >
+                <textarea
+                  class="form-control"
+                  id="contenidoEnviarNotificacion"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Destinatario</label>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="tipoDestinatario"
+                    id="destinatarioCorreo"
+                    value="correo"
+                    checked
+                  />
+                  <label class="form-check-label" for="destinatarioCorreo">
+                    Enviar por correo
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="tipoDestinatario"
+                    id="destinatarioCedula"
+                    value="cedula"
+                  />
+                  <label class="form-check-label" for="destinatarioCedula">
+                    Buscar por cédula
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="tipoDestinatario"
+                    id="destinatarioNombre"
+                    value="nombre"
+                  />
+                  <label class="form-check-label" for="destinatarioNombre">
+                    Buscar por nombre
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3" id="campoDestinatario">
+                <label for="valorDestinatario" class="form-label"
+                  >Correo electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="valorDestinatario"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-enviar"
+              id="btnEnviarNotificacion"
+            >
+              <i class="fas fa-paper-plane me-2"></i>Enviar
             </button>
           </div>
         </div>
@@ -452,15 +604,230 @@
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script personalizado -->
+    <!-- Script para ajustar dinámicamente el header -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Toggle sidebar en móviles
-        document
-          .getElementById("sidebarToggle")
-          .addEventListener("click", function () {
-            document.getElementById("sidebar").classList.toggle("show");
+        // Variables globales
+        let notificaciones = [
+          {
+            titulo: "Notificación 1",
+            contenido:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
+            fecha: "15/05/2023",
+            activa: true,
+          },
+          {
+            titulo: "Notificación 2",
+            contenido:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
+            fecha: "10/05/2023",
+            activa: true,
+          },
+        ];
+
+        // Función para actualizar la altura del header
+        function updateHeaderHeight() {
+          const header = document.querySelector(".compact-header");
+          const headerHeight = header.offsetHeight;
+          document.documentElement.style.setProperty(
+            "--header-height",
+            `${headerHeight}px`
+          );
+        }
+
+        // Función para renderizar notificaciones
+        function renderNotificaciones() {
+          const notificationList = document.getElementById("notificationList");
+          notificationList.innerHTML = "";
+
+          notificaciones.forEach((notificacion, index) => {
+            const notificationCard = document.createElement("div");
+            notificationCard.className = "notification-card";
+            notificationCard.innerHTML = `
+              <div class="notification-content">
+                <h5><a href="#" class="text-decoration-none">${
+                  notificacion.titulo
+                }</a></h5>
+                <p class="text-muted mb-2">Última actualización: ${
+                  notificacion.fecha
+                }</p>
+                <p class="mb-0">${notificacion.contenido}</p>
+              </div>
+              <div class="notification-actions">
+                <span class="${
+                  notificacion.activa ? "status-active" : "status-inactive"
+                } mb-2">
+                  ${notificacion.activa ? "Activo" : "Inactivo"}
+                </span>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-toggle ${
+                    notificacion.activa ? "" : "off"
+                  }" data-index="${index}">
+                    <i class="fas fa-toggle-${
+                      notificacion.activa ? "on" : "off"
+                    }"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" data-index="${index}">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            `;
+            notificationList.appendChild(notificationCard);
           });
+
+          // Agregar event listeners a los botones recién creados
+          addEventListeners();
+        }
+
+        // Función para agregar notificación
+        function agregarNotificacion(titulo, contenido, activa) {
+          const fechaActual = new Date();
+          const fechaFormateada = `${fechaActual.getDate()}/${
+            fechaActual.getMonth() + 1
+          }/${fechaActual.getFullYear()}`;
+
+          notificaciones.unshift({
+            titulo: titulo,
+            contenido: contenido,
+            fecha: fechaFormateada,
+            activa: activa,
+          });
+
+          renderNotificaciones();
+        }
+
+        // Función para agregar event listeners
+        function addEventListeners() {
+          // Toggle para activar/desactivar notificaciones
+          document.querySelectorAll(".btn-toggle").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const index = this.getAttribute("data-index");
+              const card = this.closest(".notification-card");
+              const status = card.querySelector(".notification-actions span");
+
+              notificaciones[index].activa = !notificaciones[index].activa;
+
+              if (notificaciones[index].activa) {
+                this.classList.remove("off");
+                this.innerHTML = '<i class="fas fa-toggle-on"></i>';
+                status.textContent = "Activo";
+                status.className = "status-active mb-2";
+              } else {
+                this.classList.add("off");
+                this.innerHTML = '<i class="fas fa-toggle-off"></i>';
+                status.textContent = "Inactivo";
+                status.className = "status-inactive mb-2";
+              }
+            });
+          });
+
+          // Eliminar notificación
+          document.querySelectorAll(".btn-outline-danger").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const index = this.getAttribute("data-index");
+              if (confirm("¿Está seguro de eliminar esta notificación?")) {
+                notificaciones.splice(index, 1);
+                renderNotificaciones();
+              }
+            });
+          });
+        }
+
+        // Cambiar campo de destinatario según selección
+        document
+          .querySelectorAll('input[name="tipoDestinatario"]')
+          .forEach((radio) => {
+            radio.addEventListener("change", function () {
+              const campoDestinatario =
+                document.getElementById("campoDestinatario");
+              const label = campoDestinatario.querySelector("label");
+              const input = campoDestinatario.querySelector("input");
+
+              if (this.value === "correo") {
+                label.textContent = "Correo electrónico";
+                input.type = "email";
+                input.placeholder = "ejemplo@dominio.com";
+              } else if (this.value === "cedula") {
+                label.textContent = "Número de cédula";
+                input.type = "text";
+                input.placeholder = "1234567890";
+              } else if (this.value === "nombre") {
+                label.textContent = "Nombre del usuario";
+                input.type = "text";
+                input.placeholder = "Nombre Apellido";
+              }
+            });
+          });
+
+        // Guardar nueva notificación
+        document
+          .getElementById("btnGuardarNotificacion")
+          .addEventListener("click", function () {
+            const titulo = document.getElementById("tituloNotificacion").value;
+            const contenido = document.getElementById(
+              "contenidoNotificacion"
+            ).value;
+            const activa = document.getElementById(
+              "activarNotificacion"
+            ).checked;
+
+            if (titulo && contenido) {
+              agregarNotificacion(titulo, contenido, activa);
+
+              // Limpiar formulario
+              document.getElementById("formNuevaNotificacion").reset();
+
+              // Cerrar modal
+              const modal = bootstrap.Modal.getInstance(
+                document.getElementById("nuevaNotificacionModal")
+              );
+              modal.hide();
+            } else {
+              alert("Por favor complete todos los campos");
+            }
+          });
+
+        // Enviar notificación
+        document
+          .getElementById("btnEnviarNotificacion")
+          .addEventListener("click", function () {
+            const titulo = document.getElementById(
+              "tituloEnviarNotificacion"
+            ).value;
+            const contenido = document.getElementById(
+              "contenidoEnviarNotificacion"
+            ).value;
+            const tipoDestinatario = document.querySelector(
+              'input[name="tipoDestinatario"]:checked'
+            ).value;
+            const valorDestinatario =
+              document.getElementById("valorDestinatario").value;
+
+            if (titulo && contenido && valorDestinatario) {
+              // Aquí iría la lógica para enviar la notificación
+              // Por ahora solo mostramos un mensaje de éxito
+              alert(
+                `Notificación enviada a ${valorDestinatario} (${tipoDestinatario})`
+              );
+
+              // Limpiar formulario
+              document.getElementById("formEnviarNotificacion").reset();
+
+              // Cerrar modal
+              const modal = bootstrap.Modal.getInstance(
+                document.getElementById("enviarNotificacionModal")
+              );
+              modal.hide();
+            } else {
+              alert("Por favor complete todos los campos");
+            }
+          });
+
+        // Inicialización
+        updateHeaderHeight();
+        window.addEventListener("resize", updateHeaderHeight);
+        renderNotificaciones();
 
         // Logout
         document
@@ -471,38 +838,6 @@
               window.location.href = "../index.html";
             }
           });
-
-        // Toggle para activar/desactivar notificaciones
-        document.querySelectorAll(".btn-toggle").forEach((btn) => {
-          btn.addEventListener("click", function () {
-            const card = this.closest(".notification-card");
-            const status = card.querySelector(".notification-actions span");
-
-            if (this.classList.contains("off")) {
-              // Activar
-              this.classList.remove("off");
-              this.innerHTML = '<i class="fas fa-toggle-on"></i>';
-              this.classList.add("btn-toggle");
-              status.textContent = "Activo";
-              status.className = "status-active mb-2";
-            } else {
-              // Desactivar
-              this.classList.add("off");
-              this.innerHTML = '<i class="fas fa-toggle-off"></i>';
-              status.textContent = "Inactivo";
-              status.className = "status-inactive mb-2";
-            }
-          });
-        });
-
-        // Eliminar notificación
-        document.querySelectorAll(".btn-outline-danger").forEach((btn) => {
-          btn.addEventListener("click", function () {
-            if (confirm("¿Está seguro de eliminar esta notificación?")) {
-              this.closest(".notification-card").remove();
-            }
-          });
-        });
       });
     </script>
   </body>

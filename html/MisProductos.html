@@ -1,293 +1,422 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mis Productos</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
-    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-    <link rel="stylesheet" href="../css/style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
     <style>
-        .breadcrumb {
-            background: none;
-            padding: 0;
-        }
-        .product-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #f8f9fa;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-        .product-card img {
-            width: 80px;
-            height: auto;
-        }
-        .publish-btn-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 3rem;
-        }
-        .dropdown-toggle::after {
-            margin-left: 0.5em;
-        }
-        
-        /* Nuevos estilos para el switch */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin: 0 10px;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider {
-            background-color: #007bff; /* Azul cuando está activado */
-        }
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        .estado-texto {
-            font-weight: 500;
-            min-width: 70px;
-            display: inline-block;
-        }
-        .text-active {
-            color: #007bff;
-        }
-        .btn-options {
-            font-size: 1.2rem;
-            padding: 0.15rem 0.5rem;
-            line-height: 1;
-            border: none;
-            background: transparent;
-            color: #6c757d;
-        }
+      .breadcrumb {
+        background: none;
+        padding: 0;
+      }
+      .publish-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 3rem;
+      }
+      .dropdown-toggle::after {
+        margin-left: 0.5em;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+        margin: 0 10px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 24px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #007bff;
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      .estado-texto {
+        font-weight: 500;
+        min-width: 70px;
+        display: inline-block;
+      }
+      .text-active {
+        color: #007bff;
+      }
+      .text-warning {
+        color: #ffc107;
+      }
+      .btn-options {
+        font-size: 1.2rem;
+        padding: 0.15rem 0.5rem;
+        line-height: 1;
+        border: none;
+        background: transparent;
+        color: #6c757d;
+      }
+      .vender-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+      }
+      .vender-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+      .vender-dropdown .dropdown-item {
+        color: black;
+      }
+      .vender-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+      .profile-dropdown .dropdown-item {
+        color: black;
+      }
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+      .product-table {
+        width: 100%;
+        margin-bottom: 30px;
+        border-collapse: collapse;
+      }
+      .product-table th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .product-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+      }
+      .product-table tr:hover {
+        background-color: #f8f9fa;
+      }
+      .section-title {
+        margin: 30px 0 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .search-container {
+        margin-bottom: 2rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand" href="sesion-vendedor.html">
-            <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-4">
+              <a class="navbar-brand" href="sesion-vendedor.html">
+                <img
+                  src="../img/logo_moto_store-1-5.png"
+                  style="width: 200px; height: 150px"
+                  alt="logo"
+                />
+              </a>
+            </div>
+            <div class="col-4 col-md-4">
+              <div class="search-mobile d-lg-none ms-2">
+                <form class="d-flex">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search"
+                    size="100"
+                  />
+                  <button class="btn btn-success ms-2" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="col">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent1"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav me-auto ms-2">
               <li class="nav-item mx-2">
-                <a class="nav-link" href="informe-ven.html">Informes<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item mx-2"> 
                 <a class="nav-link" href="membresia.html">Membresia</a>
               </li>
               <li class="nav-item mx-2">
                 <a class="nav-link" href="MisProductos.html">Mis productos</a>
               </li>
-              <form class="form-inline">
-                <div class="input-group">
-                  <input type="search" class="form-control" placeholder="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </div>
-              </form>
-              <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Vender 
+              <li class="nav-item search-desktop d-none d-lg-block">
+                <form class="form-inline">
+                  <div class="input-group">
+                    <input
+                      type="search"
+                      class="form-control"
+                      placeholder="Search"
+                      size="30"
+                    />
+                    <button class="btn btn-danger" type="submit">Search</button>
+                  </div>
+                </form>
+              </li>
+              <li class="nav-item dropdown mx-2 vender-dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownVender"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Vender
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownVender"
+                >
                   <a class="dropdown-item" href="vender-moto.html">Moto</a>
-                  <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
+                  <a class="dropdown-item" href="vender-repuesto.html"
+                    >Repuesto</a
+                  >
                 </div>
               </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="ayuda-vendedor.html">Ayuda</a>
+              <li class="nav-item">
+                <a class="nav-link" href="ayuda-frontend.html" id="ir-a-ayuda"
+                  >Ayuda</a
+                >
+                <script>
+                  document
+                    .getElementById("ir-a-ayuda")
+                    .addEventListener("click", function (e) {
+                      localStorage.setItem("seccion", "productos");
+                    });
+                </script>
               </li>
-              <li class="nav-item dropdown mx-3">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user fa-2x"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="perfil-vendedor.html">Ver perfil</a>
-                  <a class="dropdown-item" id="logout" href="">Cerrar sesion</a>
-                </div>
-              </li>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown profile-dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-user"></i> Mi cuenta
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="perfil-vendedor.html">
+                        <i class="fas fa-user-circle me-2"></i>Ver perfil
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" id="logout" href="#">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="notificaciones.html">
+                        <i class="fa-regular fa-bell"></i></i>Notificaciones
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </ul>
           </div>
-        </nav>
-      </header>
-
+        </div>
+      </nav>
+    </header>
     <main class="container mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="sesion-vendedor.html">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mis productos</li>
-            </ol>
-        </nav>
-
-        <!-- Botón Publicar nuevo producto en esquina derecha con mb-5 -->
-        <div class="publish-btn-container">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Publicar nuevo producto
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="vender-moto.html">Moto</a>
-              <a class="dropdown-item" href="vender-repuesto.html">Repuesto</a>
-            </div>
-          </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="sesion-vendedor.html">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Mis productos
+          </li>
+        </ol>
+      </nav>
+      <div class="search-container">
+        <input
+          type="search"
+          id="searchInput"
+          class="form-control"
+          placeholder="Buscar motos o repuestos..."
+        />
+      </div>
+      <div class="publish-btn-container">
+        <div class="dropdown publish-dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-plus-circle me-2"></i>Publicar nuevo producto
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <a class="dropdown-item" href="vender-moto.html"
+                ><i class="fas fa-motorcycle me-2"></i>Moto</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="vender-repuesto.html"
+                ><i class="fas fa-cog me-2"></i>Repuesto</a
+              >
+            </li>
+          </ul>
         </div>
-
-        <!-- Producto 1 con nuevos controles -->
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Producto 1</a></h5>
-                <p>Detalles</p>
-                <p>$50.00</p>
-            </div>
-            <img src="../img/scooter.png" alt="Moto">
-            <div class="d-flex align-items-center">
-                <div class="me-3">
-                    <span class="estado-texto text-active">Activado</span>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="dropdown">
-                    <button class="btn-options dropdown-toggle" 
-                            type="button" 
-                            data-toggle="dropdown"
-                            aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="modificar-moto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
-                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Producto 2 con nuevos controles -->
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Producto 2</a></h5>
-                <p>Detalles</p>
-                <p>$50.00</p>
-            </div>
-            <img src="../img/yamaha.jpg" alt="Moto">
-            <div class="d-flex align-items-center">
-                <div class="me-3">
-                    <span class="estado-texto text-warning">Pausado</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="dropdown">
-                    <button class="btn-options dropdown-toggle" 
-                            type="button" 
-                            data-toggle="dropdown"
-                            aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="modificar-moto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
-                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Producto 3 con nuevos controles -->
-        <div class="product-card">
-            <div>
-                <h5><a href="#">Producto 3</a></h5>
-                <p>Detalles</p>
-                <p>$50.00</p>
-            </div>
-            <img src="../img/bujia.jpg" alt="Moto">
-            <div class="d-flex align-items-center">
-                <div class="me-3">
-                    <span class="estado-texto text-warning">Pausado</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="dropdown">
-                    <button class="btn-options dropdown-toggle" 
-                            type="button" 
-                            data-toggle="dropdown"
-                            aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="modificar-repuesto.html"><i class="fas fa-edit me-2"></i>Modificar</a>
-                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Eliminar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <nav>
-            <ul class="pagination justify-content-center mt-3">
-                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </nav>
+      </div>
+      <h2 class="section-title">Mis Motos</h2>
+      <table class="product-table" id="motosTable">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Marca</th>
+            <th>Cilindraje</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="motosTableBody"></tbody>
+      </table>
+      <h2 class="section-title">Mis Repuestos</h2>
+      <table class="product-table" id="repuestosTable">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Marca</th>
+            <th>Cantidad</th>
+            <th>Categoría</th>
+            <th>Tipo</th>
+            <th>Subcategoría</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="repuestosTableBody"></tbody>
+      </table>
+      <nav>
+        <ul class="pagination justify-content-center mt-3">
+          <li class="page-item disabled">
+            <a class="page-link" href="#">«</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </nav>
     </main>
-
     <footer class="py-4">
       <div class="container">
-        <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <!-- Enlaces legales - Izquierda -->
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item me-3">
-                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  id="ir-aviso-legal"
+                  >Aviso Legal</a
+                >
+                <script>
+                  document
+                    .getElementById("ir-aviso-legal")
+                    .addEventListener("click", function (e) {
+                      localStorage.setItem("seccion", "productos");
+                    });
+                </script>
               </li>
-              <li class="list-inline-item">
-                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              <li class="list-inline-item mar">
+                <a
+                  href="ayuda-frontend.html"
+                  class="text-decoration-none fs-5"
+                  id="ir-a-ayuda-footer"
+                  >Ayuda</a
+                >
+                <script>
+                  document
+                    .getElementById("ir-a-ayuda-footer")
+                    .addEventListener("click", function (e) {
+                      localStorage.setItem("seccion", "productos");
+                    });
+                </script>
               </li>
             </ul>
           </div>
-          
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -313,38 +442,407 @@
             </ul>
           </div>
         </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
     </footer>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-    <script src="../js/sweetalert2@9.js"></script>
-    <script src="../js/logout.js"></script>
-    
-    <!-- Script para el switch -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
-        document.querySelectorAll('.switch input').forEach(toggle => {
-            const texto = toggle.closest('.product-card').querySelector('.estado-texto');
-            
-            toggle.addEventListener('change', function() {
-                if(this.checked) {
-                    texto.textContent = "Activado";
-                    texto.classList.remove('text-warning');
-                    texto.classList.add('text-active');
-                } else {
-                    texto.textContent = "Pausado";
-                    texto.classList.remove('text-active');
-                    texto.classList.add('text-warning');
-                }
-            });
+      $(document).ready(function () {
+        // Inicializar motos y repuestos estáticos en localStorage
+        function initializeStaticItems() {
+          const staticMotos = [
+            {
+              id: "moto_1",
+              imagen: "../img/yamaha.jpg",
+              marca: "Yamaha",
+              cilindraje: "150cc",
+              modelo: "Scooter",
+              anio: "2023",
+              descripcion:
+                "Scooter Yamaha 150cc, modelo 2023, 5,000 km, excelente estado",
+              estado: "Activado",
+              precio: "$5.000.000 COP",
+            },
+            {
+              id: "moto_2",
+              imagen: "../img/honda.jpg",
+              marca: "Honda",
+              cilindraje: "125cc",
+              modelo: "Naked",
+              anio: "2022",
+              descripcion: "Honda CB 125F, modelo 2022, 8,000 km, color rojo",
+              estado: "Pausado",
+              precio: "$4.500.000 COP",
+            },
+            {
+              id: "moto_3",
+              imagen:
+                "https://motorsfan.com/wp-content/uploads/2024/09/01-kawasaki-ninja-zx-25r-2021-e1729360702917.webp",
+              marca: "Kawasaki",
+              cilindraje: "250cc",
+              modelo: "Deportiva",
+              anio: "2021",
+              descripcion:
+                "Kawasaki Ninja 250, modelo 2021, 12,000 km, full equipo",
+              estado: "Activado",
+              precio: "$8.000.000 COP",
+            },
+          ];
+
+          const staticRepuestos = [
+            {
+              id: "repuesto_1",
+              imagen: "../img/bujia.jpg",
+              marca: "Bosch",
+              cantidad: 10,
+              categoria: "Partes del motor",
+              tipo: "Original",
+              subcategoria: "Bujías",
+              precio: "$45.000 COP",
+              descripcion: "Bujía NGK para clima frío, referencia CPR8EA-9",
+              estado: "Pausado",
+            },
+            {
+              id: "repuesto_2",
+              imagen:
+                "https://gxmotor.co/cdn/shop/files/301605.jpg?v=1692971419",
+              marca: "Gates",
+              cantidad: 5,
+              categoria: "Transmisión",
+              tipo: "Genérico",
+              subcategoria: "Cadenas",
+              precio: "$120.000 COP",
+              descripcion:
+                "Cadena de transmisión para motos 150cc, 428H-120 eslabones",
+              estado: "Activado",
+            },
+            {
+              id: "repuesto_3",
+              imagen:
+                "https://todohonda.com/wp-content/uploads/2020/11/pastilla-freno-de-cbf-150-orig-1.jpg",
+              marca: "Febibilstein",
+              cantidad: 8,
+              categoria: "Sistema de frenos",
+              tipo: "Original",
+              subcategoria: "Pastillas de freno",
+              precio: "$85.000 COP",
+              descripcion:
+                "Pastillas de freno delantero para Yamaha 150cc, material cerámico",
+              estado: "Activado",
+            },
+          ];
+
+          let motos = JSON.parse(localStorage.getItem("motos")) || [];
+          let repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+          if (motos.length === 0) {
+            localStorage.setItem("motos", JSON.stringify(staticMotos));
+          }
+          if (repuestos.length === 0) {
+            localStorage.setItem("repuestos", JSON.stringify(staticRepuestos));
+          }
+        }
+
+        initializeStaticItems();
+
+        const motosTableBody = $("#motosTableBody");
+        const repuestosTableBody = $("#repuestosTableBody");
+
+        // Cargar motos desde localStorage
+        function loadMotos() {
+          motosTableBody.empty();
+          const motos = JSON.parse(localStorage.getItem("motos")) || [];
+          motos.forEach((moto) => {
+            const modalId = `deleteModal_${moto.id}`;
+            const dropdownId = `optionsDropdown_${moto.id}`;
+            const row = `
+              <tr data-id="${moto.id}">
+                <td><img src="${moto.imagen}" alt="${
+              moto.marca
+            }" width="80" /></td>
+                <td>${moto.marca}</td>
+                <td>${moto.cilindraje}</td>
+                <td>${moto.modelo}</td>
+                <td>${moto.anio}</td>
+                <td>${moto.precio}</td>
+                <td>${moto.descripcion}</td>
+                <td>
+                  <span class="estado-texto ${
+                    moto.estado === "Activado" ? "text-active" : "text-warning"
+                  }">${moto.estado}</span>
+                  <label class="switch">
+                    <input type="checkbox" ${
+                      moto.estado === "Activado" ? "checked" : ""
+                    } />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+                <td>
+                  <div class="dropdown options-dropdown">
+                    <button
+                      class="btn-options"
+                      type="button"
+                      id="${dropdownId}"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="${dropdownId}">
+                      <li>
+                        <a class="dropdown-item" href="modificar-moto.html?id=${
+                          moto.id
+                        }"><i class="fas fa-edit me-2"></i>Modificar</a>
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item text-danger"
+                          href="#"
+                          data-bs-toggle="modal"
+                          data-bs-target="#${modalId}"
+                        ><i class="fas fa-trash me-2"></i>Eliminar</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            `;
+            const modal = `
+              <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Confirmar eliminación</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ¿Estás seguro de que deseas eliminar este producto?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-danger delete-btn" data-id="${moto.id}">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            motosTableBody.append(row);
+            $("body").append(modal);
+          });
+        }
+
+        // Cargar repuestos desde localStorage
+        function loadRepuestos() {
+          repuestosTableBody.empty();
+          const repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+          repuestos.forEach((repuesto) => {
+            const modalId = `deleteModal_${repuesto.id}`;
+            const dropdownId = `optionsDropdown_${repuesto.id}`;
+            const row = `
+              <tr data-id="${repuesto.id}">
+                <td><img src="${repuesto.imagen}" alt="${
+              repuesto.marca
+            }" width="80" /></td>
+                <td>${repuesto.marca}</td>
+                <td>${repuesto.cantidad}</td>
+                <td>${repuesto.categoria}</td>
+                <td>${repuesto.tipo}</td>
+                <td>${repuesto.subcategoria}</td>
+                <td>${repuesto.precio}</td>
+                <td>${repuesto.descripcion}</td>
+                <td>
+                  <span class="estado-texto ${
+                    repuesto.estado === "Activado"
+                      ? "text-active"
+                      : "text-warning"
+                  }">${repuesto.estado}</span>
+                  <label class="switch">
+                    <input type="checkbox" ${
+                      repuesto.estado === "Activado" ? "checked" : ""
+                    } />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+                <td>
+                  <div class="dropdown options-dropdown">
+                    <button
+                      class="btn-options"
+                      type="button"
+                      id="${dropdownId}"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="${dropdownId}">
+                      <li>
+                        <a class="dropdown-item" href="modificar-repuesto.html?id=${
+                          repuesto.id
+                        }"><i class="fas fa-edit me-2"></i>Modificar</a>
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item text-danger"
+                          href="#"
+                          data-bs-toggle="modal"
+                          data-bs-target="#${modalId}"
+                        ><i class="fas fa-trash me-2"></i>Eliminar</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            `;
+            const modal = `
+              <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Confirmar eliminación</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ¿Estás seguro de que deseas eliminar este producto?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-danger delete-btn" data-id="${repuesto.id}">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            repuestosTableBody.append(row);
+            $("body").append(modal);
+          });
+        }
+
+        loadMotos();
+        loadRepuestos();
+
+        // Actualizar estado
+        $(document).on("change", ".switch input", function () {
+          const texto = $(this).closest("tr").find(".estado-texto");
+          const id = $(this).closest("tr").data("id");
+          let motos = JSON.parse(localStorage.getItem("motos")) || [];
+          let repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+          const moto = motos.find((m) => m.id === id);
+          const repuesto = repuestos.find((r) => r.id === id);
+          if (this.checked) {
+            texto
+              .text("Activado")
+              .removeClass("text-warning")
+              .addClass("text-active");
+            if (moto) moto.estado = "Activado";
+            if (repuesto) repuesto.estado = "Activado";
+          } else {
+            texto
+              .text("Pausado")
+              .removeClass("text-active")
+              .addClass("text-warning");
+            if (moto) moto.estado = "Pausado";
+            if (repuesto) repuesto.estado = "Pausado";
+          }
+          localStorage.setItem("motos", JSON.stringify(motos));
+          localStorage.setItem("repuestos", JSON.stringify(repuestos));
         });
+
+        // Eliminar producto
+        $(document).on("click", ".delete-btn", function () {
+          const id = $(this).data("id");
+          let motos = JSON.parse(localStorage.getItem("motos")) || [];
+          let repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+          motos = motos.filter((m) => m.id !== id);
+          repuestos = repuestos.filter((r) => r.id !== id);
+          localStorage.setItem("motos", JSON.stringify(motos));
+          localStorage.setItem("repuestos", JSON.stringify(repuestos));
+          $(`tr[data-id="${id}"]`).remove();
+          $(`#deleteModal_${id}`).modal("hide");
+          Swal.fire({
+            icon: "success",
+            title: "¡Eliminado!",
+            text: "El producto ha sido eliminado.",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        });
+
+        // Logout
+        $("#logout").click(function (event) {
+          event.preventDefault();
+          Swal.fire({
+            title: "¿Cerrar sesión?",
+            text: "Tu sesión se cerrará y volverás a la página de inicio.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+            timer: 10000,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                icon: "success",
+                title: "¡Sesión cerrada!",
+                timer: 1500,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.href = "index.html";
+              });
+            }
+          });
+        });
+
+        // Buscar
+        $("#searchInput").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          $("#motosTable tbody tr").each(function () {
+            const marca = $(this).find("td:nth-child(2)").text().toLowerCase();
+            const cilindraje = $(this)
+              .find("td:nth-child(3)")
+              .text()
+              .toLowerCase();
+            const modelo = $(this).find("td:nth-child(4)").text().toLowerCase();
+            const precio = $(this).find("td:nth-child(6)").text().toLowerCase();
+            const descripcion = $(this)
+              .find("td:nth-child(7)")
+              .text()
+              .toLowerCase();
+            $(this).toggle(
+              marca.includes(searchTerm) ||
+                cilindraje.includes(searchTerm) ||
+                modelo.includes(searchTerm) ||
+                precio.includes(searchTerm) ||
+                descripcion.includes(searchTerm)
+            );
+          });
+          $("#repuestosTable tbody tr").each(function () {
+            const marca = $(this).find("td:nth-child(2)").text().toLowerCase();
+            const categoria = $(this)
+              .find("td:nth-child(4)")
+              .text()
+              .toLowerCase();
+            const tipo = $(this).find("td:nth-child(5)").text().toLowerCase();
+            const subcategoria = $(this)
+              .find("td:nth-child(6)")
+              .text()
+              .toLowerCase();
+            const descripcion = $(this)
+              .find("td:nth-child(8)")
+              .text()
+              .toLowerCase();
+            $(this).toggle(
+              marca.includes(searchTerm) ||
+                categoria.includes(searchTerm) ||
+                tipo.includes(searchTerm) ||
+                subcategoria.includes(searchTerm) ||
+                descripcion.includes(searchTerm)
+            );
+          });
+        });
+      });
     </script>
-</body>
+  </body>
 </html>

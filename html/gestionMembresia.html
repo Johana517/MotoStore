@@ -1,650 +1,1011 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Motostore</title>
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .sidebar {
-            background-color: #343a40;
-            min-height: 100vh;
-            color: white;
-        }
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        .sidebar .nav-link:hover {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .sidebar .nav-link.active {
-            color: white;
-            background-color: #007bff;
-        }
-        .main-content {
-            padding: 20px;
-        }
-        .card-summary {
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        .card-summary:hover {
-            transform: translateY(-5px);
-        }
-        .benefits-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .benefits-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .benefits-list li:last-child {
-            border-bottom: none;
-        }
-        .benefits-list i {
-            color: #28a745;
-            margin-right: 8px;
-        }
+      body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0; /* Ensure no padding on body */
+      }
+      .header-container {
+        width: 100%;
+        padding: 10px 20px;
+      }
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+      }
+      .container-fluid {
+        display: flex;
+        padding: 0; /* Remove Bootstrap's default padding */
+        margin: 0; /* Ensure no margin */
+      }
+      .sidebar-container {
+        background-color: #1a1a2e;
+        min-height: calc(
+          100vh - 100px
+        ); /* Adjust height to account for header */
+        width: 250px;
+        color: white;
+        padding: 20px 0 0 0; /* Remove left padding, keep top padding */
+        margin: 0; /* Ensure no margin */
+      }
+      .sidebar-nav {
+        padding-left: 0;
+      }
+      .main-content {
+        flex: 1;
+        padding: 20px;
+      }
+      .card-summary {
+        border-radius: 10px;
+        transition: transform 0.3s;
+      }
+      .card-summary:hover {
+        transform: translateY(-5px);
+      }
+      .benefits-list {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      .benefits-list li {
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .benefits-list li:last-child {
+        border-bottom: none;
+      }
+      .benefits-list i {
+        color: #28a745;
+        margin-right: 8px;
+      }
+      .profile-menu {
+        margin-left: auto;
+      }
+      .profile-dropdown .nav-link {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .profile-dropdown .nav-link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+      .profile-dropdown .dropdown-menu {
+        background-color: white;
+        border: 1px solid #ddd;
+      }
+      .profile-dropdown .dropdown-item {
+        color: black;
+      }
+      .profile-dropdown .dropdown-item:hover {
+        background-color: #cc0000;
+        color: white;
+      }
+      .membership-card {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+      .edit-membership-card {
+        margin-top: 10px;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 5px;
+      }
     </style>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse bg-dark">
-                <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
-                        <h4 class="text-white">Motostore</h4>
-                        <hr class="bg-light">
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/memberships">
-                                <i class="fas fa-id-card me-2"></i>Membresías
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-users me-2"></i>Clientes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog me-2"></i>Configuración
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-                <!-- Top Bar -->
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-download me-1"></i>Exportar
-                            </button>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#newMembershipModal">
-                            <i class="fas fa-plus me-1"></i>Nueva membresía
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Summary Cards -->
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="card card-summary bg-primary text-white">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h6 class="card-title">Membresías Activas</h6>
-                                        <h2 class="mb-0">45</h2>
-                                    </div>
-                                    <i class="fas fa-id-card fa-3x opacity-50"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-summary bg-success text-white">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h6 class="card-title">Ventas Hoy</h6>
-                                        <h2 class="mb-0">$1,250</h2>
-                                    </div>
-                                    <i class="fas fa-dollar-sign fa-3x opacity-50"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-summary bg-warning text-dark">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h6 class="card-title">Clientes Nuevos</h6>
-                                        <h2 class="mb-0">12</h2>
-                                    </div>
-                                    <i class="fas fa-user-plus fa-3x opacity-50"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabla de Membresías -->
-                <div class="card shadow">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>Últimas Membresías</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre Completo</th>
-                                        <th>Tipo</th>
-                                        <th>Fecha Inicio</th>
-                                        <th>Fecha Fin</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1001</td>
-                                        <td>Juan Antonio Pérez López</td>
-                                        <td><span class="badge bg-primary">Premium</span></td>
-                                        <td>16/05/2025</td>
-                                        <td>16/11/2025</td>
-                                        <td>
-                                            <span class="badge bg-success">Activa</span>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-outline-primary view-details" title="Ver detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="1001">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning edit-membership" title="Editar" data-bs-toggle="modal" data-bs-target="#editModal" data-id="1001">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger toggle-status" title="Desactivar" data-status="active" data-id="1001">
-                                                    <i class="fas fa-ban"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1002</td>
-                                        <td>María Fernanda Gómez Rodríguez</td>
-                                        <td><span class="badge bg-secondary">Básica</span></td>
-                                        <td>15/05/2025</td>
-                                        <td>15/08/2025</td>
-                                        <td>
-                                            <span class="badge bg-success">Activa</span>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-outline-primary view-details" title="Ver detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="1002">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning edit-membership" title="Editar" data-bs-toggle="modal" data-bs-target="#editModal" data-id="1002">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger toggle-status" title="Desactivar" data-status="active" data-id="1002">
-                                                    <i class="fas fa-ban"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1003</td>
-                                        <td>Carlos Alberto Martínez Sánchez</td>
-                                        <td><span class="badge bg-primary">Premium</span></td>
-                                        <td>10/05/2025</td>
-                                        <td>10/11/2025</td>
-                                        <td>
-                                            <span class="badge bg-secondary">Inactiva</span>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-outline-primary view-details" title="Ver detalles" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="1003">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning edit-membership" title="Editar" data-bs-toggle="modal" data-bs-target="#editModal" data-id="1003">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-success toggle-status" title="Activar" data-status="inactive" data-id="1003">
-                                                    <i class="fas fa-check"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="d-flex justify-content-end mt-3">
-                            <a href="/memberships" class="btn btn-primary">Ver todas</a>
-                        </div>
-                    </div>
-                </div>
-            </main>
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="header-content">
+        <a class="navbar-brand" href="sesion-administrador.html">
+          <img
+            src="../img/logo_moto_store-1-5.png"
+            style="height: 150px; width: 150px"
+            alt="logo"
+          />
+        </a>
+        <div class="profile-menu">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown profile-dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user"></i> Mi cuenta
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="perfil-vendedor.html">
+                    <i class="fas fa-user-circle me-2"></i>Ver perfil
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" id="logout" href="#">
+                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa-regular fa-bell"></i></i>Notificaciones
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <aside class="sidebar-container">
+        <ul class="nav flex-column sidebar-nav">
+          <li class="nav-item">
+          <a class="nav-link" href="gestion-categoria-baquen.html">
+            <i class="fas fa-list me-2"></i>Conf.categorias
+          </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestion-notificaciones.html">
+              <i class="fas fa-bell me-2"></i>Conf.notificaciones
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Informe-admi.html">
+              <i class="fas fa-chart-bar me-2"></i>Informes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="administracion-cuentas.html">
+              <i class="fas fa-users me-2"></i>Conf.cuentas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="administracion-cuentas.html">
+              <i class="fas fa-id-card me-2"></i>Conf.Membresia
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="administracion-cuentas.html">
+              <i class="fas fa-money-bill-wave me-2"></i>Gestion.Pago
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="administracion-cuentas.html">
+              <i class="fas fa-boxes me-2"></i>Conf.Productos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="conf-productos.html">
+              <i class="fa-regular fa-bell"></i></i> Conf.Notificacion
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="main-content">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        >
+          <h1 class="h2">Dashboard</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#createMembershipModal"
+            >
+              <i class="fas fa-plus me-1"></i>Crear Membresía
+            </button>
+          </div>
+        </div>
+
+        <div id="membershipCards" class="row mb-4">
+          <div class="col-md-6">
+            <div class="card membership-card bg-light">
+              <h5 class="card-title">Membresía Básica</h5>
+              <ul class="benefits-list">
+                <li>
+                  <i class="fas fa-check-circle"></i>Publicar 20 productos
+                </li>
+                <li><i class="fas fa-check-circle"></i>Destacar productos</li>
+              </ul>
+              <p class="text-muted">Precio: $50/mes</p>
+              <div class="edit-membership-card action-buttons">
+                <button
+                  class="btn btn-sm btn-outline-warning edit-membership-card-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editMembershipModal"
+                  data-type="Básica"
+                >
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger delete-membership-btn"
+                  data-type="Básica"
+                  ${type === "Básica" || type === "Premium" ? "disabled" : ""}
+                >
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card membership-card bg-light">
+              <h5 class="card-title">Membresía Premium</h5>
+              <ul class="benefits-list">
+                <li>
+                  <i class="fas fa-check-circle"></i>Publicar 50 productos
+                </li>
+                <li><i class="fas fa-check-circle"></i>Destacar productos</li>
+                <li>
+                  <i class="fas fa-check-circle"></i>Productos en banner (Admin)
+                </li>
+              </ul>
+              <p class="text-muted">Precio: $200/mes</p>
+              <div class="edit-membership-card action-buttons">
+                <button
+                  class="btn btn-sm btn-outline-warning edit-membership-card-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editMembershipModal"
+                  data-type="Premium"
+                >
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger delete-membership-btn"
+                  data-type="Premium"
+                  ${type === "Básica" || type === "Premium" ? "disabled" : ""}
+                >
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">
+              <i class="fas fa-id-card me-2"></i>Últimas Membresías
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" id="membershipTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre Completo</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- Modal para nueva membresía -->
-    <div class="modal fade" id="newMembershipModal" tabindex="-1" aria-labelledby="newMembershipModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="newMembershipModalLabel">Nueva Membresía</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal para crear nueva membresía -->
+    <div
+      class="modal fade"
+      id="createMembershipModal"
+      tabindex="-1"
+      aria-labelledby="createMembershipModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="createMembershipModalLabel">
+              Crear Nueva Membresía
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="createMembershipForm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="newMembershipTitle" class="form-label"
+                    >Título de la Membresía</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newMembershipTitle"
+                    required
+                  />
                 </div>
-                <div class="modal-body">
-                    <form id="newMembershipForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="clientName" class="form-label">Nombre del Cliente</label>
-                                <input type="text" class="form-control" id="clientName" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="clientEmail" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="clientEmail" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="membershipType" class="form-label">Tipo de Membresía</label>
-                                <select class="form-select" id="membershipType" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option value="basic">Básica ($50/mes)</option>
-                                    <option value="standard">Estándar ($100/mes)</option>
-                                    <option value="premium">Premium ($200/mes)</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="membershipDuration" class="form-label">Duración</label>
-                                <select class="form-select" id="membershipDuration" required>
-                                    <option value="1">1 mes</option>
-                                    <option value="3">3 meses</option>
-                                    <option value="6">6 meses</option>
-                                    <option value="12">1 año</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="benefits" class="form-label">Beneficios</label>
-                            <div id="benefits" class="p-3 bg-light rounded">
-                                <p class="text-muted">Seleccione un tipo de membresía para ver los beneficios</p>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Notas Adicionales</label>
-                            <textarea class="form-control" id="notes" rows="3"></textarea>
-                        </div>
-                    </form>
+                <div class="col-md-6">
+                  <label for="newMembershipPrice" class="form-label"
+                    >Precio ($/mes)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="newMembershipPrice"
+                    min="0"
+                    step="0.01"
+                    required
+                  />
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="saveMembership">Guardar Membresía</button>
-                </div>
-            </div>
+              </div>
+              <div class="mb-3">
+                <label for="newMembershipBenefits" class="form-label"
+                  >Beneficios</label
+                >
+                <textarea
+                  class="form-control"
+                  id="newMembershipBenefits"
+                  rows="4"
+                  placeholder="Escribe cada beneficio en una nueva línea"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="notes" class="form-label">Notas Adicionales</label>
+                <textarea class="form-control" id="notes" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="saveNewMembership"
+            >
+              Guardar Membresía
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal para editar membresías predefinidas -->
+    <div
+      class="modal fade"
+      id="editMembershipModal"
+      tabindex="-1"
+      aria-labelledby="editMembershipModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title" id="editMembershipModalLabel">
+              Editar Membresía
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editMembershipForm">
+              <input type="hidden" id="editMembershipType" />
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="editMembershipTitle" class="form-label"
+                    >Título de la Membresía</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editMembershipTitle"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="editMembershipPrice" class="form-label"
+                    >Precio ($/mes)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="editMembershipPrice"
+                    min="0"
+                    step="0.01"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="editMembershipBenefits" class="form-label"
+                  >Beneficios</label
+                >
+                <textarea
+                  class="form-control"
+                  id="editMembershipBenefits"
+                  rows="4"
+                  placeholder="Escribe cada beneficio en una nueva línea"
+                  required
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="saveMembershipEdit"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal para ver detalles -->
-    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="detailsModalLabel">Detalles de Membresía</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Información del Cliente</h5>
-                            <p><strong>Nombre:</strong> <span id="detail-name">Juan Antonio Pérez López</span></p>
-                            <p><strong>Correo:</strong> <span id="detail-email">juan.perez@example.com</span></p>
-                            <p><strong>Teléfono:</strong> <span id="detail-phone">+52 55 1234 5678</span></p>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Información de la Membresía</h5>
-                            <p><strong>Tipo:</strong> <span id="detail-type" class="badge bg-primary">Premium</span></p>
-                            <p><strong>Fecha Inicio:</strong> <span id="detail-start">16/05/2025</span></p>
-                            <p><strong>Fecha Fin:</strong> <span id="detail-end">16/11/2025</span></p>
-                            <p><strong>Estado:</strong> <span id="detail-status" class="badge bg-success">Activa</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                    
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h5>Historial de Pagos</h5>
-                            <div class="table-responsive">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Monto</th>
-                                            <th>Método</th>
-                                            <th>Estado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>16/05/2025</td>
-                                            <td>$1,200.00</td>
-                                            
-                                            <td><span class="badge bg-success">Completado</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+    <div
+      class="modal fade"
+      id="detailsModal"
+      tabindex="-1"
+      aria-labelledby="detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="detailsModalLabel">
+              Detalles de Membresía
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Información del Cliente</h5>
+                <p><strong>Nombre:</strong> <span id="detail-name"></span></p>
+                <p><strong>Correo:</strong> <span id="detail-email"></span></p>
+                <p>
+                  <strong>Teléfono:</strong> <span id="detail-phone"></span>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h5>Información de la Membresía</h5>
+                <p>
+                  <strong>Tipo:</strong>
+                  <span id="detail-type" class="badge"></span>
+                </p>
+                <p><strong>Precio:</strong> <span id="detail-price"></span></p>
+                <p>
+                  <strong>Fecha Inicio:</strong> <span id="detail-start"></span>
+                </p>
+                <p><strong>Fecha Fin:</strong> <span id="detail-end"></span></p>
+                <p>
+                  <strong>Estado:</strong>
+                  <span id="detail-status" class="badge"></span>
+                </p>
+              </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal para editar -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-warning text-dark">
-                    <h5 class="modal-title" id="editModalLabel">Editar Membresía</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <hr />
+            <h5>Beneficios</h5>
+            <ul class="benefits-list" id="detail-benefits"></ul>
+            <hr />
+            <div class="row">
+              <div class="col-md-12">
+                <h5>Historial de Pagos</h5>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="payment-history"></tbody>
+                  </table>
                 </div>
-                <div class="modal-body">
-                    <form id="editMembershipForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="editClientName" class="form-label">Nombre del Cliente</label>
-                                <input type="text" class="form-control" id="editClientName" value="Juan Antonio Pérez López" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="editMembershipType" class="form-label">Tipo de Membresía</label>
-                                <select class="form-select" id="editMembershipType" required>
-                                    <option value="basic">Básica</option>
-                                    
-                                    <option value="premium" selected>Premium</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="editStartDate" class="form-label">Fecha Inicio</label>
-                                <input type="date" class="form-control" id="editStartDate" value="2025-05-16" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="editEndDate" class="form-label">Fecha Fin</label>
-                                <input type="date" class="form-control" id="editEndDate" value="2025-11-16" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editStatus" class="form-label">Estado</label>
-                            <select class="form-select" id="editStatus" required>
-                                <option value="active" selected>Activa</option>
-                                <option value="inactive">Inactiva</option>
-                                <option value="expired">Expirada</option>
-                                <option value="pending">Pendiente</option>
-                            </select>
-                     
-                        <div class="mb-3">
-                            <label for="editNotes" class="form-label">Notas Adicionales</label>
-                            <textarea class="form-control" id="editNotes" rows="3">Cliente VIP con preferencia en nuevos lanzamientos</textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="saveChanges">Guardar Cambios</button>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <script>
-        $(document).ready(function() {
-            // Activar tooltips
-            $('[title]').tooltip();
-            
-            // Manejar cambio de estado
-            $('.toggle-status').click(function() {
-                const isActive = $(this).data('status') === 'active';
-                const row = $(this).closest('tr');
-                const statusBadge = row.find('.badge');
-                const membershipId = $(this).data('id');
-                
-                if (isActive) {
-                    // Cambiar a inactivo
-                    statusBadge.removeClass('bg-success').addClass('bg-secondary').text('Inactiva');
-                    $(this).removeClass('btn-outline-danger').addClass('btn-outline-success')
-                           .html('<i class="fas fa-check"></i>')
-                           .attr('title', 'Activar')
-                           .data('status', 'inactive');
-                } else {
-                    // Cambiar a activo
-                    statusBadge.removeClass('bg-secondary').addClass('bg-success').text('Activa');
-                    $(this).removeClass('btn-outline-success').addClass('btn-outline-danger')
-                           .html('<i class="fas fa-ban"></i>')
-                           .attr('title', 'Desactivar')
-                           .data('status', 'active');
-                }
-                
-                // Aquí iría la llamada AJAX para guardar el cambio en el servidor
-                console.log(`Membresía ${membershipId} cambiada a ${isActive ? 'inactiva' : 'activa'}`);
-                
-                // Mostrar notificación
-                showAlert(isActive ? 'Membresía desactivada correctamente' : 'Membresía activada correctamente', 
-                          isActive ? 'warning' : 'success');
+      $(document).ready(function () {
+        // Simulated database for memberships
+        let memberships = [
+          {
+            id: "1001",
+            name: "Juan Antonio Pérez López",
+            email: "juan.perez@example.com",
+            phone: "+52 55 1234 5678",
+            type: "Premium",
+            price: 200,
+            start: "2025-05-16",
+            end: "2025-11-16",
+            status: "Activa",
+            benefits: [
+              "Publicar 50 productos",
+              "Destacar productos",
+              "Productos en banner (Admin)",
+            ],
+            payments: [
+              { date: "16/05/2025", amount: "$200.00", status: "Completado" },
+            ],
+          },
+          {
+            id: "1002",
+            name: "María Fernanda Gómez Rodríguez",
+            email: "maria.gomez@example.com",
+            phone: "+52 55 9876 5432",
+            type: "Básica",
+            price: 50,
+            start: "2025-05-15",
+            end: "2025-08-15",
+            status: "Activa",
+            benefits: ["Publicar 20 productos", "Destacar productos"],
+            payments: [
+              { date: "15/05/2025", amount: "$50.00", status: "Completado" },
+            ],
+          },
+          {
+            id: "1003",
+            name: "Carlos Alberto Martínez Sánchez",
+            email: "carlos.martinez@example.com",
+            phone: "+52 55 4567 8910",
+            type: "Premium",
+            price: 200,
+            start: "2025-05-10",
+            end: "2025-11-10",
+            status: "Inactiva",
+            benefits: [
+              "Publicar 50 productos",
+              "Destacar productos",
+              "Productos en banner (Admin)",
+            ],
+            payments: [
+              { date: "10/05/2025", amount: "$200.00", status: "Completado" },
+            ],
+          },
+        ];
+
+        // Predefined memberships
+        let predefinedMemberships = {
+          Básica: {
+            title: "Membresía Básica",
+            price: 50,
+            benefits: ["Publicar 20 productos", "Destacar productos"],
+          },
+          Premium: {
+            title: "Membresía Premium",
+            price: 200,
+            benefits: [
+              "Publicar 50 productos",
+              "Destacar productos",
+              "Productos en banner (Admin)",
+            ],
+          },
+        };
+
+        // Custom memberships (displayed above table)
+        let customMemberships = [];
+
+        // Function to render membership cards
+        function renderMembershipCards() {
+          const $membershipCards = $("#membershipCards");
+          $membershipCards.empty();
+
+          // Render predefined memberships
+          $.each(predefinedMemberships, function (type, data) {
+            $membershipCards.append(`
+              <div class="col-md-6">
+                <div class="card membership-card bg-light">
+                  <h5 class="card-title">${data.title}</h5>
+                  <ul class="benefits-list">
+                    ${data.benefits
+                      .map(
+                        (benefit) =>
+                          `<li><i class="fas fa-check-circle"></i>${benefit}</li>`
+                      )
+                      .join("")}
+                  </ul>
+                  <p class="text-muted">Precio: $${data.price}/mes</p>
+                  <div class="edit-membership-card action-buttons">
+                    <button
+                      class="btn btn-sm btn-outline-warning edit-membership-card-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editMembershipModal"
+                      data-type="${type}"
+                    >
+                      <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-danger delete-membership-btn"
+                      data-type="${type}"
+                      ${type === "Básica" || type === "Premium" ? "disabled" : ""}
+                    >
+                      <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `);
+          });
+
+          // Render custom memberships
+          customMemberships.forEach((membership) => {
+            $membershipCards.append(`
+              <div class="col-md-6">
+                <div class="card membership-card bg-light">
+                  <h5 class="card-title">${membership.title}</h5>
+                  <ul class="benefits-list">
+                    ${membership.benefits
+                      .map(
+                        (benefit) =>
+                          `<li><i class="fas fa-check-circle"></i>${benefit}</li>`
+                      )
+                      .join("")}
+                  </ul>
+                  <p class="text-muted">Precio: $${membership.price}/mes</p>
+                  <div class="edit-membership-card action-buttons">
+                    <button
+                      class="btn btn-sm btn-outline-warning edit-membership-card-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editMembershipModal"
+                      data-type="${membership.title}"
+                    >
+                      <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-danger delete-membership-btn"
+                      data-type="${membership.title}"
+                    >
+                      <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `);
+          });
+        }
+
+        // Function to update summary cards
+        function updateSummaryCards() {
+          const activeCount = memberships.filter(
+            (m) => m.status === "Activa"
+          ).length;
+          const inactiveCount = memberships.filter(
+            (m) => m.status === "Inactiva"
+          ).length;
+          $("#activeMemberships").text(activeCount);
+          $("#inactiveMemberships").text(inactiveCount);
+        }
+
+        // Function to render table
+        function renderTable() {
+          const tbody = $("#membershipTable tbody");
+          tbody.empty();
+          memberships.forEach((m) => {
+            const row = `
+              <tr>
+                <td>${m.id}</td>
+                <td>${m.name}</td>
+                <td><span class="badge ${
+                  m.type === "Premium" ? "bg-primary" : "bg-secondary"
+                }">${m.type}</span></td>
+                <td>$${m.price}</td>
+                <td>${new Date(m.start).toLocaleDateString("es-ES")}</td>
+                <td>${new Date(m.end).toLocaleDateString("es-ES")}</td>
+                <td><span class="badge ${
+                  m.status === "Activa" ? "bg-success" : "bg-secondary"
+                }">${m.status}</span></td>
+                <td>
+                  <div class="btn-group action-buttons" role="group">
+                    <button class="btn btn-sm btn-outline-success activate-btn" 
+                      data-id="${m.id}" 
+                      ${m.status === "Activa" ? "disabled" : ""}>
+                      <i class="fas fa-check"></i> Activar
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger deactivate-btn" 
+                      data-id="${m.id}" 
+                      ${m.status === "Inactiva" ? "disabled" : ""}>
+                      <i class="fas fa-ban"></i> Desactivar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+            tbody.append(row);
+          });
+          updateSummaryCards();
+        }
+
+        // Initial render
+        renderMembershipCards();
+        renderTable();
+
+        // Activar tooltips
+        $("[title]").tooltip();
+
+        // Handle delete membership
+        $(document).on("click", ".delete-membership-btn", function () {
+          const type = $(this).data("type");
+          if (confirm(`¿Estás seguro de eliminar la membresía "${type}"?`)) {
+            if (predefinedMemberships[type]) {
+              showAlert("No se puede eliminar una membresía predefinida", "warning");
+            } else {
+              const index = customMemberships.findIndex((m) => m.title === type);
+              if (index !== -1) {
+                customMemberships.splice(index, 1);
+                renderMembershipCards();
+                showAlert("Membresía eliminada correctamente", "success");
+              }
+            }
+          }
+        });
+
+        // Handle activate membership
+        $(document).on("click", ".activate-btn", function () {
+          const membershipId = $(this).data("id");
+          const membership = memberships.find((m) => m.id === membershipId);
+          if (membership && membership.status !== "Activa") {
+            membership.status = "Activa";
+            renderTable();
+            showAlert("Membresía activada correctamente", "success");
+          }
+        });
+
+        // Handle deactivate membership
+        $(document).on("click", ".deactivate-btn", function () {
+          const membershipId = $(this).data("id");
+          const membership = memberships.find((m) => m.id === membershipId);
+          if (membership && membership.status !== "Inactiva") {
+            membership.status = "Inactiva";
+            renderTable();
+            showAlert("Membresía desactivada correctamente", "warning");
+          }
+        });
+
+        // Guardar nueva membresía with price validation
+        $("#saveNewMembership").click(function () {
+          const price = parseFloat($("#newMembershipPrice").val());
+          if (
+            $("#newMembershipTitle").val() === "" ||
+            $("#newMembershipPrice").val() === "" ||
+            $("#newMembershipBenefits").val() === ""
+          ) {
+            showAlert(
+              "Por favor complete todos los campos requeridos",
+              "danger"
+            );
+            return;
+          }
+          if (price < 0) {
+            showAlert("No se permite números negativos en el precio", "danger");
+            return;
+          }
+
+          const duration = parseInt(1); // Default to 1 month
+          const startDate = new Date();
+          const endDate = new Date();
+          endDate.setMonth(startDate.getMonth() + duration);
+
+          const newMembership = {
+            title: $("#newMembershipTitle").val(),
+            price: price,
+            benefits: $("#newMembershipBenefits")
+              .val()
+              .split("\n")
+              .filter((b) => b.trim() !== ""),
+          };
+
+          customMemberships.push(newMembership);
+          renderMembershipCards();
+          $("#createMembershipModal").modal("hide");
+          $("#createMembershipForm")[0].reset();
+          showAlert("Membresía creada correctamente", "success");
+        });
+
+        // Cargar datos en modal de edición para membresías predefinidas o custom
+        $(document).on("click", ".edit-membership-card-btn", function () {
+          const type = $(this).data("type");
+          let membership;
+          if (predefinedMemberships[type]) {
+            membership = predefinedMemberships[type];
+          } else {
+            membership = customMemberships.find((m) => m.title === type);
+          }
+          $("#editMembershipType").val(type);
+          $("#editMembershipTitle").val(membership.title);
+          $("#editMembershipPrice").val(membership.price);
+          $("#editMembershipBenefits").val(membership.benefits.join("\n"));
+        });
+
+        // Guardar cambios en edición de membresías predefinidas o custom with price validation
+        $("#saveMembershipEdit").click(function () {
+          const price = parseFloat($("#editMembershipPrice").val());
+          const type = $("#editMembershipType").val();
+          let membership;
+          if (price < 0) {
+            showAlert("No se permite números negativos en el precio", "danger");
+            return;
+          }
+          if (predefinedMemberships[type]) {
+            membership = predefinedMemberships[type];
+            // Update all memberships of this type
+            memberships.forEach((m) => {
+              if (m.type === type) {
+                m.price = price;
+                m.benefits = $("#editMembershipBenefits")
+                  .val()
+                  .split("\n")
+                  .filter((b) => b.trim() !== "");
+              }
             });
-            
-            // Mostrar beneficios según tipo de membresía seleccionada
-            $('#membershipType').change(function() {
-                const type = $(this).val();
-                let benefitsHtml = '';
-                
-                switch(type) {
-                    case 'basic':
-                        benefitsHtml = `
-                            <h6 class="mb-3">Membresía Básica - $50/mes</h6>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-check-circle"></i> Descuento del 10% en compras mayores a $500</li>
-                                <li><i class="fas fa-check-circle"></i> Acceso a promociones especiales</li>
-                                <li><i class="fas fa-check-circle"></i> Boletín mensual con novedades</li>
-                            </ul>
+          } else {
+            membership = customMemberships.find((m) => m.title === type);
+            const index = customMemberships.findIndex((m) => m.title === type);
+            if (index !== -1) {
+              customMemberships[index] = {
+                title: $("#editMembershipTitle").val(),
+                price: price,
+                benefits: $("#editMembershipBenefits")
+                  .val()
+                  .split("\n")
+                  .filter((b) => b.trim() !== ""),
+              };
+            }
+          }
+          if (membership) {
+            membership.title = $("#editMembershipTitle").val();
+            membership.price = price;
+            membership.benefits = $("#editMembershipBenefits")
+              .val()
+              .split("\n")
+              .filter((b) => b.trim() !== "");
+            renderMembershipCards();
+            $("#editMembershipModal").modal("hide");
+            showAlert("Cambios guardados correctamente", "success");
+          }
+        });
+
+        // Cargar datos en modal de detalles
+        $(document).on("click", ".view-details", function () {
+          const membershipId = $(this).data("id");
+          const membership = memberships.find((m) => m.id === membershipId);
+
+          if (membership) {
+            $("#detail-name").text(membership.name);
+            $("#detail-email").text(membership.email);
+            $("#detail-phone").text(membership.phone);
+            $("#detail-type")
+              .text(membership.type)
+              .removeClass()
+              .addClass(
+                "badge " +
+                  (membership.type === "Premium"
+                    ? "bg-primary"
+                    : "bg-secondary")
+              );
+            $("#detail-price").text("$" + membership.price + "/mes");
+            $("#detail-start").text(
+              new Date(membership.start).toLocaleDateString("es-ES")
+            );
+            $("#detail-end").text(
+              new Date(membership.end).toLocaleDateString("es-ES")
+            );
+            $("#detail-status")
+              .text(membership.status)
+              .removeClass()
+              .addClass(
+                "badge " +
+                  (membership.status === "Activa"
+                    ? "bg-success"
+                    : "bg-secondary")
+              );
+
+            let benefitsHtml = "";
+            membership.benefits.forEach((benefit) => {
+              benefitsHtml += `<li><i class="fas fa-check-circle"></i> ${benefit}</li>`;
+            });
+            $("#detail-benefits").html(benefitsHtml);
+
+            let paymentHtml = "";
+            membership.payments.forEach((payment) => {
+              paymentHtml += `
+                            <tr>
+                                <td>${payment.date}</td>
+                                <td>${payment.amount}</td>
+                                <td><span class="badge bg-success">${payment.status}</span></td>
+                            </tr>
                         `;
-                        break;
-                    case 'standard':
-                        benefitsHtml = `
-                            <h6 class="mb-3">Membresía Estándar - $100/mes</h6>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-check-circle"></i> Descuento del 15% en todas las compras</li>
-                                <li><i class="fas fa-check-circle"></i> Envío gratuito en compras mayores a $800</li>
-                                <li><i class="fas fa-check-circle"></i> Acceso a talleres trimestrales</li>
-                                <li><i class="fas fa-check-circle"></i> Boletín mensual con novedades</li>
-                            </ul>
-                        `;
-                        break;
-                    case 'premium':
-                        benefitsHtml = `
-                            <h6 class="mb-3">Membresía Premium - $200/mes</h6>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-check-circle"></i> Descuento del 20% en todas las compras</li>
-                                <li><i class="fas fa-check-circle"></i> Acceso prioritario a nuevos productos</li>
-                                <li><i class="fas fa-check-circle"></i> Envío gratuito en todas las compras</li>
-                                <li><i class="fas fa-check-circle"></i> Talleres exclusivos mensuales</li>
-                                <li><i class="fas fa-check-circle"></i> Asesoría personalizada</li>
-                            </ul>
-                        `;
-                        break;
-                    default:
-                        benefitsHtml = '<p class="text-muted">Seleccione un tipo de membresía para ver los beneficios</p>';
-                }
-                
-                $('#benefits').html(benefitsHtml);
             });
-            
-            // Guardar nueva membresía
-            $('#saveMembership').click(function() {
-                // Validar formulario
-                if ($('#clientName').val() === '' || $('#membershipType').val() === '') {
-                    showAlert('Por favor complete todos los campos requeridos', 'danger');
-                    return;
-                }
-                
-                // Aquí iría la llamada AJAX para guardar en el servidor
-                console.log('Guardando nueva membresía...');
-                
-                // Simular guardado exitoso
-                setTimeout(() => {
-                    $('#newMembershipModal').modal('hide');
-                    showAlert('Membresía creada correctamente', 'success');
-                    // Aquí podrías recargar la tabla o agregar la nueva fila dinámicamente
-                }, 1000);
-            });
-            
-            // Guardar cambios en edición
-            $('#saveChanges').click(function() {
-                // Aquí iría la llamada AJAX para guardar en el servidor
-                console.log('Guardando cambios en membresía...');
-                
-                // Simular guardado exitoso
-                setTimeout(() => {
-                    $('#editModal').modal('hide');
-                    showAlert('Cambios guardados correctamente', 'success');
-                    // Aquí podrías actualizar la fila correspondiente en la tabla
-                }, 1000);
-            });
-            
-            // Cargar datos en modal de detalles según ID
-            $('.view-details').click(function() {
-                const membershipId = $(this).data('id');
-                console.log(`Mostrando detalles de membresía ${membershipId}`);
-                
-                // Aquí iría la llamada AJAX para obtener los detalles del servidor
-                // Por ahora usamos datos de ejemplo según el ID
-                let membershipData = {};
-                
-                switch(membershipId) {
-                    case '1001':
-                        membershipData = {
-                            name: 'Juan Antonio Pérez López',
-                            email: 'juan.perez@example.com',
-                            phone: '+52 55 1234 5678',
-                            type: 'Premium',
-                            start: '16/05/2025',
-                            end: '16/11/2025',
-                            status: 'Activa',
-                            benefits: [
-                                'Descuento del 20% en todas las compras',
-                                'Acceso prioritario a nuevos productos',
-                                'Envío gratuito en todas las compras',
-                                'Talleres exclusivos mensuales',
-                                'Asesoría personalizada'
-                            ]
-                        };
-                        break;
-                    case '1002':
-                        membershipData = {
-                            name: 'María Fernanda Gómez Rodríguez',
-                            email: 'maria.gomez@example.com',
-                            phone: '+52 55 9876 5432',
-                            type: 'Básica',
-                            start: '15/05/2025',
-                            end: '15/08/2025',
-                            status: 'Activa',
-                            benefits: [
-                                'Descuento del 10% en compras mayores a $500',
-                                'Acceso a promociones especiales',
-                                'Boletín mensual con novedades'
-                            ]
-                        };
-                        break;
-                    case '1003':
-                        membershipData = {
-                            name: 'Carlos Alberto Martínez Sánchez',
-                            email: 'carlos.martinez@example.com',
-                            phone: '+52 55 4567 8910',
-                            type: 'Premium',
-                            start: '10/05/2025',
-                            end: '10/11/2025',
-                            status: 'Inactiva',
-                            benefits: [
-                                'Descuento del 20% en todas las compras',
-                                'Acceso prioritario a nuevos productos',
-                                'Envío gratuito en todas las compras',
-                                'Talleres exclusivos mensuales',
-                                'Asesoría personalizada'
-                            ]
-                        };
-                        break;
-                }
-                
-                // Actualizar modal con los datos
-                $('#detail-name').text(membershipData.name);
-                $('#detail-email').text(membershipData.email);
-                $('#detail-phone').text(membershipData.phone);
-                $('#detail-type').text(membershipData.type).removeClass().addClass('badge ' + (membershipData.type === 'Premium' ? 'bg-primary' : 'bg-secondary'));
-                $('#detail-start').text(membershipData.start);
-                $('#detail-end').text(membershipData.end);
-                $('#detail-status').text(membershipData.status).removeClass().addClass('badge ' + (membershipData.status === 'Activa' ? 'bg-success' : 'bg-secondary'));
-                
-                // Actualizar beneficios
-                let benefitsHtml = '';
-                membershipData.benefits.forEach(benefit => {
-                    benefitsHtml += `<li><i class="fas fa-check-circle"></i> ${benefit}</li>`;
-                });
-                $('#detail-benefits').html(benefitsHtml);
-            });
-            
-            // Función para mostrar alertas
-            function showAlert(message, type) {
-                const alertHtml = `
+            $("#payment-history").html(paymentHtml);
+          }
+        });
+
+        // Función para mostrar alertas
+        function showAlert(message, type) {
+          const alertHtml = `
                     <div class="alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1100">
                         ${message}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 `;
-                
-                $('body').append(alertHtml);
-                
-                // Eliminar la alerta después de 5 segundos
-                setTimeout(() => {
-                    $('.alert').alert('close');
-                }, 5000);
-            }
-        });
+
+          $("body").append(alertHtml);
+          setTimeout(() => {
+            $(".alert").alert("close");
+          }, 5000);
+        }
+      });
     </script>
-</body>
+    <script src="/js/jquery.min.js"></script>
+  </body>
 </html>

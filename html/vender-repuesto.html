@@ -11,6 +11,10 @@
     />
     <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
     <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
     <style>
       .sidebar {
         width: 100%;
@@ -50,48 +54,42 @@
         padding: 10px 20px;
         font-size: 1rem;
       }
-      
-      /* Estilos para la previsualización de imágenes */
       .image-preview-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 15px;
-          margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
       }
-      
       .image-preview-item {
-          position: relative;
-          width: 150px;
-          height: 150px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          overflow: hidden;
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
       }
-      
       .image-preview {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
-      
       .remove-image {
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          background: rgba(0,0,0,0.5);
-          color: white;
-          border: none;
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
       }
     </style>
   </head>
-
   <body>
     <header>
       <nav class="navbar navbar-expand-lg text-center">
@@ -107,40 +105,37 @@
     <main>
       <div class="sidebar container bg-light mt-5 py-4 px-4 mb-5">
         <h2>Describe tu repuesto</h2>
-        <form>
-          <!-- Fila 1: Cantidad, Precio, Marca -->
+        <form id="repuestoForm">
           <div class="row">
             <div class="form-group col-12 col-md-6 col-lg-4">
               <label for="cantidad">Cantidad</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="cantidad"
                 placeholder="Colocar cantidad del repuesto"
                 required
               />
             </div>
-
             <div class="form-group col-12 col-md-6 col-lg-4">
               <label for="precio">Precio</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="precio"
                 placeholder="Colocar precio del repuesto"
                 required
               />
             </div>
-
             <div class="form-group col-12 col-md-6 col-lg-4">
               <label for="marca">Marca</label>
               <select id="marca" class="form-control" required>
                 <option value="" selected disabled>Seleccionar Marca</option>
-                <option value="1">Bosch</option>
-                <option value="2">Moog</option>
-                <option value="3">Febi Bilstein</option>
-                <option value="4">SKF</option>
-                <option value="5">Gates</option>
+                <option value="Bosch">Bosch</option>
+                <option value="Moog">Moog</option>
+                <option value="Febi Bilstein">Febi Bilstein</option>
+                <option value="SKF">SKF</option>
+                <option value="Gates">Gates</option>
               </select>
             </div>
             <div class="form-group col-12 col-md-6 col-lg-4">
@@ -149,52 +144,48 @@
                 id="categoria"
                 class="form-select"
                 onchange="cargarSubcategorias()"
+                required
               >
                 <option value="" selected disabled>
                   Seleccionar categoría
                 </option>
-                <option value="motor">Partes del Motor</option>
-                <option value="transmision">Transmisión</option>
-                <option value="frenos">Sistema de Frenos</option>
-                <option value="suspension">Ruedas y Suspensión</option>
+                <option value="Partes del Motor">Partes del Motor</option>
+                <option value="Transmisión">Transmisión</option>
+                <option value="Sistema de Frenos">Sistema de Frenos</option>
+                <option value="Ruedas y Suspensión">Ruedas y Suspensión</option>
               </select>
             </div>
-
             <div class="form-group col-12 col-md-6 col-lg-4">
               <label for="tipoRepuesto">Tipo de Repuesto</label>
               <select id="tipoRepuesto" class="form-control" required>
                 <option value="" selected disabled>
                   Seleccionar tipo de repuesto
                 </option>
-                <option value="1">Original</option>
-                <option value="2">Genérico</option>
+                <option value="Original">Original</option>
+                <option value="Genérico">Genérico</option>
               </select>
             </div>
-
             <div class="form-group col-12 col-md-6 col-lg-4">
               <label for="subcategoria">Subcategoría</label>
-              <select id="subcategoria" class="form-select">
+              <select id="subcategoria" class="form-select" required>
                 <option value="" selected disabled>
                   Selecciona una subcategoría
                 </option>
               </select>
             </div>
           </div>
-          <!-- Fila 2: Categoría, Tipo, Subcategoría -->
           <div class="row">
             <div class="form-group col-lg-12">
-              <label for="precio">Descripcion</label>
+              <label for="descripcion">Descripción</label>
               <input
                 type="text"
                 class="form-control"
-                id="precio"
-                placeholder="Si quieres detallar mas cosas de tu repuesto lo puedes hacer aqui"
+                id="descripcion"
+                placeholder="Si quieres detallar más cosas de tu repuesto lo puedes hacer aquí"
                 required
               />
             </div>
           </div>
-
-          <!-- Campo de archivo -->
           <div class="form-group">
             <label for="formFileMultiple">FOTO DEL REPUESTO</label>
             <input
@@ -203,38 +194,45 @@
               id="formFileMultiple"
               multiple
               accept="image/*"
+              required
             />
-            <!-- Contenedor para previsualización de imágenes -->
-            <div class="image-preview-container" id="imagePreviewContainer"></div>
+            <div
+              class="image-preview-container"
+              id="imagePreviewContainer"
+            ></div>
           </div>
-
-          <!-- Botones -->
           <div class="btn-container">
             <button type="button" class="btn btn-danger" id="btnCancelar">
               Cancelar
             </button>
-            <button type="submit" class="btn btn-success">Publicar</button>
+            <button type="button" class="btn btn-success" id="btnPublicar">
+              Publicar
+            </button>
           </div>
         </form>
       </div>
     </main>
     <footer class="py-4">
       <div class="container">
-        <!-- Primera fila: Enlaces y redes sociales -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <!-- Enlaces legales - Izquierda -->
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item me-3">
-                <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  >Aviso Legal</a
+                >
               </li>
-              <li class="list-inline-item">
-                <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
+              <li class="list-inline-item mar">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5"
+                  >Ayuda</a
+                >
               </li>
             </ul>
           </div>
-          
-          <!-- Redes sociales - Derecha (iconos más grandes) -->
           <div class="mb-3 mb-md-0">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-3">
@@ -260,39 +258,41 @@
             </ul>
           </div>
         </div>
-          
-          <!-- Copyright centrado -->
-          <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
-            <p class="mb-0 text-white">https://Motostore.com</p>
-          </div>
+        <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
+          <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
     </footer>
-
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="../js/cancelar.js"></script>
     <script>
       const subcategorias = {
-        motor: [
+        "Partes del Motor": [
           "Cilindros",
           "Pistones",
           "Árbol de levas",
           "Válvulas",
           "Juntas",
         ],
-        transmision: [
+        Transmisión: [
           "Cadena",
           "Piñón",
           "Corona",
           "Embrague",
           "Caja de cambios",
         ],
-        frenos: [
+        "Sistema de Frenos": [
           "Pastillas de freno",
           "Discos de freno",
           "Zapatas",
           "Bombas de freno",
           "Líneas de freno",
         ],
-        suspension: [
+        "Ruedas y Suspensión": [
           "Llantas",
           "Neumáticos",
           "Amortiguadores",
@@ -304,8 +304,6 @@
       function cargarSubcategorias() {
         const categoria = document.getElementById("categoria").value;
         const subcategoriaSelect = document.getElementById("subcategoria");
-
-        // Limpiar y resetear
         subcategoriaSelect.innerHTML = "";
         subcategoriaSelect.appendChild(
           new Option("Selecciona una subcategoría", "", true, true)
@@ -314,63 +312,117 @@
 
         if (categoria && subcategorias[categoria]) {
           subcategorias[categoria].forEach((subcat) => {
-            subcategoriaSelect.appendChild(
-              new Option(subcat, subcat.toLowerCase().replace(/\s/g, "_"))
-            );
+            subcategoriaSelect.appendChild(new Option(subcat, subcat));
           });
           subcategoriaSelect.disabled = false;
         }
       }
 
-      // Inicializar subcategorías si hay una categoría seleccionada
       document.addEventListener("DOMContentLoaded", function () {
         const categoriaSelect = document.getElementById("categoria");
         categoriaSelect.addEventListener("change", cargarSubcategorias);
-
-        // Si hay un valor seleccionado al cargar
         if (categoriaSelect.value) {
           cargarSubcategorias();
         }
       });
-      
-      // Script para previsualización de imágenes
-      document.getElementById('formFileMultiple').addEventListener('change', function(event) {
+
+      document
+        .getElementById("formFileMultiple")
+        .addEventListener("change", function (event) {
           const files = event.target.files;
-          const previewContainer = document.getElementById('imagePreviewContainer');
-          previewContainer.innerHTML = ''; // Limpiar contenedor
-          
+          const previewContainer = document.getElementById(
+            "imagePreviewContainer"
+          );
+          previewContainer.innerHTML = "";
+
           if (files) {
-              for (let i = 0; i < files.length; i++) {
-                  const file = files[i];
-                  if (file.type.match('image.*')) {
-                      const reader = new FileReader();
-                      
-                      reader.onload = function(e) {
-                          const previewItem = document.createElement('div');
-                          previewItem.className = 'image-preview-item';
-                          
-                          const img = document.createElement('img');
-                          img.src = e.target.result;
-                          img.className = 'image-preview';
-                          
-                          const removeBtn = document.createElement('button');
-                          removeBtn.className = 'remove-image';
-                          removeBtn.innerHTML = '×';
-                          removeBtn.onclick = function() {
-                              previewItem.remove();
-                              // Aquí podrías añadir lógica para eliminar el archivo del input
-                          };
-                          
-                          previewItem.appendChild(img);
-                          previewItem.appendChild(removeBtn);
-                          previewContainer.appendChild(previewItem);
-                      }
-                      
-                      reader.readAsDataURL(file);
-                  }
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (file.type.match("image.*")) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                  const previewItem = document.createElement("div");
+                  previewItem.className = "image-preview-item";
+                  const img = document.createElement("img");
+                  img.src = e.target.result;
+                  img.className = "image-preview";
+                  const removeBtn = document.createElement("button");
+                  removeBtn.className = "remove-image";
+                  removeBtn.innerHTML = "×";
+                  removeBtn.onclick = function () {
+                    previewItem.remove();
+                  };
+                  previewItem.appendChild(img);
+                  previewItem.appendChild(removeBtn);
+                  previewContainer.appendChild(previewItem);
+                };
+                reader.readAsDataURL(file);
               }
+            }
           }
-      });
+        });
+
+      document
+        .getElementById("btnPublicar")
+        .addEventListener("click", function () {
+          const cantidad = document.getElementById("cantidad").value;
+          const precio = document.getElementById("precio").value;
+          const marca = document.getElementById("marca").value;
+          const categoria = document.getElementById("categoria").value;
+          const tipoRepuesto = document.getElementById("tipoRepuesto").value;
+          const subcategoria = document.getElementById("subcategoria").value;
+          const descripcion = document.getElementById("descripcion").value;
+          const files = document.getElementById("formFileMultiple").files;
+
+          if (
+            !cantidad ||
+            !precio ||
+            !marca ||
+            !categoria ||
+            !tipoRepuesto ||
+            !subcategoria ||
+            !descripcion ||
+            files.length === 0
+          ) {
+            Swal.fire({
+              icon: "error",
+              title: "Campos incompletos",
+              text: "Por favor, completa todos los campos requeridos y sube al menos una imagen.",
+            });
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const repuesto = {
+              id: "repuesto_" + Date.now(),
+              cantidad,
+              precio: `$${parseFloat(precio).toLocaleString("es-CO")} COP`,
+              marca,
+              categoria,
+              tipo: tipoRepuesto,
+              subcategoria,
+              descripcion,
+              imagen: e.target.result,
+              estado: "Activado",
+            };
+
+            let repuestos = JSON.parse(localStorage.getItem("repuestos")) || [];
+            repuestos.push(repuesto);
+            localStorage.setItem("repuestos", JSON.stringify(repuestos));
+
+            Swal.fire({
+              icon: "success",
+              title: "¡Repuesto publicado!",
+              text: "Tu repuesto ha sido publicado exitosamente.",
+              timer: 1500,
+              showConfirmButton: false,
+            }).then(() => {
+              window.location.href = "MisProductos.html";
+            });
+          };
+          reader.readAsDataURL(files[0]);
+        });
     </script>
   </body>
 </html>

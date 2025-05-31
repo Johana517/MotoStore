@@ -1,281 +1,370 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cuenta Vendedor vender-moto</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
-  <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    /* Ocultar las flechas en Bootstrap */
-    .sidebar {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuenta Vendedor vender-moto</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../fontawesome-free-6.7.2-web/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/logo_moto_store-1-5.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .sidebar {
         width: 1200px;
         background: #f8f9fa;
         padding: 20px;
         border-radius: 8px;
-        }
-        .sidebar h2 {
+      }
+      .sidebar h2 {
         font-size: 1.5rem;
         margin-bottom: 15px;
-        }
-        .sidebar label {
+      }
+      .sidebar label {
         font-weight: bold;
         margin-top: 5px;
-        }
-        .sidebar .form-select, 
-        .sidebar .form-control {
-        width: 100%; 
+      }
+      .sidebar .form-select,
+      .sidebar .form-control {
+        width: 100%;
         padding: 8px;
         border-radius: 5px;
         border: 1px solid #ccc;
-        }
-        .sidebar .btn {
-        width: 100%; 
+      }
+      .sidebar .btn {
+        width: 100%;
         padding: 10px;
         font-size: 1rem;
-        }
-        
-        /* Estilos para la previsualización de imágenes */
-        .image-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .image-preview-item {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .image-preview {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .remove-image {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-  </style>
-</head>
-
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg text-center">
-      <a class="navbar-brand" href="sesion-vendedor.html">
-        <img src="../img/logo_moto_store-1-5.png" style="width: 200px; height: 150px;" alt="logo">
-      </a>
-    </nav>
-  </header>
-  <main>
-    <div class="sidebar container bg-light mt-5 py-2 px-5 mb-5">
-      <h2 class="text-center mt-5">Describe tu Moto</h2>
-      <form>
-        <div class="form-row my-3">
-          <div class="form-group col-md-4">
-            <label for="inputState">Marca</label>
-            <select id="inputState" class="form-control" required>
-              <option value="0" selected disabled>Seleccionar Marca</option>
-              <option value="1">Yamaha</option>
-              <option value="2">Honda</option>
-              <option value="3">Suzuki</option>
-              <option value="4">Kawasaki</option>
-              <option value="5">Auteco</option>
-            </select>
+      }
+      .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .image-preview-item {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .image-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .remove-image {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg text-center">
+        <a class="navbar-brand" href="sesion-vendedor.html">
+          <img
+            src="../img/logo_moto_store-1-5.png"
+            style="width: 200px; height: 150px"
+            alt="logo"
+          />
+        </a>
+      </nav>
+    </header>
+    <main>
+      <div class="sidebar container bg-light mt-5 py-2 px-5 mb-5">
+        <h2 class="text-center mt-5">Describe tu Moto</h2>
+        <form id="motoForm">
+          <div class="form-row my-3">
+            <div class="form-group col-md-4">
+              <label for="marca">Marca</label>
+              <select id="marca" class="form-control" required>
+                <option value="" selected disabled>Seleccionar Marca</option>
+                <option value="Yamaha">Yamaha</option>
+                <option value="Honda">Honda</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Kawasaki">Kawasaki</option>
+                <option value="Auteco">Auteco</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="cilindraje">Cilindraje</label>
+              <select id="cilindraje" class="form-control" required>
+                <option value="" selected disabled>
+                  Seleccionar Cilindraje
+                </option>
+                <option value="100cc">100cc</option>
+                <option value="110cc">110cc</option>
+                <option value="125cc">125cc</option>
+                <option value="150cc">150cc</option>
+                <option value="200cc">200cc</option>
+                <option value="250cc">250cc</option>
+                <option value="300cc">300cc</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="modelo">Modelo de Moto</label>
+              <select id="modelo" class="form-control" required>
+                <option value="" selected disabled>
+                  Seleccionar Modelo de moto
+                </option>
+                <option value="Scooter">Scooter</option>
+                <option value="Enduro">Enduro</option>
+                <option value="Deportiva">Deportiva</option>
+                <option value="Naked">Naked</option>
+                <option value="Chopper">Chopper</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <label for="inputState">Cilindraje</label>
-            <select id="inputState" class="form-control" required>
-              <option value="0" selected disabled>Seleccionar Cilindraje</option>
-              <option value="1">100</option>
-              <option value="2">110</option>
-              <option value="3">125</option>
-              <option value="4">150</option>
-              <option value="5">200</option>
-              <option value="5">250</option>
-              <option value="5">300</option>
-            </select>
+          <div class="form-row my-3">
+            <div class="form-group col-md-6">
+              <label for="precio">Precio</label>
+              <input
+                type="number"
+                class="form-control"
+                id="precio"
+                placeholder="Colocar precio de la Moto"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="anio">Año (Desde que año tiene su moto)</label>
+              <select id="anio" class="form-control" required>
+                <option value="" selected disabled>Seleccionar Año</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <label for="inputState">Modelo de Moto</label>
-            <select id="inputState" class="form-control">
-              <option value="0" selected disabled>Seleccionar Modelo de moto</option>
-              <option value="1">Scooter</option>
-              <option value="2">Enduro</option>
-              <option value="3">Deportiva</option>
-              <option value="4">Naked</option>
-              <option value="5">Chopper</option>
-            </select>
+          <div class="form-row my-3">
+            <div class="col-lg-12">
+              <h4>Descripción</h4>
+              <textarea
+                name="descripcion"
+                id="descripcion"
+                rows="5"
+                cols="50"
+                placeholder="Si quieres detallar más cosas de tu moto lo puedes hacer aquí"
+                class="form-control"
+              ></textarea>
+            </div>
           </div>
-        </div>
-        <div class="form-row my-3">
-          <div class="form-group col-md-6">
-              <label for="inputEmail4">Precio</label>
-              <input type="number" class="form-control" id="flechas" placeholder="Colocar precio de la Moto" required>
+          <div class="form-row my-3">
+            <div class="mb-3 form-group col-lg-12 col-md-12">
+              <label for="formFileMultiple" class="form-label"
+                >FOTO DE LA MOTO</label
+              >
+              <input
+                class="form-control"
+                type="file"
+                id="formFileMultiple"
+                multiple
+                accept="image/*"
+                required
+              />
+              <div
+                class="image-preview-container"
+                id="imagePreviewContainer"
+              ></div>
+            </div>
           </div>
-          <div class="form-gruop col-md-6">
-            <label for="inputState">Año (Desde que año tiene su moto)</label>
-            <select id="inputState" class="form-control" required>
-              <option value="0" selected disabled>Seleccionar Año</option>
-              <option value="2010">2010</option>
-              <option value="2011">2011</option>
-              <option value="2012">2012</option>
-              <option value="2013">2013</option>
-              <option value="2014">2014</option>
-              <option value="2015">2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-            </select>
+          <div class="container d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-danger"
+              id="btnCancelar"
+              style="margin-right: 15px"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-success" id="btnPublicar">
+              Publicar
+            </button>
           </div>
-        </div>
-        <div class="form-row my-3">
-          <div class="col-lg-12">
-            <h4>Descripcion</h4>
-            <textarea name="" id="descripcion" rows="5" cols="50" placeholder="Si quieres detallar mas cosas de tu moto lo puedes hacer aqui"></textarea>
-          </div>
-        </div>
-        <div class="form-row my-3">
-          <div class="mb-3 form-group col-lg-12 col-md-12">
-            <label for="formFileMultiple" class="form-label">FOTO DE LA MOTO</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple accept="image/*">
-            <!-- Contenedor para previsualización de imágenes -->
-            <div class="image-preview-container" id="imagePreviewContainer"></div>
-          </div>                   
-        </div>
-        <div class="container d-flex justify-content-end">
-          <button type="button" class="btn btn-danger" id="btnCancelar" style="margin-right: 15px;">Cancelar</button>
-          <button type="button" class="btn btn-success">Publicar</button>
-        </div>  
-      </form>
-    </div>
-  </main>
-  <footer class="py-4">
-    <div class="container">
-      <!-- Primera fila: Enlaces y redes sociales -->
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <!-- Enlaces legales - Izquierda -->
-        <div class="mb-3 mb-md-0">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
-              <a href="aviso-legal-vendedor.html" class="text-decoration-none fs-5">Aviso Legal</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="ayuda-vendedor.html" class="text-decoration-none fs-5">Ayuda</a>
-            </li>
-          </ul>
-        </div>
-        
-        <!-- Redes sociales - Derecha (iconos más grandes) -->
-        <div class="mb-3 mb-md-0">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-youtube fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-facebook fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item me-3">
-              <a href="#" class="text-white">
-                <i class="fab fa-x-twitter fa-3x"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="text-white">
-                <i class="fab fa-instagram fa-3x"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        </form>
       </div>
-        
-        <!-- Copyright centrado -->
+    </main>
+    <footer class="py-4">
+      <div class="container">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3 mar">
+                <a
+                  href="aviso-legal-fronend.html"
+                  class="text-decoration-none fs-5"
+                  >Aviso Legal</a
+                >
+              </li>
+              <li class="list-inline-item mar">
+                <a href="ayuda-frontend.html" class="text-decoration-none fs-5"
+                  >Ayuda</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mb-3 mb-md-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-youtube fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-facebook fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-3">
+                <a href="#" class="text-white">
+                  <i class="fab fa-x-twitter fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-white">
+                  <i class="fab fa-instagram fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="col-12 text-center mt-4 pt-3 border-top border-secondary">
           <p class="mb-0 text-white">https://Motostore.com</p>
         </div>
       </div>
-    </div>
-  </footer>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
-  <script src="../js/sweetalert2@9.js"></script>
-  <script src="../js/cancelar.js"></script>
-  <script src="../js/logout.js"></script>
-  
-  <!-- Script para previsualización de imágenes -->
-  <script>
-    document.getElementById('formFileMultiple').addEventListener('change', function(event) {
-        const files = event.target.files;
-        const previewContainer = document.getElementById('imagePreviewContainer');
-        previewContainer.innerHTML = ''; // Limpiar contenedor
-        
-        if (files) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (file.type.match('image.*')) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        const previewItem = document.createElement('div');
-                        previewItem.className = 'image-preview-item';
-                        
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'image-preview';
-                        
-                        const removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-image';
-                        removeBtn.innerHTML = '×';
-                        removeBtn.onclick = function() {
-                            previewItem.remove();
-                            // Aquí podrías añadir lógica para eliminar el archivo del input
-                        };
-                        
-                        previewItem.appendChild(img);
-                        previewItem.appendChild(removeBtn);
-                        previewContainer.appendChild(previewItem);
-                    }
-                    
-                    reader.readAsDataURL(file);
-                }
-            }
-        }
-    });
-  </script>
+    </footer>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script src="../js/sweetalert2@9.js"></script>
+    <script src="../js/cancelar.js"></script>
+    <script src="../js/logout.js"></script>
+    <script>
+      document
+        .getElementById("formFileMultiple")
+        .addEventListener("change", function (event) {
+          const files = event.target.files;
+          const previewContainer = document.getElementById(
+            "imagePreviewContainer"
+          );
+          previewContainer.innerHTML = "";
 
-</body>
+          if (files) {
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (file.type.match("image.*")) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                  const previewItem = document.createElement("div");
+                  previewItem.className = "image-preview-item";
+                  const img = document.createElement("img");
+                  img.src = e.target.result;
+                  img.className = "image-preview";
+                  const removeBtn = document.createElement("button");
+                  removeBtn.className = "remove-image";
+                  removeBtn.innerHTML = "×";
+                  removeBtn.onclick = function () {
+                    previewItem.remove();
+                  };
+                  previewItem.appendChild(img);
+                  previewItem.appendChild(removeBtn);
+                  previewContainer.appendChild(previewItem);
+                };
+                reader.readAsDataURL(file);
+              }
+            }
+          }
+        });
+
+      document
+        .getElementById("btnPublicar")
+        .addEventListener("click", function () {
+          const marca = document.getElementById("marca").value;
+          const cilindraje = document.getElementById("cilindraje").value;
+          const modelo = document.getElementById("modelo").value;
+          const precio = document.getElementById("precio").value;
+          const anio = document.getElementById("anio").value;
+          const descripcion = document.getElementById("descripcion").value;
+          const files = document.getElementById("formFileMultiple").files;
+
+          if (
+            !marca ||
+            !cilindraje ||
+            !modelo ||
+            !precio ||
+            !anio ||
+            files.length === 0
+          ) {
+            Swal.fire({
+              icon: "error",
+              title: "Campos incompletos",
+              text: "Por favor, completa todos los campos requeridos y sube al menos una imagen.",
+            });
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const moto = {
+              id: "moto_" + Date.now(),
+              marca,
+              cilindraje,
+              modelo,
+              anio,
+              precio,
+              descripcion: descripcion || "Sin descripción",
+              imagen: e.target.result,
+              estado: "Activado",
+            };
+
+            let motos = JSON.parse(localStorage.getItem("motos")) || [];
+            motos.push(moto);
+            localStorage.setItem("motos", JSON.stringify(motos));
+
+            Swal.fire({
+              icon: "success",
+              title: "¡Moto publicada!",
+              text: "Tu moto ha sido publicada exitosamente.",
+              timer: 1500,
+              showConfirmButton: false,
+            }).then(() => {
+              window.location.href = "MisProductos.html";
+            });
+          };
+          reader.readAsDataURL(files[0]);
+        });
+    </script>
+  </body>
 </html>
