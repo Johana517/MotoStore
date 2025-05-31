@@ -126,7 +126,6 @@
                 });
               </script>
             </li>
-            
             <!-- Barra de búsqueda (solo en desktop) -->
             <li class="nav-item search-desktop d-none d-lg-block">
               <form class="form-inline">
@@ -148,7 +147,13 @@
               </script>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="iniciar-sesion.html">Vender</a>
+              <a class="nav-link" href="iniciar-sesion.html" id="ir-a-vender">Vender</a>
+                <script>
+                document.getElementById("ir-a-vender").addEventListener("click", function (e) {
+                  localStorage.setItem("seccion", "repuestos");
+                  // el navegador seguirá la redirección automáticamente porque no hicimos e.preventDefault()
+                });
+                </script>
             </li>
           </ul>
         </div>
