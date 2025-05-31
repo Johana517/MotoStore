@@ -72,9 +72,6 @@
         border-radius: 6px;
         padding: 10px;
       }
-      footer {
-        background-color: #343a40;
-      }
       /* Estilos para el campo de contraseña */
       .password-container {
         position: relative;
@@ -102,7 +99,7 @@
             <a id="logo"
               ><img
                 src="../img/logo_moto_store-1-5.png"
-                id="Logo"
+                id="logo"
                 style="width: 200px; height: 150px"
               />
             </a>
@@ -382,6 +379,8 @@
     <!-- JavaScript personalizado -->
     <script>
       // Simulamos una base de datos de usuarios registrados
+      const seccion = localStorage.getItem("seccion");
+      const logo = document.getElementById("logo");
       if (seccion === "motos") {
         logo.href = "Home-motos.html";
       } else if (seccion === "repuestos") {
